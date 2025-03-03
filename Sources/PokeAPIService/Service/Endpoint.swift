@@ -21,4 +21,20 @@ enum Endpoint {
             }
         }
     }
+
+    enum GamesGroup {
+        enum Version {
+            case list
+            case one(String)
+
+            var path: String {
+                switch self {
+                case .list:
+                    return "version"
+                case .one(let value):
+                    return "version/\(value)"
+                }
+            }
+        }
+    }
 }
