@@ -14,9 +14,9 @@ enum Endpoint {
             var path: String {
                 switch self {
                 case .list:
-                    return "pokemon"
-                case .one(let value):
-                    return "pokemon/\(value)"
+                    "pokemon"
+                case let .one(value):
+                    "pokemon/\(value)"
                 }
             }
         }
@@ -30,9 +30,9 @@ enum Endpoint {
             var path: String {
                 switch self {
                 case .list:
-                    return "version"
-                case .one(let value):
-                    return "version/\(value)"
+                    "version"
+                case let .one(value):
+                    "version/\(value)"
                 }
             }
         }

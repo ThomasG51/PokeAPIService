@@ -1,5 +1,5 @@
 //
-//  ResourceList.swift
+//  BaseResourceList.swift
 //  PokeAPIService
 //
 //  Created by Thomas George on 01/03/2025.

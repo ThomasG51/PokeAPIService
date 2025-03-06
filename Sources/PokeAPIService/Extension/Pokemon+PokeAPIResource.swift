@@ -1,5 +1,5 @@
 //
-//  Pokemon+API.swift
+//  Pokemon+PokeAPIResource.swift
 //  PokeAPIService
 //
 //  Created by Thomas George on 28/02/2025.
@@ -9,7 +9,7 @@ import Foundation
 
 extension Pokemon: PokeAPIResource {
     typealias T = Pokemon
-    
+
     /// <#Description#>
     /// - Parameters:
     ///   - offset: <#offset description#>
@@ -27,21 +27,21 @@ extension Pokemon: PokeAPIResource {
         }
         return pokemonList.sorted { $0.id < $1.id }
     }
-    
+
     /// <#Description#>
     /// - Parameter id: <#id description#>
     /// - Returns: <#description#>
     static func selectOne(by id: Int) async throws -> Pokemon {
         try await PokeAPIService<Pokemon>.fetchData(of: Endpoint.PokemonGroup.Pokemon.one(String(id)).path)
     }
-    
+
     /// <#Description#>
     /// - Parameter name: <#name description#>
     /// - Returns: <#description#>
     static func selectOne(by name: String) async throws -> Pokemon {
         try await PokeAPIService<Pokemon>.fetchData(of: Endpoint.PokemonGroup.Pokemon.one(name).path)
     }
-    
+
     /// <#Description#>
     /// - Parameters:
     ///   - offset: <#offset description#>

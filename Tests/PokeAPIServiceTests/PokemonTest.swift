@@ -1,5 +1,5 @@
 //
-//  Test.swift
+//  PokemonTest.swift
 //  PokeAPIService
 //
 //  Created by Thomas George on 01/03/2025.
@@ -23,7 +23,7 @@ struct PokemonTest {
         let firstGeneration = try await Pokemon.selectAll(count: 151)
         #expect(firstGeneration.count == 151)
     }
-    
+
     @Test func test_fetch_one_pokemon() async throws {
         let bulbizare = try await Pokemon.selectOne(by: 1)
         #expect(bulbizare != nil)
