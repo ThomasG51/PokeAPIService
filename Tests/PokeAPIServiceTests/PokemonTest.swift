@@ -26,7 +26,6 @@ struct PokemonTest {
     
     @Test func test_fetch_one_pokemon() async throws {
         let bulbizare = try await Pokemon.selectOne(by: 1)
-        dump(bulbizare)
         #expect(bulbizare != nil)
         #expect(bulbizare.id == 1)
         #expect(bulbizare.name.lowercased() == "bulbasaur")

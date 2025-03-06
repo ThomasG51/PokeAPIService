@@ -19,8 +19,13 @@ struct Pokemon: Decodable {
     let weight: Int
     let abilities: [Ability]
     let formsURLs: [BaseResource]
+//    let gameIndices: [GameIndice]
     let heldItems: [HeldItem]
     let locationAreaEncounters: String
+//    let moves: [Move]
+//    let pastTypes: [PastType]
+//    let sprites: Sprites
+//    let cries: Cries
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -54,7 +59,7 @@ extension Pokemon {
 
     struct HeldItem: Decodable {
         let item: BaseResource
-        let versionDetails: HeldItemVersionDetail
+        let versionDetails: [HeldItemVersionDetail]
 
         enum CodingKeys: String, CodingKey {
             case item
