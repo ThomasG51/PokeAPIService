@@ -10,13 +10,16 @@ jobs:
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v3
+    - uses: Homebrew/actions/setup-homebrew@master
     - uses: swift-actions/setup-swift@v2
       with:
         swift-version: "6.0"
     - name: Get swift version
       run: swift --version
-    - name: Set up Homebrew
-      uses: Homebrew/actions/setup-homebrew@master
+    - name: Setup linters
+      run: brew install swiftlint
+    - name: SwiftLint
+      run: swiftlint lint
     - name: SwiftFormat
       run: swiftformat --swiftversion 6.0 --lint . --reporter github-actions-log
     - name: Run tests
