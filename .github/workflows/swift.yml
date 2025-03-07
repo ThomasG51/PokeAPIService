@@ -19,7 +19,7 @@ jobs:
     - name: Setup linters
       run: brew install swiftlint
     - name: SwiftLint
-      run: swiftlint lint
+      run: swiftlint --strict
     - name: SwiftFormat
       run: swiftformat --swiftversion 6.0 --lint . --reporter github-actions-log
     - name: Run tests
