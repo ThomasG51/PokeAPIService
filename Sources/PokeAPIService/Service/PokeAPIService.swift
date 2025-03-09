@@ -6,10 +6,11 @@ import Foundation
 struct PokeAPIService<T> where T: Decodable {
     // MARK: - Function
 
-    /// <#Description#>
+    /// Fetch data from a URL
     ///
-    /// - Parameter endpointPath: <#endpointPath description#>
-    /// - Returns: <#description#>
+    /// - Parameter path: The URL path
+    /// - Parameter params: The parameters to construct the URL
+    /// - Returns: The data decoded in the right object type
     ///
     static func fetchData(of path: String, with params: [String: String]? = nil) async throws -> T {
         let url = try constructURL(with: "\(path)", and: params)
@@ -19,10 +20,11 @@ struct PokeAPIService<T> where T: Decodable {
 
     // MARK: - Private Function
 
-    /// <#Description#>
+    /// Construct a URL with a path and parameters
     ///
-    /// - Parameter path: <#path description#>
-    /// - Returns: <#description#>
+    /// - Parameter path: The URL path
+    /// - Parameter params: The parameters for the URL
+    /// - Returns: a non optional URL
     ///
     private static func constructURL(with path: String, and params: [String: String]?) throws -> URL {
         var urlComponents = URLComponents()
@@ -41,10 +43,10 @@ struct PokeAPIService<T> where T: Decodable {
         return url
     }
 
-    /// <#Description#>
+    /// The data fetched from a URL
     ///
-    /// - Parameter url: <#url description#>
-    /// - Returns: <#description#>
+    /// - Parameter url: The related URL
+    /// - Returns: The fetched data
     ///
     private static func data(from url: URL) async throws -> Data {
         let (data, response) = try await URLSession.shared.data(from: url)
@@ -60,10 +62,10 @@ struct PokeAPIService<T> where T: Decodable {
         return data
     }
 
-    /// <#Description#>
+    /// Decode data in the right object type
     ///
-    /// - Parameter data: <#data description#>
-    /// - Returns: <#description#>
+    /// - Parameter data: The data to decode
+    /// - Returns: The decoded object
     ///
     private static func decode(_ data: Data) throws -> T {
         do {
