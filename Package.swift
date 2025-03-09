@@ -6,19 +6,19 @@ import PackageDescription
 let package = Package(
     name: "PokeAPIService",
     platforms: [
-        .macOS(.v14), .iOS(.v17),
+        .macOS(.v14), .iOS(.v17)
     ],
     products: [
         .library(
             name: "PokeAPIService",
             targets: ["PokeAPIService"]
-        ),
+        )
     ],
     targets: [
         .target(name: "PokeAPIService"),
         .testTarget(
             name: "PokeAPIServiceTests",
             dependencies: ["PokeAPIService"]
-        ),
+        )
     ]
 )
