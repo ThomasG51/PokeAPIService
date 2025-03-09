@@ -16,13 +16,13 @@ jobs:
         swift-version: "5.10"
     - name: Show macOS version
       run: sw_vers --productVersion
-    - name: Show swift version
+    - name: Show Swift version
       run: swift --version
     - name: Setup linters
       run: brew install swiftlint
     - name: SwiftLint
       run: swiftlint --strict
     - name: SwiftFormat
-      run: swiftformat --swiftversion 5.10 --lint . --reporter github-actions-log
+      run: swiftformat . --reporter github-actions-log
     - name: Run tests
       run: swift test -v
