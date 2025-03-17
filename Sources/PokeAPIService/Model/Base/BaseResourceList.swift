@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct BaseResourceList: Codable {
-    let urls: [BaseResource]
+public struct BaseResourceList: Codable {
+    public let urls: [BaseResource]
 
-    enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey {
         case urls = "results"
     }
 }

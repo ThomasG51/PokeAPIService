@@ -10,5 +10,3 @@
 ###### Fetch a list of resources (url)
 ###### Fetch a list of resources (object)
 ###### Fetch one resource (object)
-
-

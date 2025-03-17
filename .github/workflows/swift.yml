@@ -21,9 +21,9 @@ jobs:
       run: swift --version
     - name: Setup linters
       run: brew install swiftlint
-    - name: SwiftLint
-      run: swiftlint --strict
     - name: SwiftFormat
       run: swiftformat . --reporter github-actions-log
+    - name: SwiftLint
+      run: swiftlint --strict
     - name: Run tests
       run: swift test -v

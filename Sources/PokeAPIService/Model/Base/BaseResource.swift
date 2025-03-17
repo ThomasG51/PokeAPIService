@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BaseResource: Codable {
-    let name: String
-    let url: String
+public struct BaseResource: Codable {
+    public let name: String
+    public let url: String
 }

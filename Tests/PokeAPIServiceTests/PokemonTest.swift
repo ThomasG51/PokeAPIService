@@ -29,5 +29,6 @@ struct PokemonTest {
         #expect(bulbizare != nil)
         #expect(bulbizare.id == 1)
         #expect(bulbizare.name.lowercased() == "bulbasaur")
+        dump(bulbizare)
     }
 }
