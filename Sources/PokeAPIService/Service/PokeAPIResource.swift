@@ -8,10 +8,10 @@
 import Foundation
 
 protocol PokeAPIResource where Self: Decodable {
-    associatedtype T
+    static var resourceRootPath: String { get }
 
-    static func selectAll(from offset: Int, count limit: Int) async throws -> [T]
-    static func selectOne(by id: Int) async throws -> T
-    static func selectOne(by name: String) async throws -> T
+    static func selectAll(from offset: Int, count limit: Int) async throws -> [Self]
+    static func selectOne(by id: Int) async throws -> Self
+    static func selectOne(by name: String) async throws -> Self
     static func urls(from offset: Int, count limit: Int) async throws -> [String]
 }

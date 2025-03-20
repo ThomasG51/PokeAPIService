@@ -8,12 +8,12 @@ struct PokeAPIService<T> where T: Decodable {
 
     /// Fetch data from a URL
     ///
-    /// - Parameter path: The URL path
+    /// - Parameter endpoint: The resource endpoint
     /// - Parameter params: The parameters to construct the URL
     /// - Returns: The data decoded in the right object type
     ///
-    static func fetchData(of path: String, with params: [String: String]? = nil) async throws -> T {
-        let url = try constructURL(with: "\(path)", and: params)
+    static func fetchData(from endpoint: Endpoint, with params: [String: String]? = nil) async throws -> T {
+        let url = try constructURL(with: endpoint, and: params)
         let data = try await data(from: url)
         return try decode(data)
     }
@@ -22,15 +22,15 @@ struct PokeAPIService<T> where T: Decodable {
 
     /// Construct a URL with a path and parameters
     ///
-    /// - Parameter path: The URL path
+    /// - Parameter endpoint: The resource endpoint
     /// - Parameter params: The parameters for the URL
     /// - Returns: a non optional URL
     ///
-    private static func constructURL(with path: String, and params: [String: String]?) throws -> URL {
+    private static func constructURL(with endpoint: Endpoint, and params: [String: String]?) throws -> URL {
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = "pokeapi.co"
-        urlComponents.path = "/api/v2/\(path)"
+        urlComponents.path = "/api/v2/\(endpoint.path)"
 
         if let params {
             urlComponents.queryItems = params.map { URLQueryItem(name: $0.key, value: $0.value) }

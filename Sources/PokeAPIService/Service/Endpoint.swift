@@ -6,35 +6,15 @@
 //
 
 enum Endpoint {
-    enum PokemonGroup {
-        enum Pokemon {
-            case list
-            case one(String)
+    case list(rootPath: String)
+    case resource(rootPath: String, value: String)
 
-            var path: String {
-                switch self {
-                case .list:
-                    "pokemon"
-                case let .one(value):
-                    "pokemon/\(value)"
-                }
-            }
-        }
-    }
-
-    enum GamesGroup {
-        enum Version {
-            case list
-            case one(String)
-
-            var path: String {
-                switch self {
-                case .list:
-                    "version"
-                case let .one(value):
-                    "version/\(value)"
-                }
-            }
+    var path: String {
+        switch self {
+        case let .list(rootPath):
+            rootPath
+        case let .resource(rootPath, value):
+            rootPath + "/" + value
         }
     }
 }
