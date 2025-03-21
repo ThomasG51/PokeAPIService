@@ -18,13 +18,13 @@ extension Pokemon: PokeAPIResource {
     /// - Parameters limit: Pagination limit
     /// - Returns: an array of `Pokemon`
     ///
-    public static func selectAll(from offset: Int = 0, count limit: Int = 20) async throws -> [Self] {
+    public static func selectAll(from offset: Int = 0, count limit: Int = 20) async throws -> [Pokemon] {
         let apiResources = try await baseResources(from: offset, count: limit)
-        let pokemonList = try await withThrowingTaskGroup(of: Self.self, returning: [Self].self) { group in
+        let pokemonList = try await withThrowingTaskGroup(of: Pokemon.self, returning: [Pokemon].self) { group in
             for resource in apiResources {
                 group.addTask { try await selectOne(by: resource.id) }
             }
-            return try await group.reduce(into: [Self]()) { $0.append($1) }
+            return try await group.reduce(into: [Pokemon]()) { $0.append($1) }
         }
         return pokemonList.sorted { $0.id < $1.id }
     }
@@ -34,8 +34,8 @@ extension Pokemon: PokeAPIResource {
     /// - Parameter id: The Pokemon ID
     /// - Returns: a `Pokemon`
     ///
-    public static func selectOne(by id: Int) async throws -> Self {
-        try await PokeAPIService<Self>.fetchData(from: .resource(rootPath: resourceRootPath, value: String(id)))
+    public static func selectOne(by id: Int) async throws -> Pokemon {
+        try await PokeAPIService<Pokemon>.fetchData(from: .resource(rootPath: resourceRootPath, value: String(id)))
     }
 
     /// Get a Pokemon using its name
@@ -43,8 +43,8 @@ extension Pokemon: PokeAPIResource {
     /// - Parameter name: The Pokemon name
     /// - Returns: a `Pokemon`
     ///
-    public static func selectOne(by name: String) async throws -> Self {
-        try await PokeAPIService<Self>.fetchData(from: .resource(rootPath: resourceRootPath, value: name))
+    public static func selectOne(by name: String) async throws -> Pokemon {
+        try await PokeAPIService<Pokemon>.fetchData(from: .resource(rootPath: resourceRootPath, value: name))
     }
 
     /// Get a list of Pokemon API base resources

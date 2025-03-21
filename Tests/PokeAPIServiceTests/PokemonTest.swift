@@ -9,7 +9,7 @@
 import Testing
 
 struct PokemonTest {
-    @Test func testAPIResourcesWithPagination() async throws {
+    @Test func testBaseResourcesWithPagination() async throws {
         let firstBaseResources = try await Pokemon.baseResources(from: 0, count: 60)
         #expect(firstBaseResources.count == 60)
         #expect(firstBaseResources.last?.id == "60")
