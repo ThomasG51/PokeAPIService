@@ -7,12 +7,12 @@
 #### A package to use PokeAPI in Swift
 
 ###### Fetch a list of resources (url)
-```
+```swift
 Pokemon.urls(from: 0, count: 151)
 ```
 
 ###### Fetch a list of resources (object)
-```
+```swift
 Pokemon.selectAll()
 
 Pokemon.selectAll(count: 151)
@@ -21,7 +21,7 @@ Pokemon.selectAll(from: 151, count: 100)
 ```
 
 ###### Fetch one resource (object)
-```
+```swift
 let id: Int = 1
 Pokemon.selectOne(by: id)
 
