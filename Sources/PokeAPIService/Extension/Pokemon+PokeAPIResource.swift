@@ -19,12 +19,10 @@ extension Pokemon: PokeAPIResource {
     /// - Returns: an array of `Pokemon`
     ///
     public static func selectAll(from offset: Int = 0, count limit: Int = 20) async throws -> [Self] {
-        let urls = try await urls(from: offset, count: limit)
+        let apiResources = try await baseResources(from: offset, count: limit)
         let pokemonList = try await withThrowingTaskGroup(of: Self.self, returning: [Self].self) { group in
-            for url in urls {
-                if let id = Int(url.split(separator: "/").last ?? "") {
-                    group.addTask { try await selectOne(by: id) }
-                }
+            for resource in apiResources {
+                group.addTask { try await selectOne(by: resource.id) }
             }
             return try await group.reduce(into: [Self]()) { $0.append($1) }
         }
@@ -49,15 +47,15 @@ extension Pokemon: PokeAPIResource {
         try await PokeAPIService<Self>.fetchData(from: .resource(rootPath: resourceRootPath, value: name))
     }
 
-    /// Get a list of Pokemon  resource URLs based on pagination
+    /// Get a list of Pokemon API base resources
     ///
     /// - Parameters offset: Pagination offset
     /// - Parameters limit: Pagination limit
-    /// - Returns: an array of url in `String` format
+    /// - Returns: an array of `BaseResource` containing a name and an ID
     ///
-    public static func urls(from offset: Int, count limit: Int) async throws -> [String] {
+    public static func baseResources(from offset: Int, count limit: Int) async throws -> [BaseResource] {
         let params = ["offset": String(offset), "limit": String(limit)]
         let baseResult = try await PokeAPIService<BaseResult>.fetchData(from: .list(rootPath: resourceRootPath), with: params)
-        return baseResult.resources.reduce(into: [String]()) { $0.append($1.url) }
+        return baseResult.resources
     }
 }

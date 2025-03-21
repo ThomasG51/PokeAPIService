@@ -13,5 +13,5 @@ protocol PokeAPIResource where Self: Decodable {
     static func selectAll(from offset: Int, count limit: Int) async throws -> [Self]
     static func selectOne(by id: Int) async throws -> Self
     static func selectOne(by name: String) async throws -> Self
-    static func urls(from offset: Int, count limit: Int) async throws -> [String]
+    static func baseResources(from offset: Int, count limit: Int) async throws -> [BaseResource]
 }

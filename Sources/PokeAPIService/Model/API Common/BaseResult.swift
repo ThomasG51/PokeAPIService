@@ -7,8 +7,8 @@
 
 import Foundation
 
-public struct BaseResult: Codable {
-    public let resources: [BaseResource]
+struct BaseResult: Codable {
+    let resources: [BaseResource]
 
     public enum CodingKeys: String, CodingKey {
         case resources = "results"
