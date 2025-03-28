@@ -16,33 +16,54 @@ Pokemon
 ##### Games
 ```swift
 Generation
+
+Pokedex
 ```
 
 ## Network Requests
 
 Each model above is an API resource that can fetch data directly from itself using the following functions
 
-##### Fetch one object resource
+##### Fetch one object
 ```swift
-let id: Int = 1
-Pokemon.selectOne(by: id)
+// Fetch by id
 
-let name = "bulbasaur"
-Pokemon.selectOne(by: name)
+let pokemonID = 1
+Pokemon.selectOne(by: 1)
+
+let generationID = 1
+Generation.selectOne(by: 1)
+
+let pokedexID = 1
+Pokedex.selectOne(by: 2)
+
+
+// Fetch by name
+
+let pokemonName = "bulbasaur"
+Pokemon.selectOne(by: pokemonName)
+
+let generationName = "generation-i"
+Generation.selectOne(by: generationName)
+
+let pokedexName = "kanto"
+Pokedex.selectOne(by: pokedexName)
 ```
 
-##### Fetch a list of object resources
+##### Fetch a list of objects
 ```swift
-Pokemon.selectAll()
-
-Pokemon.selectAll(count: 151)
-
 Pokemon.selectAll(from: 151, count: 100)
+
+Generation.selectAll()
+
+Pokedex.selectAll(count: 3)
 ```
 
-##### Fetch a list of base resources (only id, name, type)
+##### Fetch a list of base resources (only id, name and type)
 ```swift
 Pokemon.baseResources(from: 0, count: 151)
-```
 
-> _⚠️ Some models can't use `SelectAll()` and `baseResources()` functions because the API doesn't allow it. As a result, these two methods are not available for these models._
+Generation.baseResources(from: 0, count: 1)
+
+Pokedex.baseResources(from: 1, count: 1)
+```
