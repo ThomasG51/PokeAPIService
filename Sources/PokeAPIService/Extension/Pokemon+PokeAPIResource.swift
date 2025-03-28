@@ -35,7 +35,7 @@ extension Pokemon: PokeAPIResource {
     /// - Returns: a `Pokemon`
     ///
     public static func selectOne(by id: Int) async throws -> Pokemon {
-        try await PokeAPIService<Pokemon>.fetchData(from: .resource(rootPath: resourceRootPath, value: String(id)))
+        try await PokeAPIService.fetchData(from: .resource(rootPath: resourceRootPath, value: String(id)))
     }
 
     /// Get a Pokemon using its name
@@ -44,7 +44,7 @@ extension Pokemon: PokeAPIResource {
     /// - Returns: a `Pokemon`
     ///
     public static func selectOne(by name: String) async throws -> Pokemon {
-        try await PokeAPIService<Pokemon>.fetchData(from: .resource(rootPath: resourceRootPath, value: name))
+        try await PokeAPIService.fetchData(from: .resource(rootPath: resourceRootPath, value: name))
     }
 
     /// Get a list of Pokemon API base resources
