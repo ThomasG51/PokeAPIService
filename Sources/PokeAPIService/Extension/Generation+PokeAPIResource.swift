@@ -10,21 +10,28 @@ import Foundation
 extension Generation: PokeAPIResource {
     static var resourceRootPath = "generation"
 
-    @available(*, deprecated, message: "⚠️ do not use with this kind of model : API forbidden")
-    static func selectAll(from _: Int = 0, count _: Int = 20) async throws -> [Generation] {
-        throw PokeAPIResourceError.forbiddenResource
+    static func selectAll(from offset: Int = 0, count limit: Int = 20) async throws -> [Generation] {
+        let apiResources = try await baseResources(from: offset, count: limit)
+        let generations = try await withThrowingTaskGroup(of: Generation.self, returning: [Generation].self) { group in
+            for resource in apiResources {
+                group.addTask { try await selectOne(by: resource.id) }
+            }
+            return try await group.reduce(into: [Generation]()) { $0.append($1) }
+        }
+        return generations.sorted { $0.id < $1.id }
     }
 
     public static func selectOne(by id: Int) async throws -> Generation {
-        try await PokeAPIService<Generation>.fetchData(from: .resource(rootPath: resourceRootPath, value: String(id)))
+        try await PokeAPIService.fetchData(from: .resource(rootPath: resourceRootPath, value: String(id)))
     }
 
     public static func selectOne(by name: String) async throws -> Generation {
-        try await PokeAPIService<Generation>.fetchData(from: .resource(rootPath: resourceRootPath, value: name))
+        try await PokeAPIService.fetchData(from: .resource(rootPath: resourceRootPath, value: name))
     }
 
-    @available(*, deprecated, message: "⚠️ do not use with this kind of model : API forbidden")
-    static func baseResources(from _: Int, count _: Int) async throws -> [BaseResource] {
-        throw PokeAPIResourceError.forbiddenResource
+    static func baseResources(from offset: Int, count limit: Int) async throws -> [BaseResource] {
+        let params = ["offset": String(offset), "limit": String(limit)]
+        let baseResult = try await PokeAPIService<BaseResult>.fetchData(from: .list(rootPath: resourceRootPath), with: params)
+        return baseResult.resources
     }
 }
