@@ -15,7 +15,7 @@ public struct Pokedex: Decodable {
     public let names: [NameLanguage]
     public let pokemonEntries: [PokemonEntry]
     public let region: BaseResource?
-    public let versions: [BaseResource]
+    public let versionGroups: [BaseResource]
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -25,7 +25,7 @@ public struct Pokedex: Decodable {
         case names
         case pokemonEntries = "pokemon_entries"
         case region
-        case versions = "version_groups"
+        case versionGroups = "version_groups"
     }
 }
 

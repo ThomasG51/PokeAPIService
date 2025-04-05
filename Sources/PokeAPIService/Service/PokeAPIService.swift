@@ -52,11 +52,16 @@ struct PokeAPIService<T> where T: Decodable {
         let (data, response) = try await URLSession.shared.data(from: url)
 
         guard let httpResponse = response as? HTTPURLResponse else {
-            throw PokeAPIServiceError.dataRequestFailed
+            throw PokeAPIServiceError.invalidResponse
+        }
+
+        if httpResponse.statusCode == 404 {
+            throw PokeAPIServiceError.notFound
         }
 
         if httpResponse.statusCode != 200 {
-            throw PokeAPIServiceError.httpStatusCodeError(httpResponse.statusCode)
+            let message = String(data: data, encoding: String.Encoding.utf8) ?? "No description"
+            throw PokeAPIServiceError.httpStatusCodeError(code: httpResponse.statusCode, message: message)
         }
 
         return data
@@ -71,16 +76,32 @@ struct PokeAPIService<T> where T: Decodable {
         do {
             return try JSONDecoder().decode(T.self, from: data)
         } catch {
-            throw PokeAPIServiceError.decoding(error)
+            throw PokeAPIServiceError.decoding(description: error.localizedDescription)
         }
     }
 }
 
 // MARK: - PokeAPIServiceError
 
-enum PokeAPIServiceError: Error {
+enum PokeAPIServiceError: Error, Equatable {
     case invalidURL
-    case dataRequestFailed
-    case httpStatusCodeError(Int)
-    case decoding(Error)
+    case invalidResponse
+    case notFound
+    case httpStatusCodeError(code: Int, message: String)
+    case decoding(description: String)
+
+    var localizedDescription: String {
+        switch self {
+        case .invalidURL:
+            "Invalid URL"
+        case .invalidResponse:
+            "Invalid response"
+        case .notFound:
+            "Not found"
+        case .httpStatusCodeError(code: let code, message: let message):
+            "HTTP status code: \(code), message: \(message)"
+        case .decoding(let description):
+            "Decoding Error : \(description)"
+        }
+    }
 }

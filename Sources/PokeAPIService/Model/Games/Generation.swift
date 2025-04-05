@@ -16,7 +16,7 @@ public struct Generation: Decodable {
     public let moves: [BaseResource]
     public let pokemonSpecies: [BaseResource]
     public let types: [BaseResource]
-    public let versions: [BaseResource]
+    public let versionGroups: [BaseResource]
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -27,6 +27,6 @@ public struct Generation: Decodable {
         case moves
         case pokemonSpecies = "pokemon_species"
         case types
-        case versions = "version_groups"
+        case versionGroups = "version_groups"
     }
 }

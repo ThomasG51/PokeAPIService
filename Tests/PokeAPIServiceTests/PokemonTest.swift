@@ -10,14 +10,14 @@ import Testing
 
 struct PokemonTest {
     @Test func testBaseResourcesWithPagination() async throws {
-        let firstBaseResources = try #require(await Pokemon.baseResources(from: 0, count: 60))
+        let firstBaseResources = try await Pokemon.baseResources(from: 0, count: 60)
         #expect(firstBaseResources.count == 60)
         #expect(firstBaseResources.last?.id == "60")
         #expect(firstBaseResources.first?.id == "1")
         #expect(firstBaseResources.first?.name == "bulbasaur")
         #expect(firstBaseResources.first?.type == "pokemon")
 
-        let secondBaseResources = try #require(await Pokemon.baseResources(from: 60, count: 60))
+        let secondBaseResources = try await Pokemon.baseResources(from: 60, count: 60)
         #expect(secondBaseResources.count == 60)
         #expect(secondBaseResources.last?.id == "120")
         #expect(secondBaseResources.first?.id == "61")
@@ -26,7 +26,7 @@ struct PokemonTest {
     }
 
     @Test func testSelectFirstGenerationOfPokemon() async throws {
-        let firstGeneration = try #require(await Pokemon.selectAll(count: 151))
+        let firstGeneration = try await Pokemon.selectAll(count: 151)
         #expect(firstGeneration.count == 151)
         #expect(firstGeneration.first?.id == 1)
         #expect(firstGeneration.first?.name.lowercased() == "bulbasaur")
@@ -35,7 +35,7 @@ struct PokemonTest {
     }
 
     @Test func testSelectSecondGenerationOfPokemon() async throws {
-        let secondGeneration = try #require(await Pokemon.selectAll(from: 151, count: 100))
+        let secondGeneration = try await Pokemon.selectAll(from: 151, count: 100)
         #expect(secondGeneration.count == 100)
         #expect(secondGeneration.first?.id == 152)
         #expect(secondGeneration.first?.name.lowercased() == "chikorita")
@@ -44,8 +44,7 @@ struct PokemonTest {
     }
 
     @Test func testFetchBulbasaurByID() async throws {
-        let bulbasaur = try #require(await Pokemon.selectOne(by: 1))
-        #expect(bulbasaur != nil)
+        let bulbasaur = try await Pokemon.selectOne(by: 1)
         #expect(bulbasaur.id == 1)
         #expect(bulbasaur.name.lowercased() == "bulbasaur")
         #expect(bulbasaur.types.contains(where: { $0.type.name == "grass" }))
@@ -56,8 +55,7 @@ struct PokemonTest {
     }
 
     @Test func testFetchBulbasaurByName() async throws {
-        let bulbasaur = try #require(await Pokemon.selectOne(by: "bulbasaur"))
-        #expect(bulbasaur != nil)
+        let bulbasaur = try await Pokemon.selectOne(by: "bulbasaur")
         #expect(bulbasaur.id == 1)
         #expect(bulbasaur.name.lowercased() == "bulbasaur")
         #expect(bulbasaur.types.contains(where: { $0.type.name == "grass" }))
@@ -68,8 +66,7 @@ struct PokemonTest {
     }
 
     @Test func testFetchPikachuByID() async throws {
-        let pikachu = try #require(await Pokemon.selectOne(by: 25))
-        #expect(pikachu != nil)
+        let pikachu = try await Pokemon.selectOne(by: 25)
         #expect(pikachu.id == 25)
         #expect(pikachu.name.lowercased() == "pikachu")
         #expect(pikachu.types.contains(where: { $0.type.name == "electric" }))
@@ -79,13 +76,18 @@ struct PokemonTest {
     }
 
     @Test func testFetchPikachuByName() async throws {
-        let pikachu = try #require(await Pokemon.selectOne(by: "pikachu"))
-        #expect(pikachu != nil)
+        let pikachu = try await Pokemon.selectOne(by: "pikachu")
         #expect(pikachu.id == 25)
         #expect(pikachu.name.lowercased() == "pikachu")
         #expect(pikachu.types.contains(where: { $0.type.name == "electric" }))
         #expect(!pikachu.sprites.frontDefault.isEmpty)
         #expect(!pikachu.sprites.backDefault.isEmpty)
         #expect(pikachu.gameIndices.contains(where: { $0.version.name == "yellow" }))
+    }
+
+    @Test func testFetchInexistingPokemon() async throws {
+        await #expect(throws: PokeAPIServiceError.notFound, performing: {
+            try await Pokemon.selectOne(by: "unknown")
+        })
     }
 }
