@@ -6,6 +6,10 @@
 ![xcode-version](https://img.shields.io/badge/Xcode-16-blue?logo=xcode&logoColor=white)
 ![github actions](https://github.com/ThomasG51/PokeAPIService/actions/workflows/swift.yml/badge.svg)
 
+> ⚠️ <br>
+> As the package is still in development phase, not all PokeAPI resources are available yet <br>
+> Please check-out the [resources by category](#resources-by-category) section.
+
 ## Installation
 
 #### Swift Package Manager
@@ -16,20 +20,6 @@
 #### Xcode Package Dependency
 ```
 https://github.com/ThomasG51/PokeAPIService
-```
-
-## Resources by category
-
-##### Pokemon
-```
-- Pokemon
-```
-##### Games
-```
-- Generation
-- Pokedex
-- GameVersion
-- GameVersionGroup
 ```
 
 ## Network Requests
@@ -89,3 +79,31 @@ Pokedex.baseResources(from: 1, count: 1)
 
 GameVersion.baseResources(from: 0, count: 4)
 ```
+
+<h2 id="resources-by-category">Resources by category</h2>
+
+##### Pokemon
+
+- [ ] Ability
+- [x] Pokemon
+- [ ] PokemonColor
+- [ ] PokemonLocationArea
+- [ ] PokemonForm
+- [ ] PokemonHabitat
+- [ ] PokemonShape
+- [ ] PokemonSpecies
+- [ ] PokemonType
+- [ ] Stat
+
+##### Games
+
+- [x] GameVersion
+- [x] GameVersionGroup
+- [x] Generation
+- [x] Pokedex
+
+##### Berries
+
+- [x] Berry
+- [ ] BerryFirmness
+- [ ] BerryFlavor
