@@ -16,6 +16,4 @@ protocol PokeAPIResource where Self: Decodable {
     static func baseResources(from offset: Int, count limit: Int) async throws -> [BaseResource]
 }
 
-enum PokeAPIResourceError: Error {
-    case forbiddenResource
-}
+

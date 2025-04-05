@@ -6,25 +6,35 @@
 ![xcode-version](https://img.shields.io/badge/Xcode-16-blue?logo=xcode&logoColor=white)
 ![github actions](https://github.com/ThomasG51/PokeAPIService/actions/workflows/swift.yml/badge.svg)
 
+## Installation
+
+#### Swift Package Manager
+```swift
+.package(url: "https://github.com/ThomasG51/PokeAPIService", from: "<version>")
+```
+
+#### Xcode Package Dependency
+```
+https://github.com/ThomasG51/PokeAPIService
+```
 
 ## Resources by category
 
 ##### Pokemon
-```swift
-Pokemon
+```
+- Pokemon
 ```
 ##### Games
-```swift
-Generation
-
-Pokedex
+```
+- Generation
+- Pokedex
 ```
 
 ## Network Requests
 
 Each model above is an API resource that can fetch data directly from itself using the following functions
 
-##### Fetch one object
+##### Fetch one object by ID or name
 ```swift
 // Fetch by id
 
@@ -54,7 +64,7 @@ Pokedex.selectOne(by: pokedexName)
 ```swift
 Pokemon.selectAll(from: 151, count: 100)
 
-Generation.selectAll()
+Generation.selectAll() // Without count argument, the list will be paginate by 20 by default
 
 Pokedex.selectAll(count: 3)
 ```
