@@ -28,6 +28,8 @@ https://github.com/ThomasG51/PokeAPIService
 ```
 - Generation
 - Pokedex
+- GameVersion
+- GameVersionGroup
 ```
 
 ## Network Requests
@@ -47,6 +49,9 @@ Generation.selectOne(by: generationID)
 let pokedexID = 1
 Pokedex.selectOne(by: pokedexID)
 
+let gameVersionID = 1
+GameVersion.selectOne(by: gameVersionID)
+
 
 // Fetch by name
 
@@ -58,6 +63,9 @@ Generation.selectOne(by: generationName)
 
 let pokedexName = "kanto"
 Pokedex.selectOne(by: pokedexName)
+
+let gameVersionName = "red"
+GameVersion.selectOne(by: gameVersionName)
 ```
 
 ##### Fetch a list of objects
@@ -67,6 +75,8 @@ Pokemon.selectAll(from: 151, count: 100)
 Generation.selectAll() // Without count argument, the list will be paginate by 20 by default
 
 Pokedex.selectAll(count: 3)
+
+GameVersion.selectAll(from: 0, count: 1)
 ```
 
 ##### Fetch a list of base resources (only id, name and type)
@@ -76,4 +86,6 @@ Pokemon.baseResources(from: 0, count: 151)
 Generation.baseResources(from: 0, count: 1)
 
 Pokedex.baseResources(from: 1, count: 1)
+
+GameVersion.baseResources(from: 0, count: 4)
 ```

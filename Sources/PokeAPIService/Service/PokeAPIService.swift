@@ -2,6 +2,7 @@
 // https://docs.swift.org/swift-book
 
 import Foundation
+import OSLog
 
 struct PokeAPIService<T> where T: Decodable {
     // MARK: - Function
@@ -37,6 +38,7 @@ struct PokeAPIService<T> where T: Decodable {
         }
 
         guard let url = urlComponents.url else {
+            PokeLogger.critical("Invalid URL !")
             throw PokeAPIServiceError.invalidURL
         }
 
@@ -52,15 +54,18 @@ struct PokeAPIService<T> where T: Decodable {
         let (data, response) = try await URLSession.shared.data(from: url)
 
         guard let httpResponse = response as? HTTPURLResponse else {
+            PokeLogger.critical("Invalid response !")
             throw PokeAPIServiceError.invalidResponse
         }
 
         if httpResponse.statusCode == 404 {
+            PokeLogger.warning("Resource not found !")
             throw PokeAPIServiceError.notFound
         }
 
         if httpResponse.statusCode != 200 {
             let message = String(data: data, encoding: String.Encoding.utf8) ?? "No description"
+            PokeLogger.warning("code: \(httpResponse.statusCode), message: \(message)")
             throw PokeAPIServiceError.httpStatusCodeError(code: httpResponse.statusCode, message: message)
         }
 
@@ -76,7 +81,21 @@ struct PokeAPIService<T> where T: Decodable {
         do {
             return try JSONDecoder().decode(T.self, from: data)
         } catch {
-            throw PokeAPIServiceError.decoding(description: error.localizedDescription)
+            let description = switch error {
+            case let DecodingError.dataCorrupted(context):
+                "\(context)."
+            case let DecodingError.keyNotFound(key, context):
+                "Key '\(key.stringValue)' not found.\n" + "Debug Description: \(context.debugDescription)."
+            case let DecodingError.valueNotFound(value, context):
+                "Value '\(value)' not found.\n" + "Debug Description: \(context.debugDescription)."
+            case let DecodingError.typeMismatch(type, context):
+                "Type '\(type)' mismatch.\n" + "Debug Description: \(context.debugDescription)."
+            default:
+                error.localizedDescription
+            }
+
+            PokeLogger.critical(description)
+            throw PokeAPIServiceError.decoding(description: description)
         }
     }
 }
@@ -98,9 +117,9 @@ enum PokeAPIServiceError: Error, Equatable {
             "Invalid response"
         case .notFound:
             "Not found"
-        case .httpStatusCodeError(code: let code, message: let message):
+        case let .httpStatusCodeError(code: code, message: message):
             "HTTP status code: \(code), message: \(message)"
-        case .decoding(let description):
+        case let .decoding(description):
             "Decoding Error : \(description)"
         }
     }
