@@ -39,13 +39,13 @@ Each model above is an API resource that can fetch data directly from itself usi
 // Fetch by id
 
 let pokemonID = 1
-Pokemon.selectOne(by: 1)
+Pokemon.selectOne(by: pokemonID)
 
 let generationID = 1
-Generation.selectOne(by: 1)
+Generation.selectOne(by: generationID)
 
 let pokedexID = 1
-Pokedex.selectOne(by: 2)
+Pokedex.selectOne(by: pokedexID)
 
 
 // Fetch by name
