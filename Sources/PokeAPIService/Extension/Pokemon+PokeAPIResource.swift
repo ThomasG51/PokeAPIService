@@ -12,9 +12,9 @@ extension Pokemon: PokeAPIResource {
     ///
     static var resourceRootPath = "pokemon"
 
-    /// Get a list of Pokemon based on pagination
+    /// Get a list of Pokemon
     ///
-    /// Without function parameters, the count is set to 20 by default.
+    /// Without function parameters, the count parameter is set to 20 by default.
     /// ```swift
     /// Task {
     ///     do {
@@ -48,7 +48,7 @@ extension Pokemon: PokeAPIResource {
     /// ```
     ///
     /// - Parameters offset: The pagination offset
-    /// - Parameters limit: Thepagination limit
+    /// - Parameters limit: The pagination limit
     /// - Returns: A list of Pokemon
     ///
     public static func selectAll(from offset: Int = 0, count limit: Int = 20) async throws -> [Pokemon] {
@@ -62,10 +62,11 @@ extension Pokemon: PokeAPIResource {
         return pokemonList.sorted { $0.id < $1.id }
     }
 
-    /// Get a Pokemon using its id
+    /// Get a Pokemon using its ID
     ///
     /// ```swift
     /// Task {
+    ///     do {
     ///         let pokemonID: Int = 1
     ///         let bulbasaur = try await Pokemon.selectOne(by: pokemonID)
     ///     } catch {
@@ -75,7 +76,7 @@ extension Pokemon: PokeAPIResource {
     /// ```
     ///
     /// - Parameter id: The Pokemon ID
-    /// - Returns: a `Pokemon`
+    /// - Returns: A Pokemon
     ///
     public static func selectOne(by id: Int) async throws -> Pokemon {
         try await PokeAPIService.fetchData(from: .resource(rootPath: resourceRootPath, value: String(id)))
@@ -85,6 +86,7 @@ extension Pokemon: PokeAPIResource {
     ///
     /// ```swift
     /// Task {
+    ///     do {
     ///         let pokemonName = "pikachu"
     ///         let pikachu = try await Pokemon.selectOne(by: pokemonName)
     ///     } catch {
@@ -94,7 +96,7 @@ extension Pokemon: PokeAPIResource {
     /// ```
     ///
     /// - Parameter name: The Pokemon name
-    /// - Returns: a Pokemon
+    /// - Returns: A Pokemon
     ///
     public static func selectOne(by name: String) async throws -> Pokemon {
         try await PokeAPIService.fetchData(from: .resource(rootPath: resourceRootPath, value: name))
@@ -114,7 +116,7 @@ extension Pokemon: PokeAPIResource {
     ///
     /// - Parameters offset: The pagination offset
     /// - Parameters limit: The pagination limit
-    /// - Returns: an list of light API base resource containing only an ID, a name and a type
+    /// - Returns: A list of light API base resources containing only an ID, a name and a type
     ///
     public static func baseResources(from offset: Int, count limit: Int) async throws -> [BaseResource] {
         let params = ["offset": String(offset), "limit": String(limit)]

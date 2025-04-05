@@ -6,7 +6,7 @@ import Foundation
 struct PokeAPIService<T> where T: Decodable {
     // MARK: - Function
 
-    /// Fetch data from a URL
+    /// Fetch and return decoded data from a URL
     ///
     /// - Parameter endpoint: The resource endpoint
     /// - Parameter params: The parameters to construct the URL
@@ -43,7 +43,7 @@ struct PokeAPIService<T> where T: Decodable {
         return url
     }
 
-    /// The data fetched from a URL
+    /// Handle data and  HTTP response
     ///
     /// - Parameter url: The related URL
     /// - Returns: The fetched data
