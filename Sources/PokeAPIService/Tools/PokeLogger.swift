@@ -28,7 +28,7 @@ struct PokeLogger {
             logger.warning("\(message)")
         #endif
     }
-    
+
     static func critical(_ message: String) {
         #if DEBUG
             logger.critical("\(message)")

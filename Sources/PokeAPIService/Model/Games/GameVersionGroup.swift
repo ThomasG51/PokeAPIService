@@ -7,15 +7,15 @@
 
 import Foundation
 
-struct GameVersionGroup: Decodable {
-    let id: Int
-    let name: String
-    let order: Int
-    let generation: BaseResource
-    let moveLearnMethods: [BaseResource]
-    let pokedexes: [BaseResource]
-    let regions: [BaseResource]
-    let versions: [BaseResource]
+public struct GameVersionGroup: Decodable {
+    public let id: Int
+    public let name: String
+    public let order: Int
+    public let generation: BaseResource
+    public let moveLearnMethods: [BaseResource]
+    public let pokedexes: [BaseResource]
+    public let regions: [BaseResource]
+    public let versions: [BaseResource]
 
     enum CodingKeys: String, CodingKey {
         case id
