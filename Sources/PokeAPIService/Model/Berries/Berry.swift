@@ -7,6 +7,8 @@
 
 import Foundation
 
+/// Model for Berry API Resource
+///
 public struct Berry: Decodable {
     public let id: Int
     public let name: String

@@ -7,6 +7,8 @@
 
 import Foundation
 
+/// Model for GameVersion API Resource
+///
 struct GameVersion: Decodable {
     let id: Int
     let name: String

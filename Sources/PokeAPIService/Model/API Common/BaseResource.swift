@@ -7,6 +7,8 @@
 
 import Foundation
 
+/// Model for API Base Resource
+///
 public struct BaseResource: Codable {
     // MARK: - Public
 

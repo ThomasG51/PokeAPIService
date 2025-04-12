@@ -7,6 +7,8 @@
 
 import Foundation
 
+/// Model for NameLanguage API Resource
+///
 public struct NameLanguage: Decodable {
     public let name: String
     public let language: BaseResource

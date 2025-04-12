@@ -7,6 +7,8 @@
 
 import Foundation
 
+/// Model for Generation API Resource
+///
 public struct Generation: Decodable {
     public let id: Int
     public let name: String

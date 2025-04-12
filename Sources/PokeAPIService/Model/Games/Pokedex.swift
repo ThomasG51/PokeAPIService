@@ -7,6 +7,8 @@
 
 import Foundation
 
+/// Model for Pokedex API Resource
+///
 public struct Pokedex: Decodable {
     public let id: Int
     public let name: String

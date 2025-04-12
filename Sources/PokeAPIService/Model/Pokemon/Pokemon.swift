@@ -9,6 +9,8 @@ import Foundation
 
 // MARK: - Model
 
+/// Model for Pokemon API Resource
+///
 public struct Pokemon: Decodable {
     public let id: Int
     public let name: String
