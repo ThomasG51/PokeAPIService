@@ -1,5 +1,5 @@
 //
-//  Untitled.swift
+//  GenerationTest.swift
 //  PokeAPIService
 //
 //  Created by Thomas George on 12/04/2025.

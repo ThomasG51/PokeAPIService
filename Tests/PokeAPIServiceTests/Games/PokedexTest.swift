@@ -19,12 +19,12 @@ struct PokedexTest {
         #expect(firstBaseResources.last?.name == "original-johto")
         #expect(firstBaseResources.last?.type == "pokedex")
     }
-    
+
     @Test func testPokedexSelectAll() async throws {
         let generations = try await Pokedex.selectAll()
         #expect(generations.count == 20)
     }
-    
+
     @Test func testPokedexSelectNationalByID() async throws {
         let nationalPokedex = try await Pokedex.selectOne(by: 1)
         #expect(nationalPokedex.id == 1)
@@ -33,7 +33,7 @@ struct PokedexTest {
         #expect(nationalPokedex.pokemonEntries.count == 1025)
         #expect(nationalPokedex.descriptions.first { $0.language.name == "en" }?.description == "Entire National dex")
     }
-    
+
     @Test func testPokedexSelectNationalByName() async throws {
         let nationalPokedex = try await Pokedex.selectOne(by: "national")
         #expect(nationalPokedex.id == 1)
@@ -42,7 +42,7 @@ struct PokedexTest {
         #expect(nationalPokedex.pokemonEntries.count == 1025)
         #expect(nationalPokedex.descriptions.first { $0.language.name == "en" }?.description == "Entire National dex")
     }
-    
+
     @Test func testPokedexSelectKantoByID() async throws {
         let kantoPokedex = try await Pokedex.selectOne(by: 2)
         #expect(kantoPokedex.id == 2)
@@ -51,7 +51,7 @@ struct PokedexTest {
         #expect(kantoPokedex.pokemonEntries.count == 151)
         #expect(kantoPokedex.descriptions.first { $0.language.name == "en" }?.description == "Red/Blue/Yellow Kanto dex")
     }
-    
+
     @Test func testPokedexSelectKantoByName() async throws {
         let kantoPokedex = try await Pokedex.selectOne(by: "kanto")
         #expect(kantoPokedex.id == 2)
@@ -60,7 +60,7 @@ struct PokedexTest {
         #expect(kantoPokedex.pokemonEntries.count == 151)
         #expect(kantoPokedex.descriptions.first { $0.language.name == "en" }?.description == "Red/Blue/Yellow Kanto dex")
     }
-    
+
     @Test func testFetchInexistingPokedex() async throws {
         await #expect(throws: PokeAPIServiceError.notFound, performing: {
             try await Pokedex.selectOne(by: "unknown")

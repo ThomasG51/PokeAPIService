@@ -19,12 +19,12 @@ struct GameVersionGroupTest {
         #expect(firstBaseResources.last?.name == "gold-silver")
         #expect(firstBaseResources.last?.type == "version-group")
     }
-    
+
     @Test func testGameVersionGroupSelectAll() async throws {
         let gameVersionGroups = try await GameVersionGroup.selectAll()
         #expect(gameVersionGroups.count == 20)
     }
-    
+
     @Test func testGameVersionGroupSelectRedBlueByID() async throws {
         let gameVersionGroupRedBlue = try await GameVersionGroup.selectOne(by: 1)
         #expect(gameVersionGroupRedBlue.id == 1)
@@ -35,7 +35,7 @@ struct GameVersionGroupTest {
         #expect(gameVersionGroupRedBlue.versions.contains(where: { $0.name == "red" }))
         #expect(gameVersionGroupRedBlue.versions.contains(where: { $0.name == "blue" }))
     }
-    
+
     @Test func testGameVersionGroupSelectRedBlueByName() async throws {
         let gameVersionGroupRedBlue = try await GameVersionGroup.selectOne(by: "red-blue")
         #expect(gameVersionGroupRedBlue.id == 1)
@@ -46,7 +46,7 @@ struct GameVersionGroupTest {
         #expect(gameVersionGroupRedBlue.versions.contains(where: { $0.name == "red" }))
         #expect(gameVersionGroupRedBlue.versions.contains(where: { $0.name == "blue" }))
     }
-    
+
     @Test func testGameVersionGroupSelectGoldSilverByID() async throws {
         let gameVersionGroupGoldSilver = try await GameVersionGroup.selectOne(by: 3)
         #expect(gameVersionGroupGoldSilver.id == 3)
@@ -57,7 +57,7 @@ struct GameVersionGroupTest {
         #expect(gameVersionGroupGoldSilver.versions.contains(where: { $0.name == "gold" }))
         #expect(gameVersionGroupGoldSilver.versions.contains(where: { $0.name == "silver" }))
     }
-    
+
     @Test func testGameVersionGroupSelectGoldSilverByName() async throws {
         let gameVersionGroupGoldSilver = try await GameVersionGroup.selectOne(by: "gold-silver")
         #expect(gameVersionGroupGoldSilver.id == 3)
@@ -68,7 +68,7 @@ struct GameVersionGroupTest {
         #expect(gameVersionGroupGoldSilver.versions.contains(where: { $0.name == "gold" }))
         #expect(gameVersionGroupGoldSilver.versions.contains(where: { $0.name == "silver" }))
     }
-    
+
     @Test func testFetchInexistingGameVersionGroup() async throws {
         await #expect(throws: PokeAPIServiceError.notFound, performing: {
             try await GameVersionGroup.selectOne(by: "unknown")
