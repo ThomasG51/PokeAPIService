@@ -98,6 +98,10 @@ struct PokeAPIService<T> where T: Decodable {
             throw PokeAPIServiceError.decoding(description: description)
         }
     }
+
+    // MARK: - Init
+
+    private init() {}
 }
 
 // MARK: - PokeAPIServiceError
