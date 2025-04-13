@@ -41,7 +41,7 @@ public struct Berry: Decodable {
 
 public extension Berry {
     struct BerryFlavorMap: Decodable {
-        let potency: Int
-        let flavor: BaseResource
+        public let potency: Int
+        public let flavor: BaseResource
     }
 }

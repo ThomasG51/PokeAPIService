@@ -9,9 +9,9 @@ import Foundation
 
 /// Model for BerryFirmness API Resource
 ///
-struct BerryFirmness: Decodable {
-    let id: Int
-    let name: String
-    let berries: [BaseResource]
-    let names: [NameLanguage]
+public struct BerryFirmness: Decodable {
+    public let id: Int
+    public let name: String
+    public let berries: [BaseResource]
+    public let names: [NameLanguage]
 }

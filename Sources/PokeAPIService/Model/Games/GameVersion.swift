@@ -9,11 +9,11 @@ import Foundation
 
 /// Model for GameVersion API Resource
 ///
-struct GameVersion: Decodable {
-    let id: Int
-    let name: String
-    let names: [NameLanguage]
-    let versionGroup: BaseResource
+public struct GameVersion: Decodable {
+    public let id: Int
+    public let name: String
+    public let names: [NameLanguage]
+    public let versionGroup: BaseResource
 
     enum CodingKeys: String, CodingKey {
         case id
