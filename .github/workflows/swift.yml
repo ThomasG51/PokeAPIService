@@ -20,10 +20,12 @@ jobs:
     - name: Show Swift version
       run: swift --version
     - name: Setup linters
-      run: brew install swiftlint
+      run: brew install swiftlint; brew install periphery
     - name: SwiftFormat
       run: swiftformat . --reporter github-actions-log
     - name: SwiftLint
       run: swiftlint --strict
+    - name: Periphery
+      run: periphery scan --retain-public --index-exclude "Sources/PokeAPIService/Model/*" --strict
     - name: Run tests
       run: swift test -v

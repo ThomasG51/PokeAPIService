@@ -113,6 +113,7 @@ enum PokeAPIServiceError: Error, Equatable {
     case httpStatusCodeError(code: Int, message: String)
     case decoding(description: String)
 
+    // periphery:ignore - wrong `unused` warning, the property is used on line 94 and also by the client app
     var localizedDescription: String {
         switch self {
         case .invalidURL:

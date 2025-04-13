@@ -5,6 +5,8 @@
 //  Created by Thomas George on 01/03/2025.
 //
 
+// periphery:ignore:all - Use to disable wrong `unused` or `redundant` warning for this protocol
+
 import Foundation
 
 protocol PokeAPIResource where Self: Decodable {
