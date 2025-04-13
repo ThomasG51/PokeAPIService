@@ -1,6 +1,14 @@
 # PokeAPIService
 
-#### 📦 A package to use PokeAPI in Swift
+![](https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png)
+![](https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png)
+![](https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/9.png)
+![](https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/144.png)
+![](https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/145.png)
+![](https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/146.png)
+
+This Swift package provides a comprehensive and efficient solution for accessing and utilizing data related to Pokemon from the [PokeAPI](https://pokeapi.co). 
+It simplifies the process of fetching, parsing, and managing Pokemon information within your iOS applications.
 
 ![swift](https://img.shields.io/badge/Swift-5.10-orange?logo=Swift&logoColor=white)
 ![xcode-version](https://img.shields.io/badge/Xcode-16-blue?logo=xcode&logoColor=white)
@@ -22,11 +30,11 @@
 https://github.com/ThomasG51/PokeAPIService
 ```
 
-## Network Requests
+## How to use ?
 
-Each model above is an API resource that can fetch data directly from itself using the following functions
+A core strength of this package is its ability to seamlessly fetch data directly from each model. Each Pokemon, Pokedex, Generation or other can initiate a request to PokeAPI and populate its properties using the following functions:
 
-##### Fetch one object by ID or name
+#### Fetch one object by ID or name
 ```swift
 // Fetch by id
 
@@ -58,7 +66,7 @@ let gameVersionName = "red"
 GameVersion.selectOne(by: gameVersionName)
 ```
 
-##### Fetch a list of objects
+#### Fetch a list of objects
 ```swift
 Pokemon.selectAll(from: 151, count: 100)
 
@@ -69,7 +77,7 @@ Pokedex.selectAll(count: 3)
 GameVersion.selectAll(from: 0, count: 1)
 ```
 
-##### Fetch a list of base resources (only id, name and type)
+#### Fetch a list of base resources (only id, name and type)
 ```swift
 Pokemon.baseResources(from: 0, count: 151)
 
@@ -82,7 +90,7 @@ GameVersion.baseResources(from: 0, count: 4)
 
 <h2 id="resources-by-category">Resources by category</h2>
 
-##### Pokemon
+#### Pokemon
 
 - [ ] Ability
 - [x] Pokemon
@@ -95,15 +103,19 @@ GameVersion.baseResources(from: 0, count: 4)
 - [ ] PokemonType
 - [ ] Stat
 
-##### Games
+#### Games
 
 - [x] GameVersion
 - [x] GameVersionGroup
 - [x] Generation
 - [x] Pokedex
 
-##### Berries
+#### Berries
 
 - [x] Berry
-- [ ] BerryFirmness
-- [ ] BerryFlavor
+- [x] BerryFirmness
+- [x] BerryFlavor
+
+## License
+
+PokeAPIService is available under the [MIT license](LICENSE).
