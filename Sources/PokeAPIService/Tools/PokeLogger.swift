@@ -11,6 +11,12 @@ import OSLog
 struct PokeLogger {
     private static let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "PokeAPIService", category: "PokeAPIService")
 
+    static func info(_ message: String) {
+        #if DEBUG
+            logger.info("\(message)")
+        #endif
+    }
+    
     static func warning(_ message: String) {
         #if DEBUG
             logger.warning("\(message)")

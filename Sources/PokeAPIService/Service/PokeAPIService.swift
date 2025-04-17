@@ -85,11 +85,11 @@ struct PokeAPIService<T> where T: Decodable {
             case let DecodingError.dataCorrupted(context):
                 "\(context)."
             case let DecodingError.keyNotFound(key, context):
-                "Key '\(key.stringValue)' not found.\n" + "Debug Description: \(context.debugDescription)."
+                "Key \(key.stringValue) not found.\n" + "Debug Description: \(context.debugDescription).\n" + "Coding Path: \(context.codingPath)."
             case let DecodingError.valueNotFound(value, context):
-                "Value '\(value)' not found.\n" + "Debug Description: \(context.debugDescription)."
+                "Value of type \(value) not found.\n" + "Debug Description: \(context.debugDescription).\n" + "Coding Path: \(context.codingPath)."
             case let DecodingError.typeMismatch(type, context):
-                "Type '\(type)' mismatch.\n" + "Debug Description: \(context.debugDescription)."
+                "Type \(type) mismatch.\n" + "Debug Description: \(context.debugDescription).\n" + "Coding Path: \(context.codingPath)."
             default:
                 error.localizedDescription
             }
