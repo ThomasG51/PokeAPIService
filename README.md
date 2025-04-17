@@ -90,9 +90,34 @@ GameVersion.baseResources(from: 0, count: 4)
 
 <h2 id="resources-by-category">Resources by category</h2>
 
+#### Berries
+
+- [x] Berry
+- [x] BerryFirmness
+- [x] BerryFlavor
+
+#### Contest
+
+- [ ] ContestType
+- [ ] ContestEffect
+- [ ] SuperContestEffect
+
+#### Games
+
+- [x] GameVersion
+- [x] GameVersionGroup
+- [x] Generation
+- [x] Pokedex
+
 #### Pokemon
 
 - [ ] Ability
+- [ ] Characteristic
+- [ ] EggGroup
+- [ ] Gender
+- [ ] GrowthRate
+- [ ] Nature
+- [ ] PokeathlonStat
 - [x] Pokemon
 - [ ] PokemonColor
 - [ ] PokemonLocationArea
@@ -102,19 +127,6 @@ GameVersion.baseResources(from: 0, count: 4)
 - [ ] PokemonSpecies
 - [ ] PokemonType
 - [ ] Stat
-
-#### Games
-
-- [x] GameVersion
-- [x] GameVersionGroup
-- [x] Generation
-- [x] Pokedex
-
-#### Berries
-
-- [x] Berry
-- [x] BerryFirmness
-- [x] BerryFlavor
 
 ## License
 
