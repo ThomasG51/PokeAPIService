@@ -16,7 +16,7 @@ struct PokeLogger {
             logger.info("\(message)")
         #endif
     }
-    
+
     static func warning(_ message: String) {
         #if DEBUG
             logger.warning("\(message)")

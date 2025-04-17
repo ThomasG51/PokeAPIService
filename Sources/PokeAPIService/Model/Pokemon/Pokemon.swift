@@ -211,10 +211,12 @@ public extension Pokemon {
 
             public struct GenerationVI: Decodable {
                 let omegarubyAlphasapphire: VersionSprites
+                // swiftlint:disable:next identifier_name
                 let XY: VersionSprites
 
                 enum CodingKeys: String, CodingKey {
                     case omegarubyAlphasapphire = "omegaruby-alphasapphire"
+                    // swiftlint:disable:next identifier_name
                     case XY = "x-y"
                 }
             }
