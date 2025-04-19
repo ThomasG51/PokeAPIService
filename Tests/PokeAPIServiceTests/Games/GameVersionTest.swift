@@ -147,7 +147,7 @@ struct GameVersionTest {
     }
 
     // MARK: - Random
-    
+
     @Test func testOptionalOnRandomGameVersion() async throws {
         let randomID = Int.random(in: 1 ... 43)
         PokeLogger.info("GameVersion ID: \(randomID)")
