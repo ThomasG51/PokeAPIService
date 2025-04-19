@@ -29,5 +29,80 @@ struct PokeLogger {
         #endif
     }
 
+    static func request(_ url: URL) {
+        #if DEBUG
+            info("""
+            🚀 REQUEST:
+            -----------
+            URL: \(url.absoluteString)
+            """)
+        #endif
+    }
+
+    static func response(_ response: HTTPURLResponse, _ body: String? = nil) {
+        #if DEBUG
+            var description = """
+            🧑‍🚀 RESPONSE:
+            ------------
+            URL: \(response.url?.absoluteString ?? "URL not found")
+            Status Code: \(response.statusCode)
+            """
+
+            if let body {
+                description += "\nBody: \(body)"
+            }
+
+            switch response.statusCode {
+            case 200:
+                info(description)
+            case 404:
+                warning(description)
+            default:
+                critical(description)
+            }
+        #endif
+    }
+
+    static func decoding(_ error: Error) {
+        #if DEBUG
+            let description = switch error {
+            case let DecodingError.dataCorrupted(context):
+                """
+                👾 DECODING ERROR:
+                ------------------
+                Data Corrupted
+                Debug Description: \(context.debugDescription)
+                """
+            case let DecodingError.keyNotFound(key, context):
+                """
+                👾 DECODING ERROR:
+                ------------------
+                Key \(key.stringValue) not found
+                Debug Description: \(context.debugDescription)
+                Coding Path: \(context.codingPath)
+                """
+            case let DecodingError.valueNotFound(value, context):
+                """
+                👾 DECODING ERROR:
+                ------------------
+                Value of type \(value) not found
+                Debug Description: \(context.debugDescription)
+                Coding Path: \(context.codingPath)
+                """
+            case let DecodingError.typeMismatch(type, context):
+                """
+                👾 DECODING ERROR:
+                ------------------
+                Type \(type) mismatch
+                Debug Description: \(context.debugDescription)
+                Coding Path: \(context.codingPath)
+                """
+            default:
+                error.localizedDescription
+            }
+            critical(description)
+        #endif
+    }
+
     private init() {}
 }

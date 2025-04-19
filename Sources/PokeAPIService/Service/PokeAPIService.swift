@@ -51,6 +51,8 @@ struct PokeAPIService<T> where T: Decodable {
     /// - Returns: The fetched data
     ///
     private static func data(from url: URL) async throws -> Data {
+        PokeLogger.request(url)
+
         let (data, response) = try await URLSession.shared.data(from: url)
 
         guard let httpResponse = response as? HTTPURLResponse else {
@@ -58,16 +60,16 @@ struct PokeAPIService<T> where T: Decodable {
             throw PokeAPIServiceError.invalidResponse
         }
 
-        if httpResponse.statusCode == 404 {
-            PokeLogger.warning("Resource not found !")
-            throw PokeAPIServiceError.notFound
+        if httpResponse.statusCode != 200 {
+            PokeLogger.response(httpResponse, data.prettyPrinted)
+            if httpResponse.statusCode == 404 {
+                throw PokeAPIServiceError.notFound
+            } else {
+                throw PokeAPIServiceError.httpStatusCodeError(code: httpResponse.statusCode, message: data.prettyPrinted)
+            }
         }
 
-        if httpResponse.statusCode != 200 {
-            let message = String(data: data, encoding: String.Encoding.utf8) ?? "No description"
-            PokeLogger.warning("code: \(httpResponse.statusCode), message: \(message)")
-            throw PokeAPIServiceError.httpStatusCodeError(code: httpResponse.statusCode, message: message)
-        }
+        PokeLogger.response(httpResponse)
 
         return data
     }
@@ -81,21 +83,8 @@ struct PokeAPIService<T> where T: Decodable {
         do {
             return try JSONDecoder().decode(T.self, from: data)
         } catch {
-            let description = switch error {
-            case let DecodingError.dataCorrupted(context):
-                "\(context)."
-            case let DecodingError.keyNotFound(key, context):
-                "Key \(key.stringValue) not found.\n" + "Debug Description: \(context.debugDescription).\n" + "Coding Path: \(context.codingPath)."
-            case let DecodingError.valueNotFound(value, context):
-                "Value of type \(value) not found.\n" + "Debug Description: \(context.debugDescription).\n" + "Coding Path: \(context.codingPath)."
-            case let DecodingError.typeMismatch(type, context):
-                "Type \(type) mismatch.\n" + "Debug Description: \(context.debugDescription).\n" + "Coding Path: \(context.codingPath)."
-            default:
-                error.localizedDescription
-            }
-
-            PokeLogger.critical(description)
-            throw PokeAPIServiceError.decoding(description: description)
+            PokeLogger.decoding(error)
+            throw PokeAPIServiceError.decoding
         }
     }
 
@@ -111,7 +100,7 @@ enum PokeAPIServiceError: Error, Equatable {
     case invalidResponse
     case notFound
     case httpStatusCodeError(code: Int, message: String)
-    case decoding(description: String)
+    case decoding
 
     // periphery:ignore - wrong `unused` warning, the property is used on line 94 and also by the client app
     var localizedDescription: String {
@@ -124,8 +113,8 @@ enum PokeAPIServiceError: Error, Equatable {
             "Not found"
         case let .httpStatusCodeError(code: code, message: message):
             "HTTP status code: \(code), message: \(message)"
-        case let .decoding(description):
-            "Decoding Error : \(description)"
+        case .decoding:
+            "Decoding Error"
         }
     }
 }
