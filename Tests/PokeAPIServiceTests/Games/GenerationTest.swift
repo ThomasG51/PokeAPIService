@@ -144,13 +144,13 @@ struct GenerationTest {
 
     @Test func testOptionalOnRandomGeneration() async throws {
         let randomID = Int.random(in: 1 ... 9)
-        PokeLogger.info("Generation ID: \(randomID)")
+        PokeLogger.info("Select Generation ID: \(randomID)")
         _ = try await Generation.selectOne(by: randomID)
     }
 
     // MARK: - Error
 
-    @Test func testFetchInexistingGeneration() async throws {
+    @Test func testSelectInexistingGeneration() async throws {
         await #expect(throws: PokeAPIServiceError.notFound, performing: {
             try await Generation.selectOne(by: "unknown")
         })

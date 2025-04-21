@@ -150,13 +150,13 @@ struct GameVersionTest {
 
     @Test func testOptionalOnRandomGameVersion() async throws {
         let randomID = Int.random(in: 1 ... 43)
-        PokeLogger.info("GameVersion ID: \(randomID)")
+        PokeLogger.info("Select GameVersion ID: \(randomID)")
         _ = try await GameVersion.selectOne(by: randomID)
     }
 
     // MARK: - Error
 
-    @Test func testFetchInexistingGameVersion() async throws {
+    @Test func testSelectInexistingGameVersion() async throws {
         await #expect(throws: PokeAPIServiceError.notFound, performing: {
             try await GameVersion.selectOne(by: "unknown")
         })

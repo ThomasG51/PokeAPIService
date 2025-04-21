@@ -51,8 +51,6 @@ struct PokeAPIService<T> where T: Decodable {
     /// - Returns: The fetched data
     ///
     private static func data(from url: URL) async throws -> Data {
-        PokeLogger.request(url)
-
         let (data, response) = try await URLSession.shared.data(from: url)
 
         guard let httpResponse = response as? HTTPURLResponse else {
@@ -68,8 +66,6 @@ struct PokeAPIService<T> where T: Decodable {
                 throw PokeAPIServiceError.httpStatusCodeError(code: httpResponse.statusCode, message: data.prettyPrinted)
             }
         }
-
-        PokeLogger.response(httpResponse)
 
         return data
     }

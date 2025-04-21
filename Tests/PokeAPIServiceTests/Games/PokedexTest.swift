@@ -75,7 +75,7 @@ struct PokedexTest {
         #expect(pokedex.descriptions.first { $0.language.name == "en" }?.description == "Entire National dex")
     }
 
-    @Test func testPokedexKantoByID() async throws {
+    @Test func testSelectKantoByID() async throws {
         let pokedex = try await Pokedex.selectOne(by: 2)
         #expect(pokedex.id == 2)
         #expect(pokedex.name == "kanto")
@@ -85,7 +85,7 @@ struct PokedexTest {
         #expect(pokedex.descriptions.first { $0.language.name == "en" }?.description == "Red/Blue/Yellow Kanto dex")
     }
 
-    @Test func testPokedexJohtoByID() async throws {
+    @Test func testSelectJohtoByID() async throws {
         let pokedex = try await Pokedex.selectOne(by: 3)
         #expect(pokedex.id == 3)
         #expect(pokedex.name == "original-johto")
@@ -95,7 +95,7 @@ struct PokedexTest {
         #expect(pokedex.descriptions.first { $0.language.name == "en" }?.description == "Gold/Silver/Crystal Johto dex—called the \"New\" Pokédex in-game")
     }
 
-    @Test func testPokedexSinnohByID() async throws {
+    @Test func testSelectSinnohByID() async throws {
         let pokedex = try await Pokedex.selectOne(by: 5)
         #expect(pokedex.id == 5)
         #expect(pokedex.name == "original-sinnoh")
@@ -105,7 +105,7 @@ struct PokedexTest {
         #expect(pokedex.descriptions.first { $0.language.name == "en" }?.description == "Diamond/Pearl Sinnoh dex")
     }
 
-    @Test func testPokedexAlolaByID() async throws {
+    @Test func testSelectAlolaByID() async throws {
         let pokedex = try await Pokedex.selectOne(by: 16)
         #expect(pokedex.id == 16)
         #expect(pokedex.name == "original-alola")
@@ -128,7 +128,7 @@ struct PokedexTest {
         #expect(pokedex.descriptions.first { $0.language.name == "en" }?.description == "Entire National dex")
     }
 
-    @Test func testPokedexKantoByName() async throws {
+    @Test func testSelectKantoByName() async throws {
         let pokedex = try await Pokedex.selectOne(by: "kanto")
         #expect(pokedex.id == 2)
         #expect(pokedex.name == "kanto")
@@ -138,7 +138,7 @@ struct PokedexTest {
         #expect(pokedex.descriptions.first { $0.language.name == "en" }?.description == "Red/Blue/Yellow Kanto dex")
     }
 
-    @Test func testPokedexJohtoByName() async throws {
+    @Test func testSelectJohtoByName() async throws {
         let pokedex = try await Pokedex.selectOne(by: "original-johto")
         #expect(pokedex.id == 3)
         #expect(pokedex.name == "original-johto")
@@ -148,7 +148,7 @@ struct PokedexTest {
         #expect(pokedex.descriptions.first { $0.language.name == "en" }?.description == "Gold/Silver/Crystal Johto dex—called the \"New\" Pokédex in-game")
     }
 
-    @Test func testPokedexSinnohByName() async throws {
+    @Test func testSelectSinnohByName() async throws {
         let pokedex = try await Pokedex.selectOne(by: "original-sinnoh")
         #expect(pokedex.id == 5)
         #expect(pokedex.name == "original-sinnoh")
@@ -158,7 +158,7 @@ struct PokedexTest {
         #expect(pokedex.descriptions.first { $0.language.name == "en" }?.description == "Diamond/Pearl Sinnoh dex")
     }
 
-    @Test func testPokedexAlolaByName() async throws {
+    @Test func testSelectAlolaByName() async throws {
         let pokedex = try await Pokedex.selectOne(by: "original-alola")
         #expect(pokedex.id == 16)
         #expect(pokedex.name == "original-alola")
@@ -172,13 +172,13 @@ struct PokedexTest {
 
     @Test func testOptionalOnRandomPokedex() async throws {
         let randomID = Int.random(in: 1 ... 32)
-        PokeLogger.info("Pokedex ID: \(randomID)")
+        PokeLogger.info("Select Pokedex ID: \(randomID)")
         _ = try await Pokedex.selectOne(by: randomID)
     }
 
     // MARK: - Error
 
-    @Test func testFetchInexistingPokedex() async throws {
+    @Test func testSelectInexistingPokedex() async throws {
         await #expect(throws: PokeAPIServiceError.notFound, performing: {
             try await Pokedex.selectOne(by: "unknown")
         })

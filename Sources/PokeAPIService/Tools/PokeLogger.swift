@@ -29,16 +29,6 @@ struct PokeLogger {
         #endif
     }
 
-    static func request(_ url: URL) {
-        #if DEBUG
-            info("""
-            🚀 REQUEST:
-            -----------
-            URL: \(url.absoluteString)
-            """)
-        #endif
-    }
-
     static func response(_ response: HTTPURLResponse, _ body: String? = nil) {
         #if DEBUG
             var description = """
@@ -68,31 +58,31 @@ struct PokeLogger {
             let description = switch error {
             case let DecodingError.dataCorrupted(context):
                 """
-                👾 DECODING ERROR:
-                ------------------
+                👾 DECODING:
+                ------------
                 Data Corrupted
                 Debug Description: \(context.debugDescription)
                 """
             case let DecodingError.keyNotFound(key, context):
                 """
-                👾 DECODING ERROR:
-                ------------------
+                👾 DECODING:
+                ------------
                 Key \(key.stringValue) not found
                 Debug Description: \(context.debugDescription)
                 Coding Path: \(context.codingPath)
                 """
             case let DecodingError.valueNotFound(value, context):
                 """
-                👾 DECODING ERROR:
-                ------------------
+                👾 DECODING:
+                ------------
                 Value of type \(value) not found
                 Debug Description: \(context.debugDescription)
                 Coding Path: \(context.codingPath)
                 """
             case let DecodingError.typeMismatch(type, context):
                 """
-                👾 DECODING ERROR:
-                ------------------
+                👾 DECODING:
+                ------------
                 Type \(type) mismatch
                 Debug Description: \(context.debugDescription)
                 Coding Path: \(context.codingPath)
