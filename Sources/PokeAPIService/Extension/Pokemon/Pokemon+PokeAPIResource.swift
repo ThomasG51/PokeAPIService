@@ -120,7 +120,7 @@ extension Pokemon: PokeAPIResource {
     ///
     public static func baseResources(from offset: Int, count limit: Int) async throws -> [BaseResource] {
         let params = ["offset": String(offset), "limit": String(limit)]
-        let baseResult = try await PokeAPIService<BaseResult>.fetchData(from: .list(rootPath: resourceRootPath), with: params)
+        let baseResult = try await PokeAPIService<APIResult>.fetchData(from: .list(rootPath: resourceRootPath), with: params)
         return baseResult.resources
     }
 }

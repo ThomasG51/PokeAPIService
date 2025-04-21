@@ -10,6 +10,6 @@ import Foundation
 /// Model for MachineVersionDetail API Resource
 ///
 public struct MachineVersionDetail: Decodable {
-    public let machine: BaseResource
+    public let machine: APIResource
     public let generation: BaseResource
 }

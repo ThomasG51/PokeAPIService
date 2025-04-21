@@ -1,5 +1,5 @@
 //
-//  BaseResult.swift
+//  APIResult.swift
 //  PokeAPIService
 //
 //  Created by Thomas George on 01/03/2025.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BaseResult: Codable {
+struct APIResult: Codable {
     let resources: [BaseResource]
 
     enum CodingKeys: String, CodingKey {
