@@ -12,7 +12,7 @@ public struct BerryFlavor: Decodable {
     public let name: String
     public let berries: [FlavorBerryMap]
     public let contestType: BaseResource
-    public let names: [NameLanguage]
+    public let names: [Name]
 }
 
 // MARK: - Nested Types

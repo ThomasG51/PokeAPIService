@@ -13,8 +13,8 @@ public struct Pokedex: Decodable {
     public let id: Int
     public let name: String
     public let isMainSeries: Bool
-    public let descriptions: [DescriptionLanguage]
-    public let names: [NameLanguage]
+    public let descriptions: [Description]
+    public let names: [Name]
     public let pokemonEntries: [PokemonEntry]
     public let region: BaseResource?
     public let versionGroups: [BaseResource]

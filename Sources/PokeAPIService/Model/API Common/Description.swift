@@ -1,5 +1,5 @@
 //
-//  DescriptionLanguage.swift
+//  Description.swift
 //  PokeAPIService
 //
 //  Created by Thomas George on 25/03/2025.
@@ -7,9 +7,9 @@
 
 import Foundation
 
-/// Model for DescriptionLanguage API Resource
+/// Model for Description API Resource
 ///
-public struct DescriptionLanguage: Decodable {
+public struct Description: Decodable {
     public let description: String
     public let language: BaseResource
 }

@@ -10,7 +10,7 @@ import Foundation
 struct BaseResult: Codable {
     let resources: [BaseResource]
 
-    public enum CodingKeys: String, CodingKey {
+    enum CodingKeys: String, CodingKey {
         case resources = "results"
     }
 }

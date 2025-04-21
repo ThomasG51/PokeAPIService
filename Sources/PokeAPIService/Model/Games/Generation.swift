@@ -13,7 +13,7 @@ public struct Generation: Decodable {
     public let id: Int
     public let name: String
     public let abilities: [BaseResource]
-    public let names: [NameLanguage]
+    public let names: [Name]
     public let mainRegion: BaseResource
     public let moves: [BaseResource]
     public let pokemonSpecies: [BaseResource]

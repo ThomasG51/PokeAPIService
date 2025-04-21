@@ -13,5 +13,5 @@ public struct BerryFirmness: Decodable {
     public let id: Int
     public let name: String
     public let berries: [BaseResource]
-    public let names: [NameLanguage]
+    public let names: [Name]
 }

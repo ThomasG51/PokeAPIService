@@ -47,8 +47,8 @@ Generation.selectOne(by: generationID)
 let pokedexID = 1
 Pokedex.selectOne(by: pokedexID)
 
-let gameVersionID = 1
-GameVersion.selectOne(by: gameVersionID)
+let versionID = 1
+Version.selectOne(by: versionID)
 
 
 // Fetch by name
@@ -62,8 +62,8 @@ Generation.selectOne(by: generationName)
 let pokedexName = "kanto"
 Pokedex.selectOne(by: pokedexName)
 
-let gameVersionName = "red"
-GameVersion.selectOne(by: gameVersionName)
+let versionName = "red"
+Version.selectOne(by: versionName)
 ```
 
 #### Fetch a list of objects
@@ -74,7 +74,7 @@ Generation.selectAll() // Without count argument, the list will be paginate by 2
 
 Pokedex.selectAll(count: 3)
 
-GameVersion.selectAll(from: 0, count: 1)
+Version.selectAll(from: 0, count: 1)
 ```
 
 #### Fetch a list of base resources (only id, name and type)
@@ -85,7 +85,7 @@ Generation.baseResources(from: 0, count: 1)
 
 Pokedex.baseResources(from: 1, count: 1)
 
-GameVersion.baseResources(from: 0, count: 4)
+Version.baseResources(from: 0, count: 4)
 ```
 
 <h2 id="resources-by-category">Resources by category</h2>
@@ -104,10 +104,10 @@ GameVersion.baseResources(from: 0, count: 4)
 
 #### Games
 
-- [x] GameVersion
-- [x] GameVersionGroup
 - [x] Generation
 - [x] Pokedex
+- [x] Version
+- [x] VersionGroup
 
 #### Pokemon
 
