@@ -19,61 +19,62 @@ public struct Pokemon: Decodable {
     public let isDefault: Bool
     public let order: Int
     public let weight: Int
-    public let abilities: [Ability]
+    public let abilities: [PokemonAbility]
     public let forms: [BaseResource]
     public let gameIndices: [VersionGameIndex]
-    public let heldItems: [HeldItem]
+    public let heldItems: [PokemonHeldItem]
     public let locationAreaEncounters: String
-    public let moves: [Move]
-    public let pastTypes: [TypePast]
-    public let sprites: Sprites
-    public let cries: Cries
+    public let moves: [PokemonMove]
+    public let pastTypes: [PokemonTypePast]
+    public let pastAbilities: [PokemonAbilityPast]
+    public let sprites: PokemonSprites
+    public let cries: PokemonCries
     public let species: BaseResource
-    public let stats: [Stat]
+    public let stats: [PokemonStat]
     public let types: [PokemonType]
 }
 
 // MARK: - Nested Types
 
 public extension Pokemon {
-    struct Ability: Decodable {
+    struct PokemonAbility: Decodable {
         public let isHidden: Bool
         public let slot: Int
         public let ability: BaseResource
     }
 
-    struct HeldItem: Decodable {
+    struct PokemonHeldItem: Decodable {
         public let item: BaseResource
-        public let versionDetails: [HeldItemVersionDetail]
+        public let versionDetails: [PokemonHeldItemVersion]
     }
 
-    struct HeldItemVersionDetail: Decodable {
+    struct PokemonHeldItemVersion: Decodable {
         public let version: BaseResource
         public let rarity: Int
     }
 
-    struct Move: Decodable {
+    struct PokemonMove: Decodable {
         public let move: BaseResource
-        public let versionGroupDetails: [MoveVersion]
+        public let versionGroupDetails: [PokemonMoveVersion]
     }
 
-    struct MoveVersion: Decodable {
+    struct PokemonMoveVersion: Decodable {
         public let moveLearnMethod: BaseResource
         public let versionGroup: BaseResource
         public let levelLearnedAt: Int
     }
 
-    struct TypePast: Decodable {
+    struct PokemonTypePast: Decodable {
         public let generation: BaseResource
         public let types: [PokemonType]
     }
 
-    struct PokemonType: Decodable {
-        public let slot: Int
-        public let type: BaseResource
+    struct PokemonAbilityPast: Decodable {
+        public let generation: BaseResource
+        public let abilities: [PokemonAbility]
     }
 
-    struct Sprites: Decodable {
+    struct PokemonSprites: Decodable {
         public let frontDefault: String
         public let frontShiny: String?
         public let frontFemale: String?
@@ -216,14 +217,19 @@ public extension Pokemon {
         }
     }
 
-    struct Cries: Decodable {
+    struct PokemonCries: Decodable {
         public let latest: String
         public let legacy: String?
     }
 
-    struct Stat: Decodable {
+    struct PokemonStat: Decodable {
         public let stat: BaseResource
         public let effort: Int
         public let baseStat: Int
+    }
+
+    struct PokemonType: Decodable {
+        public let slot: Int
+        public let type: BaseResource
     }
 }
