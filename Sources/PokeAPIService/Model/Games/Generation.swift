@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: - Model
+
 /// Model for Generation API Resource
 ///
 public struct Generation: Decodable {

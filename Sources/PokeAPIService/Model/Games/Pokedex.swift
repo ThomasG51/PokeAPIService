@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: - Model
+
 /// Model for Pokedex API Resource
 ///
 public struct Pokedex: Decodable {

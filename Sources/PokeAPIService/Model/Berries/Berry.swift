@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: - Model
+
 /// Model for Berry API Resource
 ///
 public struct Berry: Decodable {

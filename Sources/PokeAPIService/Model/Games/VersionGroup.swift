@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: - Model
+
 /// Model for VersionGroup API Resource
 ///
 public struct VersionGroup: Decodable {

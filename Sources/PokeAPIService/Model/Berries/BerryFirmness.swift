@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: - Model
+
 /// Model for BerryFirmness API Resource
 ///
 public struct BerryFirmness: Decodable {

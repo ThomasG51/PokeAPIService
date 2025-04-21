@@ -7,6 +7,10 @@
 
 import Foundation
 
+// MARK: - Model
+
+/// Model for BerryFlavor API Resource
+///
 public struct BerryFlavor: Decodable {
     public let id: Int
     public let name: String
