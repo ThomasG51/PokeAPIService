@@ -18,15 +18,4 @@ public struct GameVersionGroup: Decodable {
     public let pokedexes: [BaseResource]
     public let regions: [BaseResource]
     public let versions: [BaseResource]
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case name
-        case order
-        case generation
-        case moveLearnMethods = "move_learn_methods"
-        case pokedexes
-        case regions
-        case versions
-    }
 }

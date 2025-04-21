@@ -31,28 +31,6 @@ public struct Pokemon: Decodable {
     public let species: BaseResource
     public let stats: [Stat]
     public let types: [PokemonType]
-
-    public enum CodingKeys: String, CodingKey {
-        case id
-        case name
-        case baseExperience = "base_experience"
-        case height
-        case isDefault = "is_default"
-        case order
-        case weight
-        case abilities
-        case forms
-        case gameIndices = "game_indices"
-        case heldItems = "held_items"
-        case locationAreaEncounters = "location_area_encounters"
-        case moves
-        case pastTypes = "past_types"
-        case sprites
-        case cries
-        case species
-        case stats
-        case types
-    }
 }
 
 // MARK: - Nested Types
@@ -62,22 +40,11 @@ public extension Pokemon {
         public let isHidden: Bool
         public let slot: Int
         public let ability: BaseResource
-
-        public enum CodingKeys: String, CodingKey {
-            case isHidden = "is_hidden"
-            case slot
-            case ability
-        }
     }
 
     struct HeldItem: Decodable {
         public let item: BaseResource
         public let versionDetails: [HeldItemVersionDetail]
-
-        public enum CodingKeys: String, CodingKey {
-            case item
-            case versionDetails = "version_details"
-        }
     }
 
     struct HeldItemVersionDetail: Decodable {
@@ -88,23 +55,12 @@ public extension Pokemon {
     struct Move: Decodable {
         public let move: BaseResource
         public let versionGroupDetails: [MoveVersion]
-
-        enum CodingKeys: String, CodingKey {
-            case move
-            case versionGroupDetails = "version_group_details"
-        }
     }
 
     struct MoveVersion: Decodable {
         public let moveLearnMethod: BaseResource
         public let versionGroup: BaseResource
         public let levelLearnedAt: Int
-
-        enum CodingKeys: String, CodingKey {
-            case moveLearnMethod = "move_learn_method"
-            case versionGroup = "version_group"
-            case levelLearnedAt = "level_learned_at"
-        }
     }
 
     struct TypePast: Decodable {
@@ -127,18 +83,6 @@ public extension Pokemon {
         public let backFemale: String?
         public let backShinyFemale: String?
         public let versions: Versions
-
-        enum CodingKeys: String, CodingKey {
-            case frontDefault = "front_default"
-            case frontShiny = "front_shiny"
-            case frontFemale = "front_female"
-            case frontShinyFemale = "front_shiny_female"
-            case backDefault = "back_default"
-            case backShiny = "back_shiny"
-            case backFemale = "back_female"
-            case backShinyFemale = "back_shiny_female"
-            case versions
-        }
 
         public struct Versions: Decodable {
             public let generationI: GenerationI
@@ -252,24 +196,6 @@ public extension Pokemon {
                 public let frontShinyFemale: String?
                 public let frontShinyTransparent: String?
 
-                enum CodingKeys: String, CodingKey {
-                    case animated
-                    case backDefault = "back_default"
-                    case backFemale = "back_female"
-                    case backTransparent = "back_transparent"
-                    case backGray = "back_gray"
-                    case backShiny = "back_shiny"
-                    case backShinyFemale = "back_shiny_female"
-                    case backShinyTransparent = "back_shiny_transparent"
-                    case frontDefault = "front_default"
-                    case frontFemale = "front_female"
-                    case frontTransparent = "front_transparent"
-                    case frontGray = "front_gray"
-                    case frontShiny = "front_shiny"
-                    case frontShinyFemale = "front_shiny_female"
-                    case frontShinyTransparent = "front_shiny_transparent"
-                }
-
                 public struct VersionAnimatedSprites: Decodable {
                     public let backDefault: String?
                     public let backFemale: String?
@@ -285,23 +211,6 @@ public extension Pokemon {
                     public let frontShiny: String?
                     public let frontShinyFemale: String?
                     public let frontShinyTransparent: String?
-
-                    enum CodingKeys: String, CodingKey {
-                        case backDefault = "back_default"
-                        case backFemale = "back_female"
-                        case backTransparent = "back_transparent"
-                        case backGray = "back_gray"
-                        case backShiny = "back_shiny"
-                        case backShinyFemale = "back_shiny_female"
-                        case backShinyTransparent = "back_shiny_transparent"
-                        case frontDefault = "front_default"
-                        case frontFemale = "front_female"
-                        case frontTransparent = "front_transparent"
-                        case frontGray = "front_gray"
-                        case frontShiny = "front_shiny"
-                        case frontShinyFemale = "front_shiny_female"
-                        case frontShinyTransparent = "front_shiny_transparent"
-                    }
                 }
             }
         }
@@ -316,11 +225,5 @@ public extension Pokemon {
         public let stat: BaseResource
         public let effort: Int
         public let baseStat: Int
-
-        enum CodingKeys: String, CodingKey {
-            case stat
-            case effort
-            case baseStat = "base_stat"
-        }
     }
 }

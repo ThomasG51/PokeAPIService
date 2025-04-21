@@ -77,7 +77,9 @@ struct PokeAPIService<T> where T: Decodable {
     ///
     private static func decode(_ data: Data) throws -> T {
         do {
-            return try JSONDecoder().decode(T.self, from: data)
+            let jsonDecoder = JSONDecoder()
+            jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
+            return try jsonDecoder.decode(T.self, from: data)
         } catch {
             PokeLogger.decoding(error)
             throw PokeAPIServiceError.decoding

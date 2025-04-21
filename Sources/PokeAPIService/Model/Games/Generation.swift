@@ -19,16 +19,4 @@ public struct Generation: Decodable {
     public let pokemonSpecies: [BaseResource]
     public let types: [BaseResource]
     public let versionGroups: [BaseResource]
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case name
-        case abilities
-        case names
-        case mainRegion = "main_region"
-        case moves
-        case pokemonSpecies = "pokemon_species"
-        case types
-        case versionGroups = "version_groups"
-    }
 }

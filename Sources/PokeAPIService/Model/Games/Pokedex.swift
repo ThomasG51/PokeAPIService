@@ -18,27 +18,13 @@ public struct Pokedex: Decodable {
     public let pokemonEntries: [PokemonEntry]
     public let region: BaseResource?
     public let versionGroups: [BaseResource]
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case name
-        case isMainSeries = "is_main_series"
-        case descriptions
-        case names
-        case pokemonEntries = "pokemon_entries"
-        case region
-        case versionGroups = "version_groups"
-    }
 }
+
+// MARK: - Nested Types
 
 public extension Pokedex {
     struct PokemonEntry: Decodable {
         public let entryNumber: Int
         public let pokemonSpecies: BaseResource
-
-        enum CodingKeys: String, CodingKey {
-            case entryNumber = "entry_number"
-            case pokemonSpecies = "pokemon_species"
-        }
     }
 }

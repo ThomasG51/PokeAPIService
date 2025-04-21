@@ -13,15 +13,9 @@ public struct BerryFlavor: Decodable {
     public let berries: [FlavorBerryMap]
     public let contestType: BaseResource
     public let names: [NameLanguage]
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case name
-        case berries
-        case contestType = "contest_type"
-        case names
-    }
 }
+
+// MARK: - Nested Types
 
 public extension BerryFlavor {
     struct FlavorBerryMap: Decodable {

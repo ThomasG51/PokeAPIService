@@ -12,9 +12,4 @@ import Foundation
 public struct VersionGameIndex: Decodable {
     public let gameIndex: Int
     public let version: BaseResource
-
-    enum CodingKeys: String, CodingKey {
-        case gameIndex = "game_index"
-        case version
-    }
 }

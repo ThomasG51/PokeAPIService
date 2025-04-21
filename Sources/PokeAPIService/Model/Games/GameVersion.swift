@@ -14,11 +14,4 @@ public struct GameVersion: Decodable {
     public let name: String
     public let names: [NameLanguage]
     public let versionGroup: BaseResource
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case name
-        case names
-        case versionGroup = "version_group"
-    }
 }
