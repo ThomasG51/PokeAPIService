@@ -34,14 +34,14 @@ https://github.com/ThomasG51/PokeAPIService
 
 A core strength of this package is its ability to seamlessly fetch data directly from each model. Each Pokemon, Pokedex, Generation or other can initiate a request to PokeAPI and populate its properties.
 
-⚠️ Please note that due to restrictions by the underlying API, some models do not have acces to all fetching functions. Refer to the specific model documentation for more details.
+> ⚠️
+> Please note that due to restrictions by the underlying API, some models do not have acces to all fetching functions. 
+> Refer to the specific model documentation for more details.
 
-### Examples of use
+### Examples:
 
-#### Fetch one object by ID or name
+#### Fetch one object by ID
 ```swift
-// Fetch by id
-
 let pokemonID = 1
 Pokemon.selectOne(by: pokemonID)
 
@@ -53,10 +53,10 @@ Pokedex.selectOne(by: pokedexID)
 
 let versionID = 1
 Version.selectOne(by: versionID)
+```
 
-
-// Fetch by name
-
+#### Fetch one object by name
+```swift
 let pokemonName = "bulbasaur"
 Pokemon.selectOne(by: pokemonName)
 
