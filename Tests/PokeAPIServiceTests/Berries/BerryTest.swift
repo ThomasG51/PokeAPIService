@@ -9,80 +9,146 @@
 import Testing
 
 struct BerryTest {
-    @Test func testBaseResourcesWithPagination() async throws {
-        let firstBaseResources = try await Berry.baseResources(from: 0, count: 30)
-        #expect(firstBaseResources.count == 30)
-        #expect(firstBaseResources.last?.id == "30")
-        #expect(firstBaseResources.first?.id == "1")
-        #expect(firstBaseResources.first?.name == "cheri")
-        #expect(firstBaseResources.first?.type == "berry")
+    // MARK: - Base Resources
 
-        let secondBaseResources = try await Berry.baseResources(from: 30, count: 30)
-        #expect(secondBaseResources.count == 30)
-        #expect(secondBaseResources.last?.id == "60")
-        #expect(secondBaseResources.first?.id == "31")
-        #expect(secondBaseResources.first?.name == "spelon")
-        #expect(secondBaseResources.first?.type == "berry")
+    @Test func testFecthBaseResources() async throws {
+        let baseResources = try await Berry.baseResources(from: 0, count: 30)
+        #expect(baseResources.count == 30)
+        #expect(baseResources.first?.id == "1")
+        #expect(baseResources.first?.name == "cheri")
+        #expect(baseResources.first?.type == "berry")
+        #expect(baseResources.last?.id == "30")
+        #expect(baseResources.last?.name == "nomel")
+        #expect(baseResources.last?.type == "berry")
     }
 
-    @Test func testSelectAllBerries() async throws {
-        let berries = try await Berry.selectAll(count: 64)
-        #expect(berries.count == 64)
-        #expect(berries.first?.id == 1)
-        #expect(berries.first?.name.lowercased() == "cheri")
-        #expect(berries.last?.id == 64)
-        #expect(berries.last?.name.lowercased() == "rowap")
+    @Test func testFecthPaginatedBaseResources() async throws {
+        let baseResources = try await Berry.baseResources(from: 30, count: 30)
+        #expect(baseResources.count == 30)
+        #expect(baseResources.first?.id == "31")
+        #expect(baseResources.first?.name == "spelon")
+        #expect(baseResources.first?.type == "berry")
+        #expect(baseResources.last?.id == "60")
+        #expect(baseResources.last?.name == "enigma")
+        #expect(baseResources.last?.type == "berry")
     }
 
-    @Test func testFetchCheriByID() async throws {
-        let cheri = try await Berry.selectOne(by: 1)
-        #expect(cheri.id == 1)
-        #expect(cheri.name.lowercased() == "cheri")
-        #expect(cheri.growthTime == 3)
-        #expect(cheri.firmness.name.lowercased() == "soft")
-        #expect(cheri.flavors.contains(where: { $0.flavor.name.lowercased() == "spicy" }))
-        #expect(cheri.flavors.contains(where: { $0.flavor.name.lowercased() == "sweet" }))
-        #expect(cheri.item.name.lowercased() == "cheri-berry")
-        #expect(cheri.naturalGiftType.name.lowercased() == "fire")
+    // MARK: - Select All
+
+    @Test func testSelectDefaultGroupOfBerry() async throws {
+        let group = try await Berry.selectAll()
+        #expect(group.count == 20)
+        #expect(group.first?.id == 1)
+        #expect(group.first?.name.lowercased() == "cheri")
+        #expect(group.last?.id == 20)
+        #expect(group.last?.name.lowercased() == "pinap")
     }
 
-    @Test func testFetchCheriByName() async throws {
-        let cheri = try await Berry.selectOne(by: "cheri")
-        #expect(cheri.id == 1)
-        #expect(cheri.name.lowercased() == "cheri")
-        #expect(cheri.growthTime == 3)
-        #expect(cheri.firmness.name.lowercased() == "soft")
-        #expect(cheri.flavors.contains(where: { $0.flavor.name.lowercased() == "spicy" }))
-        #expect(cheri.flavors.contains(where: { $0.flavor.name.lowercased() == "sweet" }))
-        #expect(cheri.item.name.lowercased() == "cheri-berry")
-        #expect(cheri.naturalGiftType.name.lowercased() == "fire")
+    @Test func testSelectLimitedGroupOfBerry() async throws {
+        let group = try await Berry.selectAll(count: 30)
+        #expect(group.count == 30)
+        #expect(group.first?.id == 1)
+        #expect(group.first?.name.lowercased() == "cheri")
+        #expect(group.last?.id == 30)
+        #expect(group.last?.name.lowercased() == "nomel")
     }
 
-    @Test func testFetchSpelonByID() async throws {
-        let spelon = try await Berry.selectOne(by: 31)
-        #expect(spelon.id == 31)
-        #expect(spelon.name.lowercased() == "spelon")
-        #expect(spelon.growthTime == 15)
-        #expect(spelon.firmness.name.lowercased() == "soft")
-        #expect(spelon.flavors.contains(where: { $0.flavor.name.lowercased() == "spicy" }))
-        #expect(spelon.flavors.contains(where: { $0.flavor.name.lowercased() == "sweet" }))
-        #expect(spelon.item.name.lowercased() == "spelon-berry")
-        #expect(spelon.naturalGiftType.name.lowercased() == "dark")
+    @Test func testSelectPaginatedGroupOfBerry() async throws {
+        let group = try await Berry.selectAll(from: 30, count: 30)
+        #expect(group.count == 30)
+        #expect(group.first?.id == 31)
+        #expect(group.first?.name.lowercased() == "spelon")
+        #expect(group.last?.id == 60)
+        #expect(group.last?.name.lowercased() == "enigma")
     }
 
-    @Test func testFetchSpelonByName() async throws {
-        let spelon = try await Berry.selectOne(by: "spelon")
-        #expect(spelon.id == 31)
-        #expect(spelon.name.lowercased() == "spelon")
-        #expect(spelon.growthTime == 15)
-        #expect(spelon.firmness.name.lowercased() == "soft")
-        #expect(spelon.flavors.contains(where: { $0.flavor.name.lowercased() == "spicy" }))
-        #expect(spelon.flavors.contains(where: { $0.flavor.name.lowercased() == "sweet" }))
-        #expect(spelon.item.name.lowercased() == "spelon-berry")
-        #expect(spelon.naturalGiftType.name.lowercased() == "dark")
+    // MARK: - Select One By ID
+
+    @Test func testSelectCheriByID() async throws {
+        let berry = try await Berry.selectOne(by: 1)
+        #expect(berry.id == 1)
+        #expect(berry.name.lowercased() == "cheri")
+        #expect(berry.growthTime == 3)
+        #expect(berry.firmness.name.lowercased() == "soft")
+        #expect(berry.flavors.contains(where: { $0.flavor.name.lowercased() == "spicy" }))
+        #expect(berry.flavors.contains(where: { $0.flavor.name.lowercased() == "sweet" }))
+        #expect(berry.item.name.lowercased() == "cheri-berry")
+        #expect(berry.naturalGiftType.name.lowercased() == "fire")
     }
 
-    @Test func testFetchInexistingBerry() async throws {
+    @Test func testSelectNomelByID() async throws {
+        let berry = try await Berry.selectOne(by: 30)
+        #expect(berry.id == 30)
+        #expect(berry.name.lowercased() == "nomel")
+        #expect(berry.growthTime == 6)
+        #expect(berry.firmness.name.lowercased() == "super-hard")
+        #expect(berry.flavors.contains(where: { $0.flavor.name.lowercased() == "spicy" }))
+        #expect(berry.flavors.contains(where: { $0.flavor.name.lowercased() == "sweet" }))
+        #expect(berry.item.name.lowercased() == "nomel-berry")
+        #expect(berry.naturalGiftType.name.lowercased() == "dragon")
+    }
+
+    @Test func testSelectEnigmaByID() async throws {
+        let berry = try await Berry.selectOne(by: 60)
+        #expect(berry.id == 60)
+        #expect(berry.name.lowercased() == "enigma")
+        #expect(berry.growthTime == 24)
+        #expect(berry.firmness.name.lowercased() == "hard")
+        #expect(berry.flavors.contains(where: { $0.flavor.name.lowercased() == "dry" }))
+        #expect(berry.flavors.contains(where: { $0.flavor.name.lowercased() == "sour" }))
+        #expect(berry.item.name.lowercased() == "enigma-berry")
+        #expect(berry.naturalGiftType.name.lowercased() == "bug")
+    }
+
+    // MARK: - Select One By Name
+
+    @Test func testSelectCheriByName() async throws {
+        let berry = try await Berry.selectOne(by: "cheri")
+        #expect(berry.id == 1)
+        #expect(berry.name.lowercased() == "cheri")
+        #expect(berry.growthTime == 3)
+        #expect(berry.firmness.name.lowercased() == "soft")
+        #expect(berry.flavors.contains(where: { $0.flavor.name.lowercased() == "spicy" }))
+        #expect(berry.flavors.contains(where: { $0.flavor.name.lowercased() == "sweet" }))
+        #expect(berry.item.name.lowercased() == "cheri-berry")
+        #expect(berry.naturalGiftType.name.lowercased() == "fire")
+    }
+
+    @Test func testSelectNomelByName() async throws {
+        let berry = try await Berry.selectOne(by: "nomel")
+        #expect(berry.id == 30)
+        #expect(berry.name.lowercased() == "nomel")
+        #expect(berry.growthTime == 6)
+        #expect(berry.firmness.name.lowercased() == "super-hard")
+        #expect(berry.flavors.contains(where: { $0.flavor.name.lowercased() == "spicy" }))
+        #expect(berry.flavors.contains(where: { $0.flavor.name.lowercased() == "sweet" }))
+        #expect(berry.item.name.lowercased() == "nomel-berry")
+        #expect(berry.naturalGiftType.name.lowercased() == "dragon")
+    }
+
+    @Test func testSelectEnigmaByName() async throws {
+        let berry = try await Berry.selectOne(by: "enigma")
+        #expect(berry.id == 60)
+        #expect(berry.name.lowercased() == "enigma")
+        #expect(berry.growthTime == 24)
+        #expect(berry.firmness.name.lowercased() == "hard")
+        #expect(berry.flavors.contains(where: { $0.flavor.name.lowercased() == "dry" }))
+        #expect(berry.flavors.contains(where: { $0.flavor.name.lowercased() == "sour" }))
+        #expect(berry.item.name.lowercased() == "enigma-berry")
+        #expect(berry.naturalGiftType.name.lowercased() == "bug")
+    }
+
+    // MARK: - Random
+
+    @Test func testOptionalOnRandomBerry() async throws {
+        let randomID = Int.random(in: 1 ... 64)
+        PokeLogger.info("Select Berry ID: \(randomID)")
+        _ = try await Berry.selectOne(by: randomID)
+    }
+
+    // MARK: - Error
+
+    @Test func testSelectInexistingBerry() async throws {
         await #expect(throws: PokeAPIServiceError.notFound, performing: {
             try await Berry.selectOne(by: "unknown")
         })
