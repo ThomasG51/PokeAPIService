@@ -32,7 +32,11 @@ https://github.com/ThomasG51/PokeAPIService
 
 ## How to use ?
 
-A core strength of this package is its ability to seamlessly fetch data directly from each model. Each Pokemon, Pokedex, Generation or other can initiate a request to PokeAPI and populate its properties using the following functions:
+A core strength of this package is its ability to seamlessly fetch data directly from each model. Each Pokemon, Pokedex, Generation or other can initiate a request to PokeAPI and populate its properties.
+
+⚠️ Please note that due to restrictions by the underlying API, some models do not have acces to all fetching functions. Refer to the specific model documentation for more details.
+
+### Examples of use
 
 #### Fetch one object by ID or name
 ```swift
@@ -95,13 +99,6 @@ Version.baseResources(from: 0, count: 4)
 - [x] Berry
 - [x] BerryFirmness
 - [x] BerryFlavor
-
-#### Contest
-
-- [ ] ContestType
-- [ ] ContestEffect
-- [ ] SuperContestEffect
-
 #### Games
 
 - [x] Generation
@@ -111,7 +108,7 @@ Version.baseResources(from: 0, count: 4)
 
 #### Pokemon
 
-- [ ] Ability
+- [x] Ability
 - [ ] Characteristic
 - [ ] EggGroup
 - [ ] Gender

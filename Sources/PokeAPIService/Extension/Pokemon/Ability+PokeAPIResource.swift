@@ -1,46 +1,46 @@
 //
-//  VersionGroup+PokeAPIResource.swift
+//  Ability+PokeAPIResource.swift
 //  PokeAPIService
 //
-//  Created by Thomas George on 05/04/2025.
+//  Created by Thomas George on 21/04/2025.
 //
 
 import Foundation
 
-extension VersionGroup: PokeAPIResource {
-    /// The VersionGroup API resource root path
+extension Ability: PokeAPIResource {
+    /// The Pokemon API resource root path
     ///
-    static var resourceRootPath = "version-group"
+    static var resourceRootPath = "ability"
 
-    /// Get a list of VersionGroup
+    /// Get a list of Ability
     ///
     /// Without function parameters, the count parameter is set to 20 by default.
     /// ```swift
     /// Task {
     ///     do {
-    ///         let versionGroups = try await VersionGroup.selectAll()
+    ///         let abilities = try await Ability.selectAll()
     ///     } catch {
     ///         print(error.localizedDescription)
     ///     }
     /// }
     /// ```
     ///
-    /// Set a precise count to fetch as many VersionGroup as you need.
+    /// Set a precise count to fetch as many Ability as you need.
     /// ```swift
     /// Task {
     ///     do {
-    ///         let versionGroups = try await VersionGroup.selectAll(count: 2)
+    ///         let abilities = try await Ability.selectAll(count: 200)
     ///     } catch {
     ///         print(error.localizedDescription)
     ///     }
     /// }
     /// ```
     ///
-    /// Choose where to start and how many VersionGroup you want to fetch.
+    /// Choose where to start and how many Ability you want to fetch.
     /// ```swift
     /// Task {
     ///     do {
-    ///         let versionGroups = try await VersionGroup.selectAll(from: 1, count: 3)
+    ///         let abilities = try await Ability.selectAll(from: 100, count: 100)
     ///     } catch {
     ///         print(error.localizedDescription)
     ///     }
@@ -49,65 +49,65 @@ extension VersionGroup: PokeAPIResource {
     ///
     /// - Parameters offset: The pagination offset
     /// - Parameters limit: The pagination limit
-    /// - Returns: A list of VersionGroup
+    /// - Returns: A list of Ability
     ///
-    public static func selectAll(from offset: Int = 0, count limit: Int = 20) async throws -> [VersionGroup] {
+    public static func selectAll(from offset: Int = 0, count limit: Int = 20) async throws -> [Ability] {
         let apiResources = try await baseResources(from: offset, count: limit)
-        let versionGroups = try await withThrowingTaskGroup(of: VersionGroup.self, returning: [VersionGroup].self) { group in
+        let abilityList = try await withThrowingTaskGroup(of: Ability.self, returning: [Ability].self) { group in
             for resource in apiResources {
                 group.addTask { try await selectOne(by: resource.id) }
             }
-            return try await group.reduce(into: [VersionGroup]()) { $0.append($1) }
+            return try await group.reduce(into: [Ability]()) { $0.append($1) }
         }
-        return versionGroups.sorted { $0.id < $1.id }
+        return abilityList.sorted { $0.id < $1.id }
     }
 
-    /// Get a VersionGroup using its ID
+    /// Get an Ability using its ID
     ///
     /// ```swift
     /// Task {
     ///     do {
-    ///         let versionGroupID: Int = 1
-    ///         let redBlue = try await VersionGroup.selectOne(by: versionGroupID)
+    ///         let abilityID: Int = 15
+    ///         let insomnia = try await Ability.selectOne(by: abilityID)
     ///     } catch {
     ///         print(error.localizedDescription)
     ///     }
     /// }
     /// ```
     ///
-    /// - Parameter id: The VersionGroup ID
-    /// - Returns: A VersionGroup
+    /// - Parameter id: The Ability ID
+    /// - Returns: An Ability
     ///
-    public static func selectOne(by id: Int) async throws -> VersionGroup {
+    public static func selectOne(by id: Int) async throws -> Ability {
         try await PokeAPIService.fetchData(from: .resource(rootPath: resourceRootPath, value: String(id)))
     }
 
-    /// Get a VersionGroup using its name
+    /// Get an Ability using its name
     ///
     /// ```swift
     /// Task {
     ///     do {
-    ///         let versionGroupName = "red-blue"
-    ///         let redBlue = try await GameVersion.selectOne(by: versionGroupName)
+    ///         let abilityName = "insomnia"
+    ///         let insomnia = try await Ability.selectOne(by: abilityName)
     ///     } catch {
     ///         print(error.localizedDescription)
     ///     }
     /// }
     /// ```
     ///
-    /// - Parameter name: The VersionGroup name
-    /// - Returns: A VersionGroup
+    /// - Parameter name: The Ability name
+    /// - Returns: An Ability
     ///
-    public static func selectOne(by name: String) async throws -> VersionGroup {
+    public static func selectOne(by name: String) async throws -> Ability {
         try await PokeAPIService.fetchData(from: .resource(rootPath: resourceRootPath, value: name))
     }
 
-    /// Get a list of VersionGroup API base resources
+    /// Get a list of Ability API base resources
     ///
     /// ```swift
     /// Task {
     ///     do {
-    ///         let baseResources = try await VersionGroup.baseResources(from: 0, count: 3)
+    ///         let baseResources = try await Ability.baseResources(from: 0, count: 200)
     ///     } catch {
     ///         print(error.localizedDescription)
     ///     }
