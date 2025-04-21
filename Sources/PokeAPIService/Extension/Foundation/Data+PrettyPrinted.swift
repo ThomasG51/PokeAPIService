@@ -11,6 +11,7 @@ extension Data {
     var prettyPrinted: String {
         let string = if let jsonObject = try? JSONSerialization.jsonObject(with: self, options: []),
                         let data = try? JSONSerialization.data(withJSONObject: jsonObject, options: [.prettyPrinted])
+        // swiftlint:disable:next opening_brace
         {
             String(data: data, encoding: .utf8)
         } else {
