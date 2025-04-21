@@ -16,7 +16,7 @@ public struct BaseResource: Codable {
         String(url.split(separator: "/").last ?? "")
     }
 
-    public let name: String?
+    public let name: String
 
     public var type: String {
         String(url.split(separator: "/").dropLast().last ?? "")

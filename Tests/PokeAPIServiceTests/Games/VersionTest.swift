@@ -1,0 +1,164 @@
+//
+//  VersionTest.swift
+//  PokeAPIService
+//
+//  Created by Thomas George on 21/03/2025.
+//
+
+@testable import PokeAPIService
+import Testing
+
+struct VersionTest {
+    // MARK: - Base Resources
+
+    @Test func testFecthBaseResources() async throws {
+        let baseResources = try await Version.baseResources(from: 0, count: 20)
+        #expect(baseResources.count == 20)
+        #expect(baseResources.last?.id == "20")
+        #expect(baseResources.first?.id == "1")
+        #expect(baseResources.first?.name == "red")
+        #expect(baseResources.first?.type == "version")
+    }
+
+    @Test func testFecthPaginatedBaseResources() async throws {
+        let baseResources = try await Version.baseResources(from: 20, count: 20)
+        #expect(baseResources.count == 20)
+        #expect(baseResources.last?.id == "40")
+        #expect(baseResources.first?.id == "21")
+        #expect(baseResources.first?.name == "black-2")
+        #expect(baseResources.first?.type == "version")
+    }
+
+    // MARK: - Select All
+
+    @Test func testSelectDefaultGroupOfVersion() async throws {
+        let group = try await Version.selectAll()
+        #expect(group.count == 20)
+        #expect(group.first?.id == 1)
+        #expect(group.first?.name.lowercased() == "red")
+        #expect(group.last?.id == 20)
+        #expect(group.last?.name.lowercased() == "xd")
+    }
+
+    @Test func testSelectLimitedGroupOfVersion() async throws {
+        let group = try await Version.selectAll(count: 43)
+        #expect(group.count == 43)
+        #expect(group.first?.id == 1)
+        #expect(group.first?.name.lowercased() == "red")
+        #expect(group.last?.id == 43)
+        #expect(group.last?.name.lowercased() == "the-indigo-disk")
+    }
+
+    @Test func testSelectPaginatedGroupOfVersion() async throws {
+        let group = try await Version.selectAll(from: 20, count: 10)
+        #expect(group.count == 10)
+        #expect(group.first?.id == 21)
+        #expect(group.first?.name.lowercased() == "black-2")
+        #expect(group.last?.id == 30)
+        #expect(group.last?.name.lowercased() == "ultra-moon")
+    }
+
+    // MARK: - Select One By ID
+
+    @Test func testSelectRedByID() async throws {
+        let version = try await Version.selectOne(by: 1)
+        #expect(version.id == 1)
+        #expect(version.name == "red")
+        #expect(version.versionGroup.name == "red-blue")
+    }
+
+    @Test func testSelectGoldByID() async throws {
+        let version = try await Version.selectOne(by: 4)
+        #expect(version.id == 4)
+        #expect(version.name == "gold")
+        #expect(version.versionGroup.name == "gold-silver")
+    }
+
+    @Test func testSelectEmeraldByID() async throws {
+        let version = try await Version.selectOne(by: 9)
+        #expect(version.id == 9)
+        #expect(version.name == "emerald")
+        #expect(version.versionGroup.name == "emerald")
+    }
+
+    @Test func testSelectWhiteByID() async throws {
+        let version = try await Version.selectOne(by: 18)
+        #expect(version.id == 18)
+        #expect(version.name == "white")
+        #expect(version.versionGroup.name == "black-white")
+    }
+
+    @Test func testSelectSunByID() async throws {
+        let version = try await Version.selectOne(by: 27)
+        #expect(version.id == 27)
+        #expect(version.name == "sun")
+        #expect(version.versionGroup.name == "sun-moon")
+    }
+
+    @Test func testSelectScarletID() async throws {
+        let version = try await Version.selectOne(by: 40)
+        #expect(version.id == 40)
+        #expect(version.name == "scarlet")
+        #expect(version.versionGroup.name == "scarlet-violet")
+    }
+
+    // MARK: - Select One By Name
+
+    @Test func testSelectRedByName() async throws {
+        let version = try await Version.selectOne(by: "red")
+        #expect(version.id == 1)
+        #expect(version.name == "red")
+        #expect(version.versionGroup.name == "red-blue")
+    }
+
+    @Test func testSelectGoldByName() async throws {
+        let version = try await Version.selectOne(by: "gold")
+        #expect(version.id == 4)
+        #expect(version.name == "gold")
+        #expect(version.versionGroup.name == "gold-silver")
+    }
+
+    @Test func testSelectEmeraldByName() async throws {
+        let version = try await Version.selectOne(by: "emerald")
+        #expect(version.id == 9)
+        #expect(version.name == "emerald")
+        #expect(version.versionGroup.name == "emerald")
+    }
+
+    @Test func testSelectWhiteByName() async throws {
+        let version = try await Version.selectOne(by: "white")
+        #expect(version.id == 18)
+        #expect(version.name == "white")
+        #expect(version.versionGroup.name == "black-white")
+    }
+
+    @Test func testSelectSunByName() async throws {
+        let version = try await Version.selectOne(by: "sun")
+        #expect(version.id == 27)
+        #expect(version.name == "sun")
+        #expect(version.versionGroup.name == "sun-moon")
+    }
+
+    @Test func testSelectScarletName() async throws {
+        let version = try await Version.selectOne(by: "scarlet")
+        #expect(version.id == 40)
+        #expect(version.name == "scarlet")
+        #expect(version.versionGroup.name == "scarlet-violet")
+    }
+
+    // MARK: - Random
+
+    @Test func testOptionalOnRandomVersion() async throws {
+        let randomID = Int.random(in: 1 ... 43)
+        PokeLogger.info("Select Version ID: \(randomID)")
+        _ = try await Version.selectOne(by: randomID)
+    }
+
+    // MARK: - Error
+
+    @Test func testSelectInexistingVersion() async throws {
+        await #expect(throws: PokeAPIServiceError.notFound, performing: {
+            try await Version.selectOne(by: "unknown")
+        })
+    }
+}

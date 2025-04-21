@@ -1,5 +1,5 @@
 //
-//  GameVersion.swift
+//  Version.swift
 //  PokeAPIService
 //
 //  Created by Thomas George on 28/03/2025.
@@ -7,11 +7,11 @@
 
 import Foundation
 
-/// Model for GameVersion API Resource
+/// Model for Version API Resource
 ///
-public struct GameVersion: Decodable {
+public struct Version: Decodable {
     public let id: Int
     public let name: String
-    public let names: [NameLanguage]
+    public let names: [Name]
     public let versionGroup: BaseResource
 }

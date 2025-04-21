@@ -1,5 +1,5 @@
 //
-//  GameVersion+PokeAPIResource.swift
+//  Version+PokeAPIResource.swift
 //  PokeAPIService
 //
 //  Created by Thomas George on 28/03/2025.
@@ -7,40 +7,40 @@
 
 import Foundation
 
-extension GameVersion: PokeAPIResource {
-    /// The GameVersion API resource root path
+extension Version: PokeAPIResource {
+    /// The Version API resource root path
     ///
     static var resourceRootPath = "version"
 
-    /// Get a list of GameVersion
+    /// Get a list of Version
     ///
     /// Without function parameters, the count parameter is set to 20 by default.
     /// ```swift
     /// Task {
     ///     do {
-    ///         let gameVersion = try await GameVersion.selectAll()
+    ///         let version = try await Version.selectAll()
     ///     } catch {
     ///         print(error.localizedDescription)
     ///     }
     /// }
     /// ```
     ///
-    /// Set a precise count to fetch as many GameVersion as you need.
+    /// Set a precise count to fetch as many Version as you need.
     /// ```swift
     /// Task {
     ///     do {
-    ///         let gameVersion = try await GameVersion.selectAll(count: 2)
+    ///         let version = try await Version.selectAll(count: 2)
     ///     } catch {
     ///         print(error.localizedDescription)
     ///     }
     /// }
     /// ```
     ///
-    /// Choose where to start and how many GameVersion you want to fetch.
+    /// Choose where to start and how many Version you want to fetch.
     /// ```swift
     /// Task {
     ///     do {
-    ///         let gameVersion = try await GameVersion.selectAll(from: 1, count: 3)
+    ///         let version = try await Version.selectAll(from: 1, count: 3)
     ///     } catch {
     ///         print(error.localizedDescription)
     ///     }
@@ -49,65 +49,65 @@ extension GameVersion: PokeAPIResource {
     ///
     /// - Parameters offset: The pagination offset
     /// - Parameters limit: The pagination limit
-    /// - Returns: A list of GameVersion
+    /// - Returns: A list of Version
     ///
-    public static func selectAll(from offset: Int = 0, count limit: Int = 20) async throws -> [GameVersion] {
+    public static func selectAll(from offset: Int = 0, count limit: Int = 20) async throws -> [Version] {
         let apiResources = try await baseResources(from: offset, count: limit)
-        let gameVersions = try await withThrowingTaskGroup(of: GameVersion.self, returning: [GameVersion].self) { group in
+        let versions = try await withThrowingTaskGroup(of: Version.self, returning: [Version].self) { group in
             for resource in apiResources {
                 group.addTask { try await selectOne(by: resource.id) }
             }
-            return try await group.reduce(into: [GameVersion]()) { $0.append($1) }
+            return try await group.reduce(into: [Version]()) { $0.append($1) }
         }
-        return gameVersions.sorted { $0.id < $1.id }
+        return versions.sorted { $0.id < $1.id }
     }
 
-    /// Get a GameVersion using its ID
+    /// Get a Version using its ID
     ///
     /// ```swift
     /// Task {
     ///     do {
-    ///         let gameVersionID: Int = 3
-    ///         let yellow = try await GameVersion.selectOne(by: gameVersionID)
+    ///         let versionID: Int = 3
+    ///         let yellow = try await Version.selectOne(by: versionID)
     ///     } catch {
     ///         print(error.localizedDescription)
     ///     }
     /// }
     /// ```
     ///
-    /// - Parameter id: The GameVersion ID
-    /// - Returns: A GameVersion
+    /// - Parameter id: The Version ID
+    /// - Returns: A Version
     ///
-    public static func selectOne(by id: Int) async throws -> GameVersion {
+    public static func selectOne(by id: Int) async throws -> Version {
         try await PokeAPIService.fetchData(from: .resource(rootPath: resourceRootPath, value: String(id)))
     }
 
-    /// Get a GameVersion using its name
+    /// Get a Version using its name
     ///
     /// ```swift
     /// Task {
     ///     do {
-    ///         let gameVersionName = "yellow"
-    ///         let yellow = try await GameVersion.selectOne(by: gameVersionName)
+    ///         let versionName = "yellow"
+    ///         let yellow = try await Version.selectOne(by: versionName)
     ///     } catch {
     ///         print(error.localizedDescription)
     ///     }
     /// }
     /// ```
     ///
-    /// - Parameter name: The GameVersion name
-    /// - Returns: A GameVersion
+    /// - Parameter name: The Version name
+    /// - Returns: A Version
     ///
-    public static func selectOne(by name: String) async throws -> GameVersion {
+    public static func selectOne(by name: String) async throws -> Version {
         try await PokeAPIService.fetchData(from: .resource(rootPath: resourceRootPath, value: name))
     }
 
-    /// Get a list of GameVersion API base resources
+    /// Get a list of Version API base resources
     ///
     /// ```swift
     /// Task {
     ///     do {
-    ///         let baseResources = try await GameVersion.baseResources(from: 0, count: 3)
+    ///         let baseResources = try await Version.baseResources(from: 0, count: 3)
     ///     } catch {
     ///         print(error.localizedDescription)
     ///     }

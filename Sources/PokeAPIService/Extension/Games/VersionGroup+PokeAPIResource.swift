@@ -7,40 +7,40 @@
 
 import Foundation
 
-extension GameVersionGroup: PokeAPIResource {
-    /// The GameVersionGroup API resource root path
+extension VersionGroup: PokeAPIResource {
+    /// The VersionGroup API resource root path
     ///
     static var resourceRootPath = "version-group"
 
-    /// Get a list of GameVersionGroup
+    /// Get a list of VersionGroup
     ///
     /// Without function parameters, the count parameter is set to 20 by default.
     /// ```swift
     /// Task {
     ///     do {
-    ///         let gameVersionGroups = try await GameVersionGroup.selectAll()
+    ///         let versionGroups = try await VersionGroup.selectAll()
     ///     } catch {
     ///         print(error.localizedDescription)
     ///     }
     /// }
     /// ```
     ///
-    /// Set a precise count to fetch as many GameVersionGroup as you need.
+    /// Set a precise count to fetch as many VersionGroup as you need.
     /// ```swift
     /// Task {
     ///     do {
-    ///         let gameVersionGroups = try await GameVersionGroup.selectAll(count: 2)
+    ///         let versionGroups = try await VersionGroup.selectAll(count: 2)
     ///     } catch {
     ///         print(error.localizedDescription)
     ///     }
     /// }
     /// ```
     ///
-    /// Choose where to start and how many GameVersionGroup you want to fetch.
+    /// Choose where to start and how many VersionGroup you want to fetch.
     /// ```swift
     /// Task {
     ///     do {
-    ///         let gameVersionGroups = try await GameVersionGroup.selectAll(from: 1, count: 3)
+    ///         let versionGroups = try await VersionGroup.selectAll(from: 1, count: 3)
     ///     } catch {
     ///         print(error.localizedDescription)
     ///     }
@@ -49,65 +49,65 @@ extension GameVersionGroup: PokeAPIResource {
     ///
     /// - Parameters offset: The pagination offset
     /// - Parameters limit: The pagination limit
-    /// - Returns: A list of GameVersionGroup
+    /// - Returns: A list of VersionGroup
     ///
-    public static func selectAll(from offset: Int = 0, count limit: Int = 20) async throws -> [GameVersionGroup] {
+    public static func selectAll(from offset: Int = 0, count limit: Int = 20) async throws -> [VersionGroup] {
         let apiResources = try await baseResources(from: offset, count: limit)
-        let gameVersionGroups = try await withThrowingTaskGroup(of: GameVersionGroup.self, returning: [GameVersionGroup].self) { group in
+        let versionGroups = try await withThrowingTaskGroup(of: VersionGroup.self, returning: [VersionGroup].self) { group in
             for resource in apiResources {
                 group.addTask { try await selectOne(by: resource.id) }
             }
-            return try await group.reduce(into: [GameVersionGroup]()) { $0.append($1) }
+            return try await group.reduce(into: [VersionGroup]()) { $0.append($1) }
         }
-        return gameVersionGroups.sorted { $0.id < $1.id }
+        return versionGroups.sorted { $0.id < $1.id }
     }
 
-    /// Get a GameVersionGroup using its ID
+    /// Get a VersionGroup using its ID
     ///
     /// ```swift
     /// Task {
     ///     do {
-    ///         let gameVersionGroupID: Int = 1
-    ///         let redBlue = try await GameVersionGroup.selectOne(by: gameVersionGroupID)
+    ///         let versionGroupID: Int = 1
+    ///         let redBlue = try await VersionGroup.selectOne(by: versionGroupID)
     ///     } catch {
     ///         print(error.localizedDescription)
     ///     }
     /// }
     /// ```
     ///
-    /// - Parameter id: The GameVersionGroup ID
-    /// - Returns: A GameVersionGroup
+    /// - Parameter id: The VersionGroup ID
+    /// - Returns: A VersionGroup
     ///
-    public static func selectOne(by id: Int) async throws -> GameVersionGroup {
+    public static func selectOne(by id: Int) async throws -> VersionGroup {
         try await PokeAPIService.fetchData(from: .resource(rootPath: resourceRootPath, value: String(id)))
     }
 
-    /// Get a GameVersionGroup using its name
+    /// Get a VersionGroup using its name
     ///
     /// ```swift
     /// Task {
     ///     do {
-    ///         let gameVersionGroupName = "red-blue"
-    ///         let redBlue = try await GameVersion.selectOne(by: gameVersionGroupName)
+    ///         let versionGroupName = "red-blue"
+    ///         let redBlue = try await GameVersion.selectOne(by: versionGroupName)
     ///     } catch {
     ///         print(error.localizedDescription)
     ///     }
     /// }
     /// ```
     ///
-    /// - Parameter name: The GameVersionGroup name
-    /// - Returns: A GameVersionGroup
+    /// - Parameter name: The VersionGroup name
+    /// - Returns: A VersionGroup
     ///
-    public static func selectOne(by name: String) async throws -> GameVersionGroup {
+    public static func selectOne(by name: String) async throws -> VersionGroup {
         try await PokeAPIService.fetchData(from: .resource(rootPath: resourceRootPath, value: name))
     }
 
-    /// Get a list of GameVersionGroup API base resources
+    /// Get a list of VersionGroup API base resources
     ///
     /// ```swift
     /// Task {
     ///     do {
-    ///         let baseResources = try await GameVersionGroup.baseResources(from: 0, count: 3)
+    ///         let baseResources = try await VersionGroup.baseResources(from: 0, count: 3)
     ///     } catch {
     ///         print(error.localizedDescription)
     ///     }
