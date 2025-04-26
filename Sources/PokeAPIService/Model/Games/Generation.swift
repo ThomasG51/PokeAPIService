@@ -14,11 +14,11 @@ import Foundation
 public struct Generation: Decodable {
     public let id: Int
     public let name: String
-    public let abilities: [BaseResource]
+    public let abilities: [LightResource]
     public let names: [Name]
-    public let mainRegion: BaseResource
-    public let moves: [BaseResource]
-    public let pokemonSpecies: [BaseResource]
-    public let types: [BaseResource]
-    public let versionGroups: [BaseResource]
+    public let mainRegion: LightResource
+    public let moves: [LightResource]
+    public let pokemonSpecies: [LightResource]
+    public let types: [LightResource]
+    public let versionGroups: [LightResource]
 }

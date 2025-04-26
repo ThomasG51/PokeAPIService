@@ -12,5 +12,5 @@ import Foundation
 public struct VerboseEffect: Decodable {
     public let effect: String
     public let shortEffect: String
-    public let language: BaseResource
+    public let language: LightResource
 }

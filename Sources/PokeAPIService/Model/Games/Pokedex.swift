@@ -18,8 +18,8 @@ public struct Pokedex: Decodable {
     public let descriptions: [Description]
     public let names: [Name]
     public let pokemonEntries: [PokemonEntry]
-    public let region: BaseResource?
-    public let versionGroups: [BaseResource]
+    public let region: LightResource?
+    public let versionGroups: [LightResource]
 }
 
 // MARK: - Nested Types
@@ -27,6 +27,6 @@ public struct Pokedex: Decodable {
 public extension Pokedex {
     struct PokemonEntry: Decodable {
         public let entryNumber: Int
-        public let pokemonSpecies: BaseResource
+        public let pokemonSpecies: LightResource
     }
 }

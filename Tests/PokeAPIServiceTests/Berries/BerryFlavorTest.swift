@@ -12,25 +12,25 @@ struct BerryFlavorTest {
     // MARK: - Base Resources
 
     @Test func testFecthBaseResources() async throws {
-        let baseResources = try await BerryFlavor.baseResources(from: 0, count: 2)
-        #expect(baseResources.count == 2)
-        #expect(baseResources.first?.id == "1")
-        #expect(baseResources.first?.name == "spicy")
-        #expect(baseResources.first?.type == "berry-flavor")
-        #expect(baseResources.last?.id == "2")
-        #expect(baseResources.last?.name == "dry")
-        #expect(baseResources.last?.type == "berry-flavor")
+        let lightResources = try await BerryFlavor.lightResources(from: 0, count: 2)
+        #expect(lightResources.count == 2)
+        #expect(lightResources.first?.id == "1")
+        #expect(lightResources.first?.name == "spicy")
+        #expect(lightResources.first?.type == "berry-flavor")
+        #expect(lightResources.last?.id == "2")
+        #expect(lightResources.last?.name == "dry")
+        #expect(lightResources.last?.type == "berry-flavor")
     }
 
     @Test func testFecthPaginatedBaseResources() async throws {
-        let baseResources = try await BerryFlavor.baseResources(from: 2, count: 3)
-        #expect(baseResources.count == 3)
-        #expect(baseResources.first?.id == "3")
-        #expect(baseResources.first?.name == "sweet")
-        #expect(baseResources.first?.type == "berry-flavor")
-        #expect(baseResources.last?.id == "5")
-        #expect(baseResources.last?.name == "sour")
-        #expect(baseResources.last?.type == "berry-flavor")
+        let lightResources = try await BerryFlavor.lightResources(from: 2, count: 3)
+        #expect(lightResources.count == 3)
+        #expect(lightResources.first?.id == "3")
+        #expect(lightResources.first?.name == "sweet")
+        #expect(lightResources.first?.type == "berry-flavor")
+        #expect(lightResources.last?.id == "5")
+        #expect(lightResources.last?.name == "sour")
+        #expect(lightResources.last?.type == "berry-flavor")
     }
 
     // MARK: - Select All

@@ -12,25 +12,25 @@ struct BerryTest {
     // MARK: - Base Resources
 
     @Test func testFecthBaseResources() async throws {
-        let baseResources = try await Berry.baseResources(from: 0, count: 30)
-        #expect(baseResources.count == 30)
-        #expect(baseResources.first?.id == "1")
-        #expect(baseResources.first?.name == "cheri")
-        #expect(baseResources.first?.type == "berry")
-        #expect(baseResources.last?.id == "30")
-        #expect(baseResources.last?.name == "nomel")
-        #expect(baseResources.last?.type == "berry")
+        let lightResources = try await Berry.lightResources(from: 0, count: 30)
+        #expect(lightResources.count == 30)
+        #expect(lightResources.first?.id == "1")
+        #expect(lightResources.first?.name == "cheri")
+        #expect(lightResources.first?.type == "berry")
+        #expect(lightResources.last?.id == "30")
+        #expect(lightResources.last?.name == "nomel")
+        #expect(lightResources.last?.type == "berry")
     }
 
     @Test func testFecthPaginatedBaseResources() async throws {
-        let baseResources = try await Berry.baseResources(from: 30, count: 30)
-        #expect(baseResources.count == 30)
-        #expect(baseResources.first?.id == "31")
-        #expect(baseResources.first?.name == "spelon")
-        #expect(baseResources.first?.type == "berry")
-        #expect(baseResources.last?.id == "60")
-        #expect(baseResources.last?.name == "enigma")
-        #expect(baseResources.last?.type == "berry")
+        let lightResources = try await Berry.lightResources(from: 30, count: 30)
+        #expect(lightResources.count == 30)
+        #expect(lightResources.first?.id == "31")
+        #expect(lightResources.first?.name == "spelon")
+        #expect(lightResources.first?.type == "berry")
+        #expect(lightResources.last?.id == "60")
+        #expect(lightResources.last?.name == "enigma")
+        #expect(lightResources.last?.type == "berry")
     }
 
     // MARK: - Select All

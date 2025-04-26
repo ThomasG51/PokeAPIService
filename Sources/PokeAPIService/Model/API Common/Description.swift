@@ -11,5 +11,5 @@ import Foundation
 ///
 public struct Description: Decodable {
     public let description: String
-    public let language: BaseResource
+    public let language: LightResource
 }

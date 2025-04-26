@@ -20,7 +20,7 @@ public struct Pokemon: Decodable {
     public let order: Int
     public let weight: Int
     public let abilities: [PokemonAbility]
-    public let forms: [BaseResource]
+    public let forms: [LightResource]
     public let gameIndices: [VersionGameIndex]
     public let heldItems: [PokemonHeldItem]
     public let locationAreaEncounters: String
@@ -29,7 +29,7 @@ public struct Pokemon: Decodable {
     public let pastAbilities: [PokemonAbilityPast]
     public let sprites: PokemonSprites
     public let cries: PokemonCries
-    public let species: BaseResource
+    public let species: LightResource
     public let stats: [PokemonStat]
     public let types: [PokemonType]
 }
@@ -40,37 +40,37 @@ public extension Pokemon {
     struct PokemonAbility: Decodable {
         public let isHidden: Bool
         public let slot: Int
-        public let ability: BaseResource
+        public let ability: LightResource?
     }
 
     struct PokemonHeldItem: Decodable {
-        public let item: BaseResource
+        public let item: LightResource
         public let versionDetails: [PokemonHeldItemVersion]
     }
 
     struct PokemonHeldItemVersion: Decodable {
-        public let version: BaseResource
+        public let version: LightResource
         public let rarity: Int
     }
 
     struct PokemonMove: Decodable {
-        public let move: BaseResource
+        public let move: LightResource
         public let versionGroupDetails: [PokemonMoveVersion]
     }
 
     struct PokemonMoveVersion: Decodable {
-        public let moveLearnMethod: BaseResource
-        public let versionGroup: BaseResource
+        public let moveLearnMethod: LightResource
+        public let versionGroup: LightResource
         public let levelLearnedAt: Int
     }
 
     struct PokemonTypePast: Decodable {
-        public let generation: BaseResource
+        public let generation: LightResource
         public let types: [PokemonType]
     }
 
     struct PokemonAbilityPast: Decodable {
-        public let generation: BaseResource
+        public let generation: LightResource
         public let abilities: [PokemonAbility]
     }
 
@@ -223,13 +223,13 @@ public extension Pokemon {
     }
 
     struct PokemonStat: Decodable {
-        public let stat: BaseResource
+        public let stat: LightResource
         public let effort: Int
         public let baseStat: Int
     }
 
     struct PokemonType: Decodable {
         public let slot: Int
-        public let type: BaseResource
+        public let type: LightResource
     }
 }

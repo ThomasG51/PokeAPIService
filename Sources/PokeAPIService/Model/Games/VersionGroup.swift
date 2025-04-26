@@ -15,9 +15,9 @@ public struct VersionGroup: Decodable {
     public let id: Int
     public let name: String
     public let order: Int
-    public let generation: BaseResource
-    public let moveLearnMethods: [BaseResource]
-    public let pokedexes: [BaseResource]
-    public let regions: [BaseResource]
-    public let versions: [BaseResource]
+    public let generation: LightResource
+    public let moveLearnMethods: [LightResource]
+    public let pokedexes: [LightResource]
+    public let regions: [LightResource]
+    public let versions: [LightResource]
 }

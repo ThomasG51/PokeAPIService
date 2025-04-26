@@ -15,7 +15,7 @@ public struct BerryFlavor: Decodable {
     public let id: Int
     public let name: String
     public let berries: [FlavorBerryMap]
-    public let contestType: BaseResource
+    public let contestType: LightResource
     public let names: [Name]
 }
 
@@ -24,6 +24,6 @@ public struct BerryFlavor: Decodable {
 public extension BerryFlavor {
     struct FlavorBerryMap: Decodable {
         public let potency: Int
-        public let berry: BaseResource
+        public let berry: LightResource
     }
 }

@@ -11,5 +11,5 @@ import Foundation
 ///
 public struct VersionGameIndex: Decodable {
     public let gameIndex: Int
-    public let version: BaseResource
+    public let version: LightResource
 }

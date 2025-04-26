@@ -12,21 +12,21 @@ struct AbilityTest {
     // MARK: - Base Resources
 
     @Test func testFecthBaseResources() async throws {
-        let baseResources = try await Ability.baseResources(from: 0, count: 100)
-        #expect(baseResources.count == 100)
-        #expect(baseResources.last?.id == "100")
-        #expect(baseResources.first?.id == "1")
-        #expect(baseResources.first?.name == "stench")
-        #expect(baseResources.first?.type == "ability")
+        let lightResources = try await Ability.lightResources(from: 0, count: 100)
+        #expect(lightResources.count == 100)
+        #expect(lightResources.last?.id == "100")
+        #expect(lightResources.first?.id == "1")
+        #expect(lightResources.first?.name == "stench")
+        #expect(lightResources.first?.type == "ability")
     }
 
     @Test func testFecthPaginatedBaseResources() async throws {
-        let baseResources = try await Ability.baseResources(from: 100, count: 100)
-        #expect(baseResources.count == 100)
-        #expect(baseResources.last?.id == "200")
-        #expect(baseResources.first?.id == "101")
-        #expect(baseResources.first?.name == "technician")
-        #expect(baseResources.first?.type == "ability")
+        let lightResources = try await Ability.lightResources(from: 100, count: 100)
+        #expect(lightResources.count == 100)
+        #expect(lightResources.last?.id == "200")
+        #expect(lightResources.first?.id == "101")
+        #expect(lightResources.first?.name == "technician")
+        #expect(lightResources.first?.type == "ability")
     }
 
     // MARK: - Select All

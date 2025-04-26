@@ -81,15 +81,15 @@ Pokedex.selectAll(count: 3)
 Version.selectAll(from: 0, count: 1)
 ```
 
-#### Fetch a list of base resources (only id, name and type)
+#### Fetch a list of light resources (only id, name and type)
 ```swift
-Pokemon.baseResources(from: 0, count: 151)
+Pokemon.lightResources(from: 0, count: 151)
 
-Generation.baseResources(from: 0, count: 1)
+Generation.lightResources(from: 0, count: 1)
 
-Pokedex.baseResources(from: 1, count: 1)
+Pokedex.lightResources(from: 1, count: 1)
 
-Version.baseResources(from: 0, count: 4)
+Version.lightResources(from: 0, count: 4)
 ```
 
 <h2 id="resources-by-category">Resources by category</h2>

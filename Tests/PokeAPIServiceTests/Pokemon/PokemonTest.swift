@@ -12,21 +12,21 @@ struct PokemonTest {
     // MARK: - Base Resources
 
     @Test func testFecthBaseResources() async throws {
-        let baseResources = try await Pokemon.baseResources(from: 0, count: 60)
-        #expect(baseResources.count == 60)
-        #expect(baseResources.last?.id == "60")
-        #expect(baseResources.first?.id == "1")
-        #expect(baseResources.first?.name == "bulbasaur")
-        #expect(baseResources.first?.type == "pokemon")
+        let lightResources = try await Pokemon.lightResources(from: 0, count: 60)
+        #expect(lightResources.count == 60)
+        #expect(lightResources.last?.id == "60")
+        #expect(lightResources.first?.id == "1")
+        #expect(lightResources.first?.name == "bulbasaur")
+        #expect(lightResources.first?.type == "pokemon")
     }
 
     @Test func testFecthPaginatedBaseResources() async throws {
-        let baseResources = try await Pokemon.baseResources(from: 60, count: 60)
-        #expect(baseResources.count == 60)
-        #expect(baseResources.last?.id == "120")
-        #expect(baseResources.first?.id == "61")
-        #expect(baseResources.first?.name == "poliwhirl")
-        #expect(baseResources.first?.type == "pokemon")
+        let lightResources = try await Pokemon.lightResources(from: 60, count: 60)
+        #expect(lightResources.count == 60)
+        #expect(lightResources.last?.id == "120")
+        #expect(lightResources.first?.id == "61")
+        #expect(lightResources.first?.name == "poliwhirl")
+        #expect(lightResources.first?.type == "pokemon")
     }
 
     // MARK: - Select All

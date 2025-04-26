@@ -14,6 +14,6 @@ import Foundation
 public struct BerryFirmness: Decodable {
     public let id: Int
     public let name: String
-    public let berries: [BaseResource]
+    public let berries: [LightResource]
     public let names: [Name]
 }

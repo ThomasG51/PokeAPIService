@@ -12,25 +12,25 @@ struct BerryFirmnessTest {
     // MARK: - Base Resources
 
     @Test func testFecthBaseResources() async throws {
-        let baseResources = try await BerryFirmness.baseResources(from: 0, count: 3)
-        #expect(baseResources.count == 3)
-        #expect(baseResources.first?.id == "1")
-        #expect(baseResources.first?.name == "very-soft")
-        #expect(baseResources.first?.type == "berry-firmness")
-        #expect(baseResources.last?.id == "3")
-        #expect(baseResources.last?.name == "hard")
-        #expect(baseResources.last?.type == "berry-firmness")
+        let lightResources = try await BerryFirmness.lightResources(from: 0, count: 3)
+        #expect(lightResources.count == 3)
+        #expect(lightResources.first?.id == "1")
+        #expect(lightResources.first?.name == "very-soft")
+        #expect(lightResources.first?.type == "berry-firmness")
+        #expect(lightResources.last?.id == "3")
+        #expect(lightResources.last?.name == "hard")
+        #expect(lightResources.last?.type == "berry-firmness")
     }
 
     @Test func testFecthPaginatedBaseResources() async throws {
-        let baseResources = try await BerryFirmness.baseResources(from: 3, count: 2)
-        #expect(baseResources.count == 2)
-        #expect(baseResources.first?.id == "4")
-        #expect(baseResources.first?.name == "very-hard")
-        #expect(baseResources.first?.type == "berry-firmness")
-        #expect(baseResources.last?.id == "5")
-        #expect(baseResources.last?.name == "super-hard")
-        #expect(baseResources.last?.type == "berry-firmness")
+        let lightResources = try await BerryFirmness.lightResources(from: 3, count: 2)
+        #expect(lightResources.count == 2)
+        #expect(lightResources.first?.id == "4")
+        #expect(lightResources.first?.name == "very-hard")
+        #expect(lightResources.first?.type == "berry-firmness")
+        #expect(lightResources.last?.id == "5")
+        #expect(lightResources.last?.name == "super-hard")
+        #expect(lightResources.last?.type == "berry-firmness")
     }
 
     // MARK: - Select All

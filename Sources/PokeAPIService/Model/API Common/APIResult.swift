@@ -8,7 +8,7 @@
 import Foundation
 
 struct APIResult: Codable {
-    let resources: [BaseResource]
+    let resources: [LightResource]
 
     enum CodingKeys: String, CodingKey {
         case resources = "results"

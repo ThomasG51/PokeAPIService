@@ -11,6 +11,6 @@ import Foundation
 ///
 public struct VersionGroupFlavorText: Decodable {
     public let text: String
-    public let lamguage: BaseResource
-    public let versionGroup: BaseResource
+    public let lamguage: LightResource
+    public let versionGroup: LightResource
 }

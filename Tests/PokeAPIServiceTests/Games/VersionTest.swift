@@ -12,21 +12,21 @@ struct VersionTest {
     // MARK: - Base Resources
 
     @Test func testFecthBaseResources() async throws {
-        let baseResources = try await Version.baseResources(from: 0, count: 20)
-        #expect(baseResources.count == 20)
-        #expect(baseResources.last?.id == "20")
-        #expect(baseResources.first?.id == "1")
-        #expect(baseResources.first?.name == "red")
-        #expect(baseResources.first?.type == "version")
+        let lightResources = try await Version.lightResources(from: 0, count: 20)
+        #expect(lightResources.count == 20)
+        #expect(lightResources.last?.id == "20")
+        #expect(lightResources.first?.id == "1")
+        #expect(lightResources.first?.name == "red")
+        #expect(lightResources.first?.type == "version")
     }
 
     @Test func testFecthPaginatedBaseResources() async throws {
-        let baseResources = try await Version.baseResources(from: 20, count: 20)
-        #expect(baseResources.count == 20)
-        #expect(baseResources.last?.id == "40")
-        #expect(baseResources.first?.id == "21")
-        #expect(baseResources.first?.name == "black-2")
-        #expect(baseResources.first?.type == "version")
+        let lightResources = try await Version.lightResources(from: 20, count: 20)
+        #expect(lightResources.count == 20)
+        #expect(lightResources.last?.id == "40")
+        #expect(lightResources.first?.id == "21")
+        #expect(lightResources.first?.name == "black-2")
+        #expect(lightResources.first?.type == "version")
     }
 
     // MARK: - Select All

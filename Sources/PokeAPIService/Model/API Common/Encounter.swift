@@ -12,7 +12,7 @@ import Foundation
 public struct Encounter: Decodable {
     public let minLevel: Int
     public let maxLevel: Int
-    public let conditionValues: [BaseResource]
+    public let conditionValues: [LightResource]
     public let chance: Int
-    public let method: BaseResource
+    public let method: LightResource
 }

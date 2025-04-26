@@ -10,7 +10,7 @@ import Foundation
 /// Model for VersionEncounterDetail API Resource
 ///
 public struct VersionEncounterDetail: Decodable {
-    public let version: BaseResource
+    public let version: LightResource
     public let maxChance: Int
     public let encounterDetails: [Encounter]
 }

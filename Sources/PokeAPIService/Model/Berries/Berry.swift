@@ -20,10 +20,10 @@ public struct Berry: Decodable {
     public let size: Int
     public let smoothness: Int
     public let soilDryness: Int?
-    public let firmness: BaseResource
+    public let firmness: LightResource
     public let flavors: [BerryFlavorMap]
-    public let item: BaseResource
-    public let naturalGiftType: BaseResource
+    public let item: LightResource
+    public let naturalGiftType: LightResource
 }
 
 // MARK: - Nested Types
@@ -31,6 +31,6 @@ public struct Berry: Decodable {
 public extension Berry {
     struct BerryFlavorMap: Decodable {
         public let potency: Int
-        public let flavor: BaseResource
+        public let flavor: LightResource
     }
 }

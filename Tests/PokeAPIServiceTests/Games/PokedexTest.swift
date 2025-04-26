@@ -12,25 +12,25 @@ struct PokedexTest {
     // MARK: - Base Resources
 
     @Test func testFecthBaseResources() async throws {
-        let baseResources = try await Pokedex.baseResources(from: 0, count: 3)
-        #expect(baseResources.count == 3)
-        #expect(baseResources.first?.id == "1")
-        #expect(baseResources.first?.name == "national")
-        #expect(baseResources.first?.type == "pokedex")
-        #expect(baseResources.last?.id == "3")
-        #expect(baseResources.last?.name == "original-johto")
-        #expect(baseResources.last?.type == "pokedex")
+        let lightResources = try await Pokedex.lightResources(from: 0, count: 3)
+        #expect(lightResources.count == 3)
+        #expect(lightResources.first?.id == "1")
+        #expect(lightResources.first?.name == "national")
+        #expect(lightResources.first?.type == "pokedex")
+        #expect(lightResources.last?.id == "3")
+        #expect(lightResources.last?.name == "original-johto")
+        #expect(lightResources.last?.type == "pokedex")
     }
 
     @Test func testFecthPaginatedBaseResources() async throws {
-        let baseResources = try await Pokedex.baseResources(from: 3, count: 6)
-        #expect(baseResources.count == 6)
-        #expect(baseResources.first?.id == "4")
-        #expect(baseResources.first?.name == "hoenn")
-        #expect(baseResources.first?.type == "pokedex")
-        #expect(baseResources.last?.id == "9")
-        #expect(baseResources.last?.name == "updated-unova")
-        #expect(baseResources.last?.type == "pokedex")
+        let lightResources = try await Pokedex.lightResources(from: 3, count: 6)
+        #expect(lightResources.count == 6)
+        #expect(lightResources.first?.id == "4")
+        #expect(lightResources.first?.name == "hoenn")
+        #expect(lightResources.first?.type == "pokedex")
+        #expect(lightResources.last?.id == "9")
+        #expect(lightResources.last?.name == "updated-unova")
+        #expect(lightResources.last?.type == "pokedex")
     }
 
     // MARK: - Select All

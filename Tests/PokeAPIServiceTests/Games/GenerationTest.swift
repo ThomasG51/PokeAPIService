@@ -12,21 +12,21 @@ struct GenerationTest {
     // MARK: - Base Resources
 
     @Test func testFecthBaseResources() async throws {
-        let baseResources = try await Generation.baseResources(from: 0, count: 3)
-        #expect(baseResources.count == 3)
-        #expect(baseResources.last?.id == "3")
-        #expect(baseResources.first?.id == "1")
-        #expect(baseResources.first?.name == "generation-i")
-        #expect(baseResources.first?.type == "generation")
+        let lightResources = try await Generation.lightResources(from: 0, count: 3)
+        #expect(lightResources.count == 3)
+        #expect(lightResources.last?.id == "3")
+        #expect(lightResources.first?.id == "1")
+        #expect(lightResources.first?.name == "generation-i")
+        #expect(lightResources.first?.type == "generation")
     }
 
     @Test func testFecthPaginatedBaseResources() async throws {
-        let baseResources = try await Generation.baseResources(from: 3, count: 3)
-        #expect(baseResources.count == 3)
-        #expect(baseResources.last?.id == "6")
-        #expect(baseResources.first?.id == "4")
-        #expect(baseResources.first?.name == "generation-iv")
-        #expect(baseResources.first?.type == "generation")
+        let lightResources = try await Generation.lightResources(from: 3, count: 3)
+        #expect(lightResources.count == 3)
+        #expect(lightResources.last?.id == "6")
+        #expect(lightResources.first?.id == "4")
+        #expect(lightResources.first?.name == "generation-iv")
+        #expect(lightResources.first?.type == "generation")
     }
 
     // MARK: - Select All

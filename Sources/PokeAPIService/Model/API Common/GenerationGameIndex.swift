@@ -11,5 +11,5 @@ import Foundation
 ///
 public struct GenerationGameIndex: Decodable {
     public let gameIndex: Int
-    public let generation: BaseResource
+    public let generation: LightResource
 }

@@ -15,7 +15,7 @@ public struct Ability: Decodable {
     public let id: Int
     public let name: String
     public let isMainSeries: Bool
-    public let generation: BaseResource
+    public let generation: LightResource
     public let names: [Name]
     public let effectEntries: [VerboseEffect]
     public let effectChanges: [AbilityEffectChange]
@@ -28,18 +28,18 @@ public struct Ability: Decodable {
 public extension Ability {
     struct AbilityEffectChange: Decodable {
         public let effectEntries: [Effect]
-        public let versionGroup: BaseResource
+        public let versionGroup: LightResource
     }
 
     struct AbilityFlavorText: Decodable {
         public let flavorText: String
-        public let language: BaseResource
-        public let versionGroup: BaseResource
+        public let language: LightResource
+        public let versionGroup: LightResource
     }
 
     struct AbilityPokemon: Decodable {
         public let isHidden: Bool
         public let slot: Int
-        public let pokemon: BaseResource
+        public let pokemon: LightResource
     }
 }

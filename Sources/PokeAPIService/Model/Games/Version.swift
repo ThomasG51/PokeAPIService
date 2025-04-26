@@ -15,5 +15,5 @@ public struct Version: Decodable {
     public let id: Int
     public let name: String
     public let names: [Name]
-    public let versionGroup: BaseResource
+    public let versionGroup: LightResource
 }

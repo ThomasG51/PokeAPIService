@@ -52,7 +52,7 @@ extension Version: PokeAPIResource {
     /// - Returns: A list of Version
     ///
     public static func selectAll(from offset: Int = 0, count limit: Int = 20) async throws -> [Version] {
-        let apiResources = try await baseResources(from: offset, count: limit)
+        let apiResources = try await lightResources(from: offset, count: limit)
         let versions = try await withThrowingTaskGroup(of: Version.self, returning: [Version].self) { group in
             for resource in apiResources {
                 group.addTask { try await selectOne(by: resource.id) }
@@ -102,12 +102,12 @@ extension Version: PokeAPIResource {
         try await PokeAPIService.fetchData(from: .resource(rootPath: resourceRootPath, value: name))
     }
 
-    /// Get a list of Version API base resources
+    /// Get a list of Version light resources
     ///
     /// ```swift
     /// Task {
     ///     do {
-    ///         let baseResources = try await Version.baseResources(from: 0, count: 3)
+    ///         let lightResources = try await Version.lightResources(from: 0, count: 3)
     ///     } catch {
     ///         print(error.localizedDescription)
     ///     }
@@ -116,9 +116,9 @@ extension Version: PokeAPIResource {
     ///
     /// - Parameters offset: The pagination offset
     /// - Parameters limit: The pagination limit
-    /// - Returns: A list of light API base resources containing only an ID, a name and a type
+    /// - Returns: A list of light resources containing only an ID, a name and a type
     ///
-    public static func baseResources(from offset: Int, count limit: Int) async throws -> [BaseResource] {
+    public static func lightResources(from offset: Int, count limit: Int) async throws -> [LightResource] {
         let params = ["offset": String(offset), "limit": String(limit)]
         let baseResult = try await PokeAPIService<APIResult>.fetchData(from: .list(rootPath: resourceRootPath), with: params)
         return baseResult.resources
