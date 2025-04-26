@@ -109,7 +109,7 @@ Version.lightResources(from: 0, count: 4)
 #### Pokemon
 
 - [x] Ability
-- [ ] Characteristic
+- [x] Characteristic
 - [ ] EggGroup
 - [ ] Gender
 - [ ] GrowthRate
