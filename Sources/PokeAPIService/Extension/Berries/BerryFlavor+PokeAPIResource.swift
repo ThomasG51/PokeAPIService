@@ -10,7 +10,7 @@ import Foundation
 extension BerryFlavor: PokeAPIResource {
     /// The Pokemon API resource root path
     ///
-    static var resourceRootPath = "berry-flavor"
+    internal static var resourceRootPath = "berry-flavor"
 
     /// Get a list of BerryFlavor
     ///
@@ -47,8 +47,8 @@ extension BerryFlavor: PokeAPIResource {
     /// }
     /// ```
     ///
-    /// - Parameters offset: The pagination offset
-    /// - Parameters limit: The pagination limit
+    /// - Parameter offset: The pagination offset
+    /// - Parameter limit: The pagination limit
     /// - Returns: A list of BerryFlavor
     ///
     public static func selectAll(from offset: Int = 0, count limit: Int = 20) async throws -> [BerryFlavor] {
@@ -114,8 +114,8 @@ extension BerryFlavor: PokeAPIResource {
     /// }
     /// ```
     ///
-    /// - Parameters offset: The pagination offset
-    /// - Parameters limit: The pagination limit
+    /// - Parameter offset: The pagination offset
+    /// - Parameter limit: The pagination limit
     /// - Returns: A list of light resources containing only an ID, a name and a type
     ///
     public static func lightResources(from offset: Int, count limit: Int) async throws -> [LightResource] {

@@ -4,7 +4,7 @@
 import Foundation
 import OSLog
 
-struct PokeAPIService<T> where T: Decodable {
+internal struct PokeAPIService<T> where T: Decodable {
     // MARK: - Function
 
     /// Fetch and return decoded data from a URL

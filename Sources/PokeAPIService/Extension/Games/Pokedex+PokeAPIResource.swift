@@ -10,7 +10,7 @@ import Foundation
 extension Pokedex: PokeAPIResource {
     /// The Pokedex API resource root path
     ///
-    static var resourceRootPath = "pokedex"
+    internal static var resourceRootPath = "pokedex"
 
     /// Get a list of Pokedex
     ///
@@ -47,8 +47,8 @@ extension Pokedex: PokeAPIResource {
     /// }
     /// ```
     ///
-    /// - Parameters offset: The pagination offset
-    /// - Parameters limit: The pagination limit
+    /// - Parameter offset: The pagination offset
+    /// - Parameter limit: The pagination limit
     /// - Returns: A list of Pokedex
     ///
     public static func selectAll(from offset: Int = 0, count limit: Int = 20) async throws -> [Pokedex] {
@@ -114,8 +114,8 @@ extension Pokedex: PokeAPIResource {
     /// }
     /// ```
     ///
-    /// - Parameters offset: The pagination offset
-    /// - Parameters limit: The pagination limit
+    /// - Parameter offset: The pagination offset
+    /// - Parameter limit: The pagination limit
     /// - Returns: A list of light resources containing only an ID, a name and a type
     ///
     public static func lightResources(from offset: Int, count limit: Int) async throws -> [LightResource] {

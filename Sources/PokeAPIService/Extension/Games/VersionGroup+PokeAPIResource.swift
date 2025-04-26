@@ -10,7 +10,7 @@ import Foundation
 extension VersionGroup: PokeAPIResource {
     /// The VersionGroup API resource root path
     ///
-    static var resourceRootPath = "version-group"
+    internal static var resourceRootPath = "version-group"
 
     /// Get a list of VersionGroup
     ///
@@ -47,8 +47,8 @@ extension VersionGroup: PokeAPIResource {
     /// }
     /// ```
     ///
-    /// - Parameters offset: The pagination offset
-    /// - Parameters limit: The pagination limit
+    /// - Parameter offset: The pagination offset
+    /// - Parameter limit: The pagination limit
     /// - Returns: A list of VersionGroup
     ///
     public static func selectAll(from offset: Int = 0, count limit: Int = 20) async throws -> [VersionGroup] {
@@ -114,8 +114,8 @@ extension VersionGroup: PokeAPIResource {
     /// }
     /// ```
     ///
-    /// - Parameters offset: The pagination offset
-    /// - Parameters limit: The pagination limit
+    /// - Parameter offset: The pagination offset
+    /// - Parameter limit: The pagination limit
     /// - Returns: A list of light resources containing only an ID, a name and a type
     ///
     public static func lightResources(from offset: Int, count limit: Int) async throws -> [LightResource] {

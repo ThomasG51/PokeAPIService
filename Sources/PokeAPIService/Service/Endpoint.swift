@@ -5,7 +5,7 @@
 //  Created by Thomas George on 28/02/2025.
 //
 
-enum Endpoint {
+internal enum Endpoint {
     case list(rootPath: String)
     case resource(rootPath: String, value: String)
 

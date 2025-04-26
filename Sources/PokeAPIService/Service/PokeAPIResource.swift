@@ -9,7 +9,7 @@
 
 import Foundation
 
-protocol PokeAPIResource where Self: Decodable {
+internal protocol PokeAPIResource where Self: Decodable {
     static var resourceRootPath: String { get }
 
     static func selectAll(from offset: Int, count limit: Int) async throws -> [Self]

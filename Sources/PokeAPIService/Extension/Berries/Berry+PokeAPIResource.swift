@@ -8,7 +8,7 @@
 extension Berry: PokeAPIResource {
     /// The Pokemon API resource root path
     ///
-    static var resourceRootPath = "berry"
+    internal static var resourceRootPath = "berry"
 
     /// Get a list of Berry
     ///
@@ -45,8 +45,8 @@ extension Berry: PokeAPIResource {
     /// }
     /// ```
     ///
-    /// - Parameters offset: The pagination offset
-    /// - Parameters limit: The pagination limit
+    /// - Parameter offset: The pagination offset
+    /// - Parameter limit: The pagination limit
     /// - Returns: A list of Berry
     ///
     public static func selectAll(from offset: Int = 0, count limit: Int = 20) async throws -> [Berry] {
@@ -112,8 +112,8 @@ extension Berry: PokeAPIResource {
     /// }
     /// ```
     ///
-    /// - Parameters offset: The pagination offset
-    /// - Parameters limit: The pagination limit
+    /// - Parameter offset: The pagination offset
+    /// - Parameter limit: The pagination limit
     /// - Returns: A list of light resources containing only an ID, a name and a type
     ///
     public static func lightResources(from offset: Int, count limit: Int) async throws -> [LightResource] {

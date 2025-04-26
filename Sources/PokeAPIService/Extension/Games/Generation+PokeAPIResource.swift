@@ -10,7 +10,7 @@ import Foundation
 extension Generation: PokeAPIResource {
     /// The Generation API resource root path
     ///
-    static var resourceRootPath = "generation"
+    internal static var resourceRootPath = "generation"
 
     /// Get a list of Generation
     ///
@@ -47,8 +47,8 @@ extension Generation: PokeAPIResource {
     /// }
     /// ```
     ///
-    /// - Parameters offset: The pagination offset
-    /// - Parameters limit: The pagination limit
+    /// - Parameter offset: The pagination offset
+    /// - Parameter limit: The pagination limit
     /// - Returns: A list of Generation
     ///
     static func selectAll(from offset: Int = 0, count limit: Int = 20) async throws -> [Generation] {
@@ -114,8 +114,8 @@ extension Generation: PokeAPIResource {
     /// }
     /// ```
     ///
-    /// - Parameters offset: The pagination offset
-    /// - Parameters limit: The pagination limit
+    /// - Parameter offset: The pagination offset
+    /// - Parameter limit: The pagination limit
     /// - Returns: A list of light resources containing only an ID, a name and a type
     ///
     public static func lightResources(from offset: Int, count limit: Int) async throws -> [LightResource] {
