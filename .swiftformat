@@ -1,2 +1,4 @@
 --commas inline
 --decimalgrouping 3,5
+
+--disable redundantInternal
