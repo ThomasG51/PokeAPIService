@@ -171,7 +171,13 @@ struct PokedexTest {
     // MARK: - Random
 
     @Test func testOptionalOnRandomPokedex() async throws {
-        let randomID = Int.random(in: 1 ... 32)
+        var randomID = Int.random(in: 1 ... 32)
+        
+        // Pokedex ID 10 does not exist
+        while randomID == 10 {
+            randomID = Int.random(in: 1 ... 32)
+        }
+        
         PokeLogger.info("Select Pokedex ID: \(randomID)")
         _ = try await Pokedex.selectOne(by: randomID)
     }
