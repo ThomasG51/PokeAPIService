@@ -99,6 +99,7 @@ Version.lightResources(from: 0, count: 4)
 - [x] Berry
 - [x] BerryFirmness
 - [x] BerryFlavor
+
 #### Games
 
 - [x] Generation
@@ -110,8 +111,8 @@ Version.lightResources(from: 0, count: 4)
 
 - [x] Ability
 - [x] Characteristic
-- [ ] EggGroup
-- [ ] Gender
+- [x] EggGroup
+- [x] Gender
 - [ ] GrowthRate
 - [ ] Nature
 - [ ] PokeathlonStat
