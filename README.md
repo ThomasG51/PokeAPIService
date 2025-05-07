@@ -113,7 +113,7 @@ Version.lightResources(from: 0, count: 4)
 - [x] Characteristic
 - [x] EggGroup
 - [x] Gender
-- [ ] GrowthRate
+- [x] GrowthRate
 - [ ] Nature
 - [ ] PokeathlonStat
 - [x] Pokemon
