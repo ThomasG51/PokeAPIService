@@ -115,7 +115,7 @@ Version.lightResources(from: 0, count: 4)
 - [x] Gender
 - [x] GrowthRate
 - [x] Nature
-- [ ] PokeathlonStat
+- [x] PokeathlonStat
 - [x] Pokemon
 - [ ] PokemonColor
 - [ ] PokemonLocationArea
