@@ -11,7 +11,7 @@ import Testing
 struct BerryFirmnessTest {
     // MARK: - Base Resources
 
-    @Test func testFecthBaseResources() async throws {
+    @Test func fecthBaseResources() async throws {
         let lightResources = try await BerryFirmness.lightResources(from: 0, count: 3)
         #expect(lightResources.count == 3)
         #expect(lightResources.first?.id == "1")
@@ -22,7 +22,7 @@ struct BerryFirmnessTest {
         #expect(lightResources.last?.type == "berry-firmness")
     }
 
-    @Test func testFecthPaginatedBaseResources() async throws {
+    @Test func fecthPaginatedBaseResources() async throws {
         let lightResources = try await BerryFirmness.lightResources(from: 3, count: 2)
         #expect(lightResources.count == 2)
         #expect(lightResources.first?.id == "4")
@@ -35,7 +35,7 @@ struct BerryFirmnessTest {
 
     // MARK: - Select All
 
-    @Test func testSelectDefaultGroupOfBerryFirmness() async throws {
+    @Test func selectDefaultGroupOfBerryFirmness() async throws {
         let group = try await BerryFirmness.selectAll()
         #expect(group.count == 5)
         #expect(group.first?.id == 1)
@@ -44,7 +44,7 @@ struct BerryFirmnessTest {
         #expect(group.last?.name.lowercased() == "super-hard")
     }
 
-    @Test func testSelectLimitedGroupOfBerryFirmness() async throws {
+    @Test func selectLimitedGroupOfBerryFirmness() async throws {
         let group = try await BerryFirmness.selectAll(count: 3)
         #expect(group.count == 3)
         #expect(group.first?.id == 1)
@@ -53,7 +53,7 @@ struct BerryFirmnessTest {
         #expect(group.last?.name.lowercased() == "hard")
     }
 
-    @Test func testSelectPaginatedGroupOfBerryFirmness() async throws {
+    @Test func selectPaginatedGroupOfBerryFirmness() async throws {
         let group = try await BerryFirmness.selectAll(from: 3, count: 2)
         #expect(group.count == 2)
         #expect(group.first?.id == 4)
@@ -64,7 +64,7 @@ struct BerryFirmnessTest {
 
     // MARK: - Select One By ID
 
-    @Test func testSelectVerySoftByID() async throws {
+    @Test func selectVerySoftByID() async throws {
         let firmness = try await BerryFirmness.selectOne(by: 1)
         #expect(firmness.id == 1)
         #expect(firmness.name.lowercased() == "very-soft")
@@ -72,7 +72,7 @@ struct BerryFirmnessTest {
         #expect(firmness.berries.contains(where: { $0.name.lowercased() == "tanga" }))
     }
 
-    @Test func testSelectHardByID() async throws {
+    @Test func selectHardByID() async throws {
         let firmness = try await BerryFirmness.selectOne(by: 3)
         #expect(firmness.id == 3)
         #expect(firmness.name.lowercased() == "hard")
@@ -80,7 +80,7 @@ struct BerryFirmnessTest {
         #expect(firmness.berries.contains(where: { $0.name.lowercased() == "pinap" }))
     }
 
-    @Test func testFetchSelectHardByID() async throws {
+    @Test func fetchSelectHardByID() async throws {
         let firmness = try await BerryFirmness.selectOne(by: 5)
         #expect(firmness.id == 5)
         #expect(firmness.name.lowercased() == "super-hard")
@@ -90,7 +90,7 @@ struct BerryFirmnessTest {
 
     // MARK: - Select One By Name
 
-    @Test func testSelectVerySoftByName() async throws {
+    @Test func selectVerySoftByName() async throws {
         let firmness = try await BerryFirmness.selectOne(by: "very-soft")
         #expect(firmness.id == 1)
         #expect(firmness.name.lowercased() == "very-soft")
@@ -98,7 +98,7 @@ struct BerryFirmnessTest {
         #expect(firmness.berries.contains(where: { $0.name.lowercased() == "tanga" }))
     }
 
-    @Test func testSelectHardByName() async throws {
+    @Test func selectHardByName() async throws {
         let firmness = try await BerryFirmness.selectOne(by: "hard")
         #expect(firmness.id == 3)
         #expect(firmness.name.lowercased() == "hard")
@@ -106,7 +106,7 @@ struct BerryFirmnessTest {
         #expect(firmness.berries.contains(where: { $0.name.lowercased() == "pinap" }))
     }
 
-    @Test func testFetchSelectHardByName() async throws {
+    @Test func fetchSelectHardByName() async throws {
         let firmness = try await BerryFirmness.selectOne(by: "super-hard")
         #expect(firmness.id == 5)
         #expect(firmness.name.lowercased() == "super-hard")
@@ -116,7 +116,7 @@ struct BerryFirmnessTest {
 
     // MARK: - Random
 
-    @Test func testOptionalOnRandomBerryFirmness() async throws {
+    @Test func optionalOnRandomBerryFirmness() async throws {
         let randomID = Int.random(in: 1 ... 5)
         PokeLogger.info("Select BerryFirmness ID: \(randomID)")
         _ = try await BerryFirmness.selectOne(by: randomID)
@@ -124,7 +124,7 @@ struct BerryFirmnessTest {
 
     // MARK: - Error
 
-    @Test func testFetchInexistingBerryFirmness() async throws {
+    @Test func fetchInexistingBerryFirmness() async throws {
         await #expect(throws: PokeAPIServiceError.notFound, performing: {
             try await BerryFirmness.selectOne(by: "unknown")
         })

@@ -11,7 +11,7 @@ import Testing
 struct AbilityTest {
     // MARK: - Base Resources
 
-    @Test func testFecthBaseResources() async throws {
+    @Test func fecthBaseResources() async throws {
         let lightResources = try await Ability.lightResources(from: 0, count: 100)
         #expect(lightResources.count == 100)
         #expect(lightResources.last?.id == "100")
@@ -20,7 +20,7 @@ struct AbilityTest {
         #expect(lightResources.first?.type == "ability")
     }
 
-    @Test func testFecthPaginatedBaseResources() async throws {
+    @Test func fecthPaginatedBaseResources() async throws {
         let lightResources = try await Ability.lightResources(from: 100, count: 100)
         #expect(lightResources.count == 100)
         #expect(lightResources.last?.id == "200")
@@ -31,7 +31,7 @@ struct AbilityTest {
 
     // MARK: - Select All
 
-    @Test func testSelectDefaultGroupOfAbility() async throws {
+    @Test func selectDefaultGroupOfAbility() async throws {
         let group = try await Ability.selectAll()
         #expect(group.count == 20)
         #expect(group.first?.id == 1)
@@ -40,7 +40,7 @@ struct AbilityTest {
         #expect(group.last?.name.lowercased() == "own-tempo")
     }
 
-    @Test func testSelectLimitedGroupOfAbility() async throws {
+    @Test func selectLimitedGroupOfAbility() async throws {
         let group = try await Ability.selectAll(count: 200)
         #expect(group.count == 200)
         #expect(group.first?.id == 1)
@@ -49,7 +49,7 @@ struct AbilityTest {
         #expect(group.last?.name.lowercased() == "steelworker")
     }
 
-    @Test func testSelectPaginatedGroupOfAbility() async throws {
+    @Test func selectPaginatedGroupOfAbility() async throws {
         let group = try await Ability.selectAll(from: 200, count: 100)
         #expect(group.count == 100)
         #expect(group.first?.id == 201)
@@ -60,7 +60,7 @@ struct AbilityTest {
 
     // MARK: - Select One By ID
 
-    @Test func testSelectStenchByID() async throws {
+    @Test func selectStenchByID() async throws {
         let stench = try await Ability.selectOne(by: 1)
         #expect(stench.id == 1)
         #expect(stench.name.lowercased() == "stench")
@@ -76,7 +76,7 @@ struct AbilityTest {
         }))
     }
 
-    @Test func testSelectRunAwayByID() async throws {
+    @Test func selectRunAwayByID() async throws {
         let runAway = try await Ability.selectOne(by: 50)
         #expect(runAway.id == 50)
         #expect(runAway.name.lowercased() == "run-away")
@@ -89,7 +89,7 @@ struct AbilityTest {
         #expect(runAway.effectChanges.isEmpty)
     }
 
-    @Test func testSelectRecklessByID() async throws {
+    @Test func selectRecklessByID() async throws {
         let reckless = try await Ability.selectOne(by: 120)
         #expect(reckless.id == 120)
         #expect(reckless.name.lowercased() == "reckless")
@@ -102,7 +102,7 @@ struct AbilityTest {
         #expect(reckless.effectChanges.isEmpty)
     }
 
-    @Test func testSelectMimicryByID() async throws {
+    @Test func selectMimicryByID() async throws {
         let mimicry = try await Ability.selectOne(by: 250)
         #expect(mimicry.id == 250)
         #expect(mimicry.name.lowercased() == "mimicry")
@@ -114,7 +114,7 @@ struct AbilityTest {
         #expect(mimicry.effectChanges.isEmpty)
     }
 
-    @Test func testSelectSupersweetSyrupByID() async throws {
+    @Test func selectSupersweetSyrupByID() async throws {
         let supersweetSyrup = try await Ability.selectOne(by: 300)
         #expect(supersweetSyrup.id == 300)
         #expect(supersweetSyrup.name.lowercased() == "supersweet-syrup")
@@ -129,7 +129,7 @@ struct AbilityTest {
 
     // MARK: - Select One By Name
 
-    @Test func testSelectStenchByName() async throws {
+    @Test func selectStenchByName() async throws {
         let stench = try await Ability.selectOne(by: "stench")
         #expect(stench.id == 1)
         #expect(stench.name.lowercased() == "stench")
@@ -145,7 +145,7 @@ struct AbilityTest {
         }))
     }
 
-    @Test func testSelectRunAwayByName() async throws {
+    @Test func selectRunAwayByName() async throws {
         let runAway = try await Ability.selectOne(by: "run-away")
         #expect(runAway.id == 50)
         #expect(runAway.name.lowercased() == "run-away")
@@ -158,7 +158,7 @@ struct AbilityTest {
         #expect(runAway.effectChanges.isEmpty)
     }
 
-    @Test func testSelectRecklessByName() async throws {
+    @Test func selectRecklessByName() async throws {
         let reckless = try await Ability.selectOne(by: "reckless")
         #expect(reckless.id == 120)
         #expect(reckless.name.lowercased() == "reckless")
@@ -171,7 +171,7 @@ struct AbilityTest {
         #expect(reckless.effectChanges.isEmpty)
     }
 
-    @Test func testSelectMimicryByName() async throws {
+    @Test func selectMimicryByName() async throws {
         let mimicry = try await Ability.selectOne(by: "mimicry")
         #expect(mimicry.id == 250)
         #expect(mimicry.name.lowercased() == "mimicry")
@@ -183,7 +183,7 @@ struct AbilityTest {
         #expect(mimicry.effectChanges.isEmpty)
     }
 
-    @Test func testSelectSupersweetSyrupByName() async throws {
+    @Test func selectSupersweetSyrupByName() async throws {
         let supersweetSyrup = try await Ability.selectOne(by: "supersweet-syrup")
         #expect(supersweetSyrup.id == 300)
         #expect(supersweetSyrup.name.lowercased() == "supersweet-syrup")
@@ -198,7 +198,7 @@ struct AbilityTest {
 
     // MARK: - Random
 
-    @Test func testOptionalOnRandomAbility() async throws {
+    @Test func optionalOnRandomAbility() async throws {
         let randomID = Int.random(in: 1 ... 300)
         PokeLogger.info("Ability ID: \(randomID)")
         _ = try await Ability.selectOne(by: randomID)
@@ -206,7 +206,7 @@ struct AbilityTest {
 
     // MARK: - Error
 
-    @Test func testFetchInexistingAbility() async throws {
+    @Test func fetchInexistingAbility() async throws {
         await #expect(throws: PokeAPIServiceError.notFound, performing: {
             try await Ability.selectOne(by: "unknown")
         })

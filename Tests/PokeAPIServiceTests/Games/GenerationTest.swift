@@ -11,7 +11,7 @@ import Testing
 struct GenerationTest {
     // MARK: - Base Resources
 
-    @Test func testFecthBaseResources() async throws {
+    @Test func fecthBaseResources() async throws {
         let lightResources = try await Generation.lightResources(from: 0, count: 3)
         #expect(lightResources.count == 3)
         #expect(lightResources.last?.id == "3")
@@ -20,7 +20,7 @@ struct GenerationTest {
         #expect(lightResources.first?.type == "generation")
     }
 
-    @Test func testFecthPaginatedBaseResources() async throws {
+    @Test func fecthPaginatedBaseResources() async throws {
         let lightResources = try await Generation.lightResources(from: 3, count: 3)
         #expect(lightResources.count == 3)
         #expect(lightResources.last?.id == "6")
@@ -31,7 +31,7 @@ struct GenerationTest {
 
     // MARK: - Select All
 
-    @Test func testSelectDefaultGroupOfGeneration() async throws {
+    @Test func selectDefaultGroupOfGeneration() async throws {
         let group = try await Generation.selectAll()
         #expect(group.count == 9)
         #expect(group.first?.id == 1)
@@ -40,7 +40,7 @@ struct GenerationTest {
         #expect(group.last?.name.lowercased() == "generation-ix")
     }
 
-    @Test func testSelectLimitedGroupOfGeneration() async throws {
+    @Test func selectLimitedGroupOfGeneration() async throws {
         let group = try await Generation.selectAll(count: 3)
         #expect(group.count == 3)
         #expect(group.first?.id == 1)
@@ -49,7 +49,7 @@ struct GenerationTest {
         #expect(group.last?.name.lowercased() == "generation-iii")
     }
 
-    @Test func testSelectPaginatedGroupOfGeneration() async throws {
+    @Test func selectPaginatedGroupOfGeneration() async throws {
         let group = try await Generation.selectAll(from: 3, count: 3)
         #expect(group.count == 3)
         #expect(group.first?.id == 4)
@@ -60,7 +60,7 @@ struct GenerationTest {
 
     // MARK: - Select One By ID
 
-    @Test func testSelectGenerationIByID() async throws {
+    @Test func selectGenerationIByID() async throws {
         let generationI = try await Generation.selectOne(by: 1)
         #expect(generationI.id == 1)
         #expect(generationI.name == "generation-i")
@@ -70,7 +70,7 @@ struct GenerationTest {
         #expect(generationI.versionGroups.contains(where: { $0.name == "yellow" }))
     }
 
-    @Test func testSelectGenerationIIByID() async throws {
+    @Test func selectGenerationIIByID() async throws {
         let generationII = try await Generation.selectOne(by: 2)
         #expect(generationII.id == 2)
         #expect(generationII.name == "generation-ii")
@@ -80,7 +80,7 @@ struct GenerationTest {
         #expect(generationII.versionGroups.contains(where: { $0.name == "crystal" }))
     }
 
-    @Test func testSelectGenerationVByID() async throws {
+    @Test func selectGenerationVByID() async throws {
         let generationV = try await Generation.selectOne(by: 5)
         #expect(generationV.id == 5)
         #expect(generationV.name == "generation-v")
@@ -89,7 +89,7 @@ struct GenerationTest {
         #expect(generationV.versionGroups.contains(where: { $0.name == "black-white" }))
     }
 
-    @Test func testSelectGenerationVIIByID() async throws {
+    @Test func selectGenerationVIIByID() async throws {
         let generationI = try await Generation.selectOne(by: 7)
         #expect(generationI.id == 7)
         #expect(generationI.name == "generation-vii")
@@ -101,7 +101,7 @@ struct GenerationTest {
 
     // MARK: - Select One By Name
 
-    @Test func testSelectGenerationIByName() async throws {
+    @Test func selectGenerationIByName() async throws {
         let generationI = try await Generation.selectOne(by: "generation-i")
         #expect(generationI.id == 1)
         #expect(generationI.name == "generation-i")
@@ -111,7 +111,7 @@ struct GenerationTest {
         #expect(generationI.versionGroups.contains(where: { $0.name == "yellow" }))
     }
 
-    @Test func testSelectGenerationIIByName() async throws {
+    @Test func selectGenerationIIByName() async throws {
         let generationII = try await Generation.selectOne(by: "generation-ii")
         #expect(generationII.id == 2)
         #expect(generationII.name == "generation-ii")
@@ -121,7 +121,7 @@ struct GenerationTest {
         #expect(generationII.versionGroups.contains(where: { $0.name == "crystal" }))
     }
 
-    @Test func testSelectGenerationVByName() async throws {
+    @Test func selectGenerationVByName() async throws {
         let generationV = try await Generation.selectOne(by: "generation-v")
         #expect(generationV.id == 5)
         #expect(generationV.name == "generation-v")
@@ -130,7 +130,7 @@ struct GenerationTest {
         #expect(generationV.versionGroups.contains(where: { $0.name == "black-white" }))
     }
 
-    @Test func testSelectGenerationVIIByName() async throws {
+    @Test func selectGenerationVIIByName() async throws {
         let generationI = try await Generation.selectOne(by: "generation-vii")
         #expect(generationI.id == 7)
         #expect(generationI.name == "generation-vii")
@@ -142,7 +142,7 @@ struct GenerationTest {
 
     // MARK: - Random
 
-    @Test func testOptionalOnRandomGeneration() async throws {
+    @Test func optionalOnRandomGeneration() async throws {
         let randomID = Int.random(in: 1 ... 9)
         PokeLogger.info("Select Generation ID: \(randomID)")
         _ = try await Generation.selectOne(by: randomID)
@@ -150,7 +150,7 @@ struct GenerationTest {
 
     // MARK: - Error
 
-    @Test func testSelectInexistingGeneration() async throws {
+    @Test func selectInexistingGeneration() async throws {
         await #expect(throws: PokeAPIServiceError.notFound, performing: {
             try await Generation.selectOne(by: "unknown")
         })

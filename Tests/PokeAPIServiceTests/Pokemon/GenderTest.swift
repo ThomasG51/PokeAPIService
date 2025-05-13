@@ -11,7 +11,7 @@ import Testing
 struct GenderTest {
     // MARK: - Base Resources
 
-    @Test func testFecthBaseResources() async throws {
+    @Test func fecthBaseResources() async throws {
         let lightResources = try await Gender.lightResources(from: 0, count: 2)
         #expect(lightResources.count == 2)
         #expect(lightResources.last?.id == "2")
@@ -20,7 +20,7 @@ struct GenderTest {
         #expect(lightResources.first?.type == "gender")
     }
 
-    @Test func testFecthPaginatedBaseResources() async throws {
+    @Test func fecthPaginatedBaseResources() async throws {
         let lightResources = try await Gender.lightResources(from: 2, count: 1)
         #expect(lightResources.count == 1)
         #expect(lightResources.first?.id == "3")
@@ -30,7 +30,7 @@ struct GenderTest {
 
     // MARK: - Select All
 
-    @Test func testSelectDefaultGroupOfGender() async throws {
+    @Test func selectDefaultGroupOfGender() async throws {
         let group = try await Gender.selectAll()
         #expect(group.count == 3)
         #expect(group.first?.id == 1)
@@ -39,7 +39,7 @@ struct GenderTest {
         #expect(group.last?.name.lowercased() == "genderless")
     }
 
-    @Test func testSelectLimitedGroupOfGender() async throws {
+    @Test func selectLimitedGroupOfGender() async throws {
         let group = try await Gender.selectAll(count: 2)
         #expect(group.count == 2)
         #expect(group.first?.id == 1)
@@ -48,7 +48,7 @@ struct GenderTest {
         #expect(group.last?.name.lowercased() == "male")
     }
 
-    @Test func testSelectPaginatedGroupOfGender() async throws {
+    @Test func selectPaginatedGroupOfGender() async throws {
         let group = try await Gender.selectAll(from: 2, count: 1)
         #expect(group.count == 1)
         #expect(group.first?.id == 3)
@@ -57,7 +57,7 @@ struct GenderTest {
 
     // MARK: - Select One By ID
 
-    @Test func testSelectFemaleByID() async throws {
+    @Test func selectFemaleByID() async throws {
         let female = try await Gender.selectOne(by: 1)
         #expect(female.id == 1)
         #expect(female.name.lowercased() == "female")
@@ -65,7 +65,7 @@ struct GenderTest {
         #expect(!female.requiredForEvolution.isEmpty)
     }
 
-    @Test func testSelectMaleByID() async throws {
+    @Test func selectMaleByID() async throws {
         let male = try await Gender.selectOne(by: 2)
         #expect(male.id == 2)
         #expect(male.name.lowercased() == "male")
@@ -73,7 +73,7 @@ struct GenderTest {
         #expect(!male.requiredForEvolution.isEmpty)
     }
 
-    @Test func testSelectGenderlessByID() async throws {
+    @Test func selectGenderlessByID() async throws {
         let genderless = try await Gender.selectOne(by: 3)
         #expect(genderless.id == 3)
         #expect(genderless.name.lowercased() == "genderless")
@@ -83,7 +83,7 @@ struct GenderTest {
 
     // MARK: - Select One By Name
 
-    @Test func testSelectFemaleByName() async throws {
+    @Test func selectFemaleByName() async throws {
         let female = try await Gender.selectOne(by: "female")
         #expect(female.id == 1)
         #expect(female.name.lowercased() == "female")
@@ -91,7 +91,7 @@ struct GenderTest {
         #expect(!female.requiredForEvolution.isEmpty)
     }
 
-    @Test func testSelectMaleByName() async throws {
+    @Test func selectMaleByName() async throws {
         let male = try await Gender.selectOne(by: "male")
         #expect(male.id == 2)
         #expect(male.name.lowercased() == "male")
@@ -99,7 +99,7 @@ struct GenderTest {
         #expect(!male.requiredForEvolution.isEmpty)
     }
 
-    @Test func testSelectGenderlessByName() async throws {
+    @Test func selectGenderlessByName() async throws {
         let genderless = try await Gender.selectOne(by: "genderless")
         #expect(genderless.id == 3)
         #expect(genderless.name.lowercased() == "genderless")
@@ -109,7 +109,7 @@ struct GenderTest {
 
     // MARK: - Random
 
-    @Test func testOptionalOnRandomGender() async throws {
+    @Test func optionalOnRandomGender() async throws {
         let randomID = Int.random(in: 1 ... 3)
         PokeLogger.info("Gender ID: \(randomID)")
         _ = try await Gender.selectOne(by: randomID)
@@ -117,7 +117,7 @@ struct GenderTest {
 
     // MARK: - Error
 
-    @Test func testFetchInexistingGender() async throws {
+    @Test func fetchInexistingGender() async throws {
         await #expect(throws: PokeAPIServiceError.notFound, performing: {
             try await Gender.selectOne(by: "unknown")
         })

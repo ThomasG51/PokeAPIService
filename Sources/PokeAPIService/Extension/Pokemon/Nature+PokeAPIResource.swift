@@ -11,7 +11,7 @@ extension Nature: PokeAPIResource {
     /// The Nature API resource root path
     ///
     internal static var resourceRootPath = "nature"
-    
+
     /// Get a list of Nature
     ///
     /// Without function parameters, the count parameter is set to 20 by default.
@@ -61,7 +61,7 @@ extension Nature: PokeAPIResource {
         }
         return natureList.sorted { $0.id < $1.id }
     }
-    
+
     /// Get a Nature using its ID
     ///
     /// ```swift
@@ -81,7 +81,7 @@ extension Nature: PokeAPIResource {
     public static func selectOne(by id: Int) async throws -> Nature {
         try await PokeAPIService.fetchData(from: .resource(rootPath: resourceRootPath, value: String(id)))
     }
-    
+
     /// Get a Nature using its name
     ///
     /// ```swift
@@ -101,7 +101,7 @@ extension Nature: PokeAPIResource {
     public static func selectOne(by name: String) async throws -> Nature {
         try await PokeAPIService.fetchData(from: .resource(rootPath: resourceRootPath, value: name))
     }
-    
+
     /// Get a list of Nature light resources
     ///
     /// ```swift

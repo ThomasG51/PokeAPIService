@@ -11,7 +11,7 @@ import Testing
 struct PokemonTest {
     // MARK: - Base Resources
 
-    @Test func testFecthBaseResources() async throws {
+    @Test func fecthBaseResources() async throws {
         let lightResources = try await Pokemon.lightResources(from: 0, count: 60)
         #expect(lightResources.count == 60)
         #expect(lightResources.last?.id == "60")
@@ -20,7 +20,7 @@ struct PokemonTest {
         #expect(lightResources.first?.type == "pokemon")
     }
 
-    @Test func testFecthPaginatedBaseResources() async throws {
+    @Test func fecthPaginatedBaseResources() async throws {
         let lightResources = try await Pokemon.lightResources(from: 60, count: 60)
         #expect(lightResources.count == 60)
         #expect(lightResources.last?.id == "120")
@@ -31,7 +31,7 @@ struct PokemonTest {
 
     // MARK: - Select All
 
-    @Test func testSelectDefaultGroupOfPokemon() async throws {
+    @Test func selectDefaultGroupOfPokemon() async throws {
         let group = try await Pokemon.selectAll()
         #expect(group.count == 20)
         #expect(group.first?.id == 1)
@@ -40,7 +40,7 @@ struct PokemonTest {
         #expect(group.last?.name.lowercased() == "raticate")
     }
 
-    @Test func testSelectLimitedGroupOfPokemon() async throws {
+    @Test func selectLimitedGroupOfPokemon() async throws {
         let group = try await Pokemon.selectAll(count: 151)
         #expect(group.count == 151)
         #expect(group.first?.id == 1)
@@ -49,7 +49,7 @@ struct PokemonTest {
         #expect(group.last?.name.lowercased() == "mew")
     }
 
-    @Test func testSelectPaginatedGroupOfPokemon() async throws {
+    @Test func selectPaginatedGroupOfPokemon() async throws {
         let group = try await Pokemon.selectAll(from: 151, count: 100)
         #expect(group.count == 100)
         #expect(group.first?.id == 152)
@@ -60,7 +60,7 @@ struct PokemonTest {
 
     // MARK: - Select One By ID
 
-    @Test func testSelectBulbasaurByID() async throws {
+    @Test func selectBulbasaurByID() async throws {
         let bulbasaur = try await Pokemon.selectOne(by: 1)
         #expect(bulbasaur.id == 1)
         #expect(bulbasaur.name.lowercased() == "bulbasaur")
@@ -74,7 +74,7 @@ struct PokemonTest {
         #expect(!bulbasaur.sprites.frontDefault.isEmpty)
     }
 
-    @Test func testSelectPikachuByID() async throws {
+    @Test func selectPikachuByID() async throws {
         let pikachu = try await Pokemon.selectOne(by: 25)
         #expect(pikachu.id == 25)
         #expect(pikachu.name.lowercased() == "pikachu")
@@ -87,7 +87,7 @@ struct PokemonTest {
         #expect(!pikachu.sprites.frontDefault.isEmpty)
     }
 
-    @Test func testSelectHoOhByID() async throws {
+    @Test func selectHoOhByID() async throws {
         let cyndaquil = try await Pokemon.selectOne(by: 250)
         #expect(cyndaquil.id == 250)
         #expect(cyndaquil.name.lowercased() == "ho-oh")
@@ -101,7 +101,7 @@ struct PokemonTest {
         #expect(!cyndaquil.sprites.frontDefault.isEmpty)
     }
 
-    @Test func testSelectRayquazaByID() async throws {
+    @Test func selectRayquazaByID() async throws {
         let rayquaza = try await Pokemon.selectOne(by: 384)
         #expect(rayquaza.id == 384)
         #expect(rayquaza.name.lowercased() == "rayquaza")
@@ -115,7 +115,7 @@ struct PokemonTest {
         #expect(!rayquaza.sprites.frontDefault.isEmpty)
     }
 
-    @Test func testSelectSolgaleoByID() async throws {
+    @Test func selectSolgaleoByID() async throws {
         let solgaleo = try await Pokemon.selectOne(by: 791)
         #expect(solgaleo.id == 791)
         #expect(solgaleo.name.lowercased() == "solgaleo")
@@ -128,7 +128,7 @@ struct PokemonTest {
 
     // MARK: - Select One By Name
 
-    @Test func testSelectBulbasaurByName() async throws {
+    @Test func selectBulbasaurByName() async throws {
         let bulbasaur = try await Pokemon.selectOne(by: "bulbasaur")
         #expect(bulbasaur.id == 1)
         #expect(bulbasaur.name.lowercased() == "bulbasaur")
@@ -142,7 +142,7 @@ struct PokemonTest {
         #expect(!bulbasaur.sprites.frontDefault.isEmpty)
     }
 
-    @Test func testSelectPikachuByName() async throws {
+    @Test func selectPikachuByName() async throws {
         let pikachu = try await Pokemon.selectOne(by: "pikachu")
         #expect(pikachu.id == 25)
         #expect(pikachu.name.lowercased() == "pikachu")
@@ -155,7 +155,7 @@ struct PokemonTest {
         #expect(!pikachu.sprites.frontDefault.isEmpty)
     }
 
-    @Test func testSelectHoOhByName() async throws {
+    @Test func selectHoOhByName() async throws {
         let cyndaquil = try await Pokemon.selectOne(by: "ho-oh")
         #expect(cyndaquil.id == 250)
         #expect(cyndaquil.name.lowercased() == "ho-oh")
@@ -169,7 +169,7 @@ struct PokemonTest {
         #expect(!cyndaquil.sprites.frontDefault.isEmpty)
     }
 
-    @Test func testSelectRayquazaByName() async throws {
+    @Test func selectRayquazaByName() async throws {
         let rayquaza = try await Pokemon.selectOne(by: "rayquaza")
         #expect(rayquaza.id == 384)
         #expect(rayquaza.name.lowercased() == "rayquaza")
@@ -183,7 +183,7 @@ struct PokemonTest {
         #expect(!rayquaza.sprites.frontDefault.isEmpty)
     }
 
-    @Test func testSelectSolgaleoByName() async throws {
+    @Test func selectSolgaleoByName() async throws {
         let solgaleo = try await Pokemon.selectOne(by: "solgaleo")
         #expect(solgaleo.id == 791)
         #expect(solgaleo.name.lowercased() == "solgaleo")
@@ -196,7 +196,7 @@ struct PokemonTest {
 
     // MARK: - Random
 
-    @Test func testOptionalOnRandomPokemon() async throws {
+    @Test func optionalOnRandomPokemon() async throws {
         let randomID = Int.random(in: 1 ... 1025)
         PokeLogger.info("Pokemon ID: \(randomID)")
         _ = try await Pokemon.selectOne(by: randomID)
@@ -204,7 +204,7 @@ struct PokemonTest {
 
     // MARK: - Error
 
-    @Test func testFetchInexistingPokemon() async throws {
+    @Test func fetchInexistingPokemon() async throws {
         await #expect(throws: PokeAPIServiceError.notFound, performing: {
             try await Pokemon.selectOne(by: "unknown")
         })

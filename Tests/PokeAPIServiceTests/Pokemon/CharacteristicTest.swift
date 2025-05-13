@@ -11,7 +11,7 @@ import Testing
 struct CharacteristicTest {
     // MARK: - Base Resources
 
-    @Test func testFecthBaseResources() async throws {
+    @Test func fecthBaseResources() async throws {
         let lightResources = try await Characteristic.lightResources(from: 0, count: 15)
         #expect(lightResources.count == 15)
         #expect(lightResources.last?.id == "15")
@@ -20,7 +20,7 @@ struct CharacteristicTest {
         #expect(lightResources.first?.type == "characteristic")
     }
 
-    @Test func testFecthPaginatedBaseResources() async throws {
+    @Test func fecthPaginatedBaseResources() async throws {
         let lightResources = try await Characteristic.lightResources(from: 15, count: 15)
         #expect(lightResources.count == 15)
         #expect(lightResources.last?.id == "30")
@@ -31,7 +31,7 @@ struct CharacteristicTest {
 
     // MARK: - Select All
 
-    @Test func testSelectDefaultGroupOfCharacteristic() async throws {
+    @Test func selectDefaultGroupOfCharacteristic() async throws {
         let group = try await Characteristic.selectAll()
         #expect(group.count == 20)
         #expect(group.first?.id == 1)
@@ -42,7 +42,7 @@ struct CharacteristicTest {
         #expect(group.last?.highestStat.name == "attack")
     }
 
-    @Test func testSelectLimitedGroupOfCharacteristic() async throws {
+    @Test func selectLimitedGroupOfCharacteristic() async throws {
         let group = try await Characteristic.selectAll(count: 10)
         #expect(group.count == 10)
         #expect(group.first?.id == 1)
@@ -53,7 +53,7 @@ struct CharacteristicTest {
         #expect(group.last?.highestStat.name == "special-attack")
     }
 
-    @Test func testSelectPaginatedGroupOfCharacteristic() async throws {
+    @Test func selectPaginatedGroupOfCharacteristic() async throws {
         let group = try await Characteristic.selectAll(from: 15, count: 15)
         #expect(group.count == 15)
         #expect(group.first?.id == 16)
@@ -66,7 +66,7 @@ struct CharacteristicTest {
 
     // MARK: - Select One By ID
 
-    @Test func testSelectCharacteristicOneByID() async throws {
+    @Test func selectCharacteristicOneByID() async throws {
         let characteristic = try await Characteristic.selectOne(by: 1)
         #expect(characteristic.id == 1)
         #expect(characteristic.highestStat.name == "hp")
@@ -75,7 +75,7 @@ struct CharacteristicTest {
         #expect(characteristic.possibleValues == [0, 5, 10, 15, 20, 25, 30])
     }
 
-    @Test func testSelectCharacteristicTenByID() async throws {
+    @Test func selectCharacteristicTenByID() async throws {
         let characteristic = try await Characteristic.selectOne(by: 10)
         #expect(characteristic.id == 10)
         #expect(characteristic.highestStat.name == "special-attack")
@@ -84,7 +84,7 @@ struct CharacteristicTest {
         #expect(characteristic.possibleValues == [1, 6, 11, 16, 21, 26, 31])
     }
 
-    @Test func testSelectCharacteristicTwentyByID() async throws {
+    @Test func selectCharacteristicTwentyByID() async throws {
         let characteristic = try await Characteristic.selectOne(by: 20)
         #expect(characteristic.id == 20)
         #expect(characteristic.highestStat.name == "attack")
@@ -93,7 +93,7 @@ struct CharacteristicTest {
         #expect(characteristic.possibleValues == [3, 8, 13, 18, 23, 28])
     }
 
-    @Test func testSelectCharacteristicThirtyByID() async throws {
+    @Test func selectCharacteristicThirtyByID() async throws {
         let characteristic = try await Characteristic.selectOne(by: 30)
         #expect(characteristic.id == 30)
         #expect(characteristic.highestStat.name == "speed")
@@ -104,7 +104,7 @@ struct CharacteristicTest {
 
     // MARK: - Random
 
-    @Test func testOptionalOnRandomCharacteristic() async throws {
+    @Test func optionalOnRandomCharacteristic() async throws {
         let randomID = Int.random(in: 1 ... 30)
         PokeLogger.info("Characteristic ID: \(randomID)")
         _ = try await Characteristic.selectOne(by: randomID)
@@ -112,7 +112,7 @@ struct CharacteristicTest {
 
     // MARK: - Error
 
-    @Test func testFetchInexistingCharacteristic() async throws {
+    @Test func fetchInexistingCharacteristic() async throws {
         await #expect(throws: PokeAPIServiceError.notFound, performing: {
             try await Characteristic.selectOne(by: "unknown")
         })

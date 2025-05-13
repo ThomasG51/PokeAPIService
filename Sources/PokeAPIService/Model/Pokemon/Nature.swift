@@ -30,7 +30,7 @@ public extension Nature {
         public let maxChange: Int
         public let pokeathlonStat: LightResource
     }
-    
+
     struct MoveBattleStylePreference: Decodable {
         public let lowHpPreference: Int
         public let highHpPreference: Int

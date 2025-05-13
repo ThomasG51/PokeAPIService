@@ -10,8 +10,8 @@ import Testing
 
 struct NatureTest {
     // MARK: - Base Resources
-    
-    @Test func testFecthBaseResources() async throws {
+
+    @Test func fecthBaseResources() async throws {
         let lightResources = try await Nature.lightResources(from: 0, count: 10)
         #expect(lightResources.count == 10)
         #expect(lightResources.last?.id == "10")
@@ -20,7 +20,7 @@ struct NatureTest {
         #expect(lightResources.first?.type == "nature")
     }
 
-    @Test func testFecthPaginatedBaseResources() async throws {
+    @Test func fecthPaginatedBaseResources() async throws {
         let lightResources = try await Nature.lightResources(from: 10, count: 15)
         #expect(lightResources.count == 15)
         #expect(lightResources.first?.id == "11")
@@ -29,8 +29,8 @@ struct NatureTest {
     }
 
     // MARK: - Select All
-    
-    @Test func testSelectDefaultGroupOfNature() async throws {
+
+    @Test func selectDefaultGroupOfNature() async throws {
         let group = try await Nature.selectAll()
         #expect(group.count == 20)
         #expect(group.first?.id == 1)
@@ -39,7 +39,7 @@ struct NatureTest {
         #expect(group.last?.name.lowercased() == "naive")
     }
 
-    @Test func testSelectLimitedGroupOfNature() async throws {
+    @Test func selectLimitedGroupOfNature() async throws {
         let group = try await Nature.selectAll(count: 25)
         #expect(group.count == 25)
         #expect(group.first?.id == 1)
@@ -48,7 +48,7 @@ struct NatureTest {
         #expect(group.last?.name.lowercased() == "serious")
     }
 
-    @Test func testSelectPaginatedGroupOfNature() async throws {
+    @Test func selectPaginatedGroupOfNature() async throws {
         let group = try await Nature.selectAll(from: 10, count: 15)
         #expect(group.count == 15)
         #expect(group.first?.id == 11)
@@ -56,10 +56,10 @@ struct NatureTest {
         #expect(group.last?.id == 25)
         #expect(group.last?.name.lowercased() == "serious")
     }
-    
+
     // MARK: - Select One By ID
 
-    @Test func testSelectHardyByID() async throws {
+    @Test func selectHardyByID() async throws {
         let hardy = try await Nature.selectOne(by: 1)
         #expect(hardy.id == 1)
         #expect(hardy.name.lowercased() == "hardy")
@@ -68,7 +68,7 @@ struct NatureTest {
         #expect(hardy.moveBattleStylePreferences.contains(where: { $0.moveBattleStyle.name.lowercased() == "attack" }))
     }
 
-    @Test func testSelectGentleByID() async throws {
+    @Test func selectGentleByID() async throws {
         let gentle = try await Nature.selectOne(by: 9)
         #expect(gentle.id == 9)
         #expect(gentle.name.lowercased() == "gentle")
@@ -77,7 +77,7 @@ struct NatureTest {
         #expect(gentle.moveBattleStylePreferences.contains(where: { $0.moveBattleStyle.name.lowercased() == "attack" }))
     }
 
-    @Test func testSelectNaiveByID() async throws {
+    @Test func selectNaiveByID() async throws {
         let naive = try await Nature.selectOne(by: 20)
         #expect(naive.id == 20)
         #expect(naive.name.lowercased() == "naive")
@@ -85,10 +85,10 @@ struct NatureTest {
         #expect(naive.increasedStat?.name.lowercased() == "speed")
         #expect(naive.moveBattleStylePreferences.contains(where: { $0.moveBattleStyle.name.lowercased() == "attack" }))
     }
-    
+
     // MARK: - Select One By Name
-    
-    @Test func testSelectHardyByName() async throws {
+
+    @Test func selectHardyByName() async throws {
         let hardy = try await Nature.selectOne(by: 1)
         #expect(hardy.id == 1)
         #expect(hardy.name.lowercased() == "hardy")
@@ -97,7 +97,7 @@ struct NatureTest {
         #expect(hardy.moveBattleStylePreferences.contains(where: { $0.moveBattleStyle.name.lowercased() == "attack" }))
     }
 
-    @Test func testSelectGentleByName() async throws {
+    @Test func selectGentleByName() async throws {
         let gentle = try await Nature.selectOne(by: 9)
         #expect(gentle.id == 9)
         #expect(gentle.name.lowercased() == "gentle")
@@ -106,7 +106,7 @@ struct NatureTest {
         #expect(gentle.moveBattleStylePreferences.contains(where: { $0.moveBattleStyle.name.lowercased() == "attack" }))
     }
 
-    @Test func testSelectNaiveByName() async throws {
+    @Test func selectNaiveByName() async throws {
         let naive = try await Nature.selectOne(by: 20)
         #expect(naive.id == 20)
         #expect(naive.name.lowercased() == "naive")
@@ -114,10 +114,10 @@ struct NatureTest {
         #expect(naive.increasedStat?.name.lowercased() == "speed")
         #expect(naive.moveBattleStylePreferences.contains(where: { $0.moveBattleStyle.name.lowercased() == "attack" }))
     }
-    
+
     // MARK: - Random
 
-    @Test func testOptionalOnRandomNature() async throws {
+    @Test func optionalOnRandomNature() async throws {
         let randomID = Int.random(in: 1 ... 25)
         PokeLogger.info("Nature ID: \(randomID)")
         _ = try await Nature.selectOne(by: randomID)
@@ -125,7 +125,7 @@ struct NatureTest {
 
     // MARK: - Error
 
-    @Test func testFetchInexistingNature() async throws {
+    @Test func fetchInexistingNature() async throws {
         await #expect(throws: PokeAPIServiceError.notFound, performing: {
             try await Nature.selectOne(by: "unknown")
         })

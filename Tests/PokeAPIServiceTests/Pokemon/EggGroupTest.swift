@@ -11,7 +11,7 @@ import Testing
 struct EggGroupTest {
     // MARK: - Base Resources
 
-    @Test func testFecthBaseResources() async throws {
+    @Test func fecthBaseResources() async throws {
         let lightResources = try await EggGroup.lightResources(from: 0, count: 10)
         #expect(lightResources.count == 10)
         #expect(lightResources.last?.id == "10")
@@ -20,7 +20,7 @@ struct EggGroupTest {
         #expect(lightResources.first?.type == "egg-group")
     }
 
-    @Test func testFecthPaginatedBaseResources() async throws {
+    @Test func fecthPaginatedBaseResources() async throws {
         let lightResources = try await EggGroup.lightResources(from: 10, count: 5)
         #expect(lightResources.count == 5)
         #expect(lightResources.last?.id == "15")
@@ -31,7 +31,7 @@ struct EggGroupTest {
 
     // MARK: - Select All
 
-    @Test func testSelectDefaultGroupOfEggGroup() async throws {
+    @Test func selectDefaultGroupOfEggGroup() async throws {
         let group = try await EggGroup.selectAll()
         #expect(group.count == 15)
         #expect(group.first?.id == 1)
@@ -40,7 +40,7 @@ struct EggGroupTest {
         #expect(group.last?.name.lowercased() == "no-eggs")
     }
 
-    @Test func testSelectLimitedGroupOfEggGroup() async throws {
+    @Test func selectLimitedGroupOfEggGroup() async throws {
         let group = try await EggGroup.selectAll(count: 10)
         #expect(group.count == 10)
         #expect(group.first?.id == 1)
@@ -49,7 +49,7 @@ struct EggGroupTest {
         #expect(group.last?.name.lowercased() == "mineral")
     }
 
-    @Test func testSelectPaginatedGroupOfEggGroup() async throws {
+    @Test func selectPaginatedGroupOfEggGroup() async throws {
         let group = try await EggGroup.selectAll(from: 5, count: 10)
         #expect(group.count == 10)
         #expect(group.first?.id == 6)
@@ -60,28 +60,28 @@ struct EggGroupTest {
 
     // MARK: - Select One By ID
 
-    @Test func testSelectMonsterByID() async throws {
+    @Test func selectMonsterByID() async throws {
         let monster = try await EggGroup.selectOne(by: 1)
         #expect(monster.id == 1)
         #expect(monster.name.lowercased() == "monster")
         #expect(monster.pokemonSpecies.count == 81)
     }
 
-    @Test func testSelectGroundByID() async throws {
+    @Test func selectGroundByID() async throws {
         let ground = try await EggGroup.selectOne(by: 5)
         #expect(ground.id == 5)
         #expect(ground.name.lowercased() == "ground")
         #expect(ground.pokemonSpecies.count == 278)
     }
 
-    @Test func testSelectMineralByID() async throws {
+    @Test func selectMineralByID() async throws {
         let mineral = try await EggGroup.selectOne(by: 10)
         #expect(mineral.id == 10)
         #expect(mineral.name.lowercased() == "mineral")
         #expect(mineral.pokemonSpecies.count == 84)
     }
 
-    @Test func testSelectNoEggsByID() async throws {
+    @Test func selectNoEggsByID() async throws {
         let monster = try await EggGroup.selectOne(by: 15)
         #expect(monster.id == 15)
         #expect(monster.name.lowercased() == "no-eggs")
@@ -90,28 +90,28 @@ struct EggGroupTest {
 
     // MARK: - Select One By Name
 
-    @Test func testSelectMonsterByName() async throws {
+    @Test func selectMonsterByName() async throws {
         let monster = try await EggGroup.selectOne(by: "monster")
         #expect(monster.id == 1)
         #expect(monster.name.lowercased() == "monster")
         #expect(monster.pokemonSpecies.count == 81)
     }
 
-    @Test func testSelectGroundByName() async throws {
+    @Test func selectGroundByName() async throws {
         let ground = try await EggGroup.selectOne(by: "ground")
         #expect(ground.id == 5)
         #expect(ground.name.lowercased() == "ground")
         #expect(ground.pokemonSpecies.count == 278)
     }
 
-    @Test func testSelectMineralByName() async throws {
+    @Test func selectMineralByName() async throws {
         let mineral = try await EggGroup.selectOne(by: "mineral")
         #expect(mineral.id == 10)
         #expect(mineral.name.lowercased() == "mineral")
         #expect(mineral.pokemonSpecies.count == 84)
     }
 
-    @Test func testSelectNoEggsByName() async throws {
+    @Test func selectNoEggsByName() async throws {
         let monster = try await EggGroup.selectOne(by: "no-eggs")
         #expect(monster.id == 15)
         #expect(monster.name.lowercased() == "no-eggs")
@@ -120,7 +120,7 @@ struct EggGroupTest {
 
     // MARK: - Random
 
-    @Test func testOptionalOnRandomEggGroup() async throws {
+    @Test func optionalOnRandomEggGroup() async throws {
         let randomID = Int.random(in: 1 ... 15)
         PokeLogger.info("EggGroup ID: \(randomID)")
         _ = try await EggGroup.selectOne(by: randomID)
@@ -128,7 +128,7 @@ struct EggGroupTest {
 
     // MARK: - Error
 
-    @Test func testFetchInexistingEggGroup() async throws {
+    @Test func fetchInexistingEggGroup() async throws {
         await #expect(throws: PokeAPIServiceError.notFound, performing: {
             try await EggGroup.selectOne(by: "unknown")
         })

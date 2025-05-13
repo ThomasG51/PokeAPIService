@@ -11,7 +11,7 @@ import Testing
 struct BerryTest {
     // MARK: - Base Resources
 
-    @Test func testFecthBaseResources() async throws {
+    @Test func fecthBaseResources() async throws {
         let lightResources = try await Berry.lightResources(from: 0, count: 30)
         #expect(lightResources.count == 30)
         #expect(lightResources.first?.id == "1")
@@ -22,7 +22,7 @@ struct BerryTest {
         #expect(lightResources.last?.type == "berry")
     }
 
-    @Test func testFecthPaginatedBaseResources() async throws {
+    @Test func fecthPaginatedBaseResources() async throws {
         let lightResources = try await Berry.lightResources(from: 30, count: 30)
         #expect(lightResources.count == 30)
         #expect(lightResources.first?.id == "31")
@@ -35,7 +35,7 @@ struct BerryTest {
 
     // MARK: - Select All
 
-    @Test func testSelectDefaultGroupOfBerry() async throws {
+    @Test func selectDefaultGroupOfBerry() async throws {
         let group = try await Berry.selectAll()
         #expect(group.count == 20)
         #expect(group.first?.id == 1)
@@ -44,7 +44,7 @@ struct BerryTest {
         #expect(group.last?.name.lowercased() == "pinap")
     }
 
-    @Test func testSelectLimitedGroupOfBerry() async throws {
+    @Test func selectLimitedGroupOfBerry() async throws {
         let group = try await Berry.selectAll(count: 30)
         #expect(group.count == 30)
         #expect(group.first?.id == 1)
@@ -53,7 +53,7 @@ struct BerryTest {
         #expect(group.last?.name.lowercased() == "nomel")
     }
 
-    @Test func testSelectPaginatedGroupOfBerry() async throws {
+    @Test func selectPaginatedGroupOfBerry() async throws {
         let group = try await Berry.selectAll(from: 30, count: 30)
         #expect(group.count == 30)
         #expect(group.first?.id == 31)
@@ -64,7 +64,7 @@ struct BerryTest {
 
     // MARK: - Select One By ID
 
-    @Test func testSelectCheriByID() async throws {
+    @Test func selectCheriByID() async throws {
         let berry = try await Berry.selectOne(by: 1)
         #expect(berry.id == 1)
         #expect(berry.name.lowercased() == "cheri")
@@ -76,7 +76,7 @@ struct BerryTest {
         #expect(berry.naturalGiftType.name.lowercased() == "fire")
     }
 
-    @Test func testSelectNomelByID() async throws {
+    @Test func selectNomelByID() async throws {
         let berry = try await Berry.selectOne(by: 30)
         #expect(berry.id == 30)
         #expect(berry.name.lowercased() == "nomel")
@@ -88,7 +88,7 @@ struct BerryTest {
         #expect(berry.naturalGiftType.name.lowercased() == "dragon")
     }
 
-    @Test func testSelectEnigmaByID() async throws {
+    @Test func selectEnigmaByID() async throws {
         let berry = try await Berry.selectOne(by: 60)
         #expect(berry.id == 60)
         #expect(berry.name.lowercased() == "enigma")
@@ -102,7 +102,7 @@ struct BerryTest {
 
     // MARK: - Select One By Name
 
-    @Test func testSelectCheriByName() async throws {
+    @Test func selectCheriByName() async throws {
         let berry = try await Berry.selectOne(by: "cheri")
         #expect(berry.id == 1)
         #expect(berry.name.lowercased() == "cheri")
@@ -114,7 +114,7 @@ struct BerryTest {
         #expect(berry.naturalGiftType.name.lowercased() == "fire")
     }
 
-    @Test func testSelectNomelByName() async throws {
+    @Test func selectNomelByName() async throws {
         let berry = try await Berry.selectOne(by: "nomel")
         #expect(berry.id == 30)
         #expect(berry.name.lowercased() == "nomel")
@@ -126,7 +126,7 @@ struct BerryTest {
         #expect(berry.naturalGiftType.name.lowercased() == "dragon")
     }
 
-    @Test func testSelectEnigmaByName() async throws {
+    @Test func selectEnigmaByName() async throws {
         let berry = try await Berry.selectOne(by: "enigma")
         #expect(berry.id == 60)
         #expect(berry.name.lowercased() == "enigma")
@@ -140,7 +140,7 @@ struct BerryTest {
 
     // MARK: - Random
 
-    @Test func testOptionalOnRandomBerry() async throws {
+    @Test func optionalOnRandomBerry() async throws {
         let randomID = Int.random(in: 1 ... 64)
         PokeLogger.info("Select Berry ID: \(randomID)")
         _ = try await Berry.selectOne(by: randomID)
@@ -148,7 +148,7 @@ struct BerryTest {
 
     // MARK: - Error
 
-    @Test func testSelectInexistingBerry() async throws {
+    @Test func selectInexistingBerry() async throws {
         await #expect(throws: PokeAPIServiceError.notFound, performing: {
             try await Berry.selectOne(by: "unknown")
         })

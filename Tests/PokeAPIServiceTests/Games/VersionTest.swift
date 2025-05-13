@@ -11,7 +11,7 @@ import Testing
 struct VersionTest {
     // MARK: - Base Resources
 
-    @Test func testFecthBaseResources() async throws {
+    @Test func fecthBaseResources() async throws {
         let lightResources = try await Version.lightResources(from: 0, count: 20)
         #expect(lightResources.count == 20)
         #expect(lightResources.last?.id == "20")
@@ -20,7 +20,7 @@ struct VersionTest {
         #expect(lightResources.first?.type == "version")
     }
 
-    @Test func testFecthPaginatedBaseResources() async throws {
+    @Test func fecthPaginatedBaseResources() async throws {
         let lightResources = try await Version.lightResources(from: 20, count: 20)
         #expect(lightResources.count == 20)
         #expect(lightResources.last?.id == "40")
@@ -31,7 +31,7 @@ struct VersionTest {
 
     // MARK: - Select All
 
-    @Test func testSelectDefaultGroupOfVersion() async throws {
+    @Test func selectDefaultGroupOfVersion() async throws {
         let group = try await Version.selectAll()
         #expect(group.count == 20)
         #expect(group.first?.id == 1)
@@ -40,7 +40,7 @@ struct VersionTest {
         #expect(group.last?.name.lowercased() == "xd")
     }
 
-    @Test func testSelectLimitedGroupOfVersion() async throws {
+    @Test func selectLimitedGroupOfVersion() async throws {
         let group = try await Version.selectAll(count: 43)
         #expect(group.count == 43)
         #expect(group.first?.id == 1)
@@ -49,7 +49,7 @@ struct VersionTest {
         #expect(group.last?.name.lowercased() == "the-indigo-disk")
     }
 
-    @Test func testSelectPaginatedGroupOfVersion() async throws {
+    @Test func selectPaginatedGroupOfVersion() async throws {
         let group = try await Version.selectAll(from: 20, count: 10)
         #expect(group.count == 10)
         #expect(group.first?.id == 21)
@@ -60,42 +60,42 @@ struct VersionTest {
 
     // MARK: - Select One By ID
 
-    @Test func testSelectRedByID() async throws {
+    @Test func selectRedByID() async throws {
         let version = try await Version.selectOne(by: 1)
         #expect(version.id == 1)
         #expect(version.name == "red")
         #expect(version.versionGroup.name == "red-blue")
     }
 
-    @Test func testSelectGoldByID() async throws {
+    @Test func selectGoldByID() async throws {
         let version = try await Version.selectOne(by: 4)
         #expect(version.id == 4)
         #expect(version.name == "gold")
         #expect(version.versionGroup.name == "gold-silver")
     }
 
-    @Test func testSelectEmeraldByID() async throws {
+    @Test func selectEmeraldByID() async throws {
         let version = try await Version.selectOne(by: 9)
         #expect(version.id == 9)
         #expect(version.name == "emerald")
         #expect(version.versionGroup.name == "emerald")
     }
 
-    @Test func testSelectWhiteByID() async throws {
+    @Test func selectWhiteByID() async throws {
         let version = try await Version.selectOne(by: 18)
         #expect(version.id == 18)
         #expect(version.name == "white")
         #expect(version.versionGroup.name == "black-white")
     }
 
-    @Test func testSelectSunByID() async throws {
+    @Test func selectSunByID() async throws {
         let version = try await Version.selectOne(by: 27)
         #expect(version.id == 27)
         #expect(version.name == "sun")
         #expect(version.versionGroup.name == "sun-moon")
     }
 
-    @Test func testSelectScarletID() async throws {
+    @Test func selectScarletID() async throws {
         let version = try await Version.selectOne(by: 40)
         #expect(version.id == 40)
         #expect(version.name == "scarlet")
@@ -104,42 +104,42 @@ struct VersionTest {
 
     // MARK: - Select One By Name
 
-    @Test func testSelectRedByName() async throws {
+    @Test func selectRedByName() async throws {
         let version = try await Version.selectOne(by: "red")
         #expect(version.id == 1)
         #expect(version.name == "red")
         #expect(version.versionGroup.name == "red-blue")
     }
 
-    @Test func testSelectGoldByName() async throws {
+    @Test func selectGoldByName() async throws {
         let version = try await Version.selectOne(by: "gold")
         #expect(version.id == 4)
         #expect(version.name == "gold")
         #expect(version.versionGroup.name == "gold-silver")
     }
 
-    @Test func testSelectEmeraldByName() async throws {
+    @Test func selectEmeraldByName() async throws {
         let version = try await Version.selectOne(by: "emerald")
         #expect(version.id == 9)
         #expect(version.name == "emerald")
         #expect(version.versionGroup.name == "emerald")
     }
 
-    @Test func testSelectWhiteByName() async throws {
+    @Test func selectWhiteByName() async throws {
         let version = try await Version.selectOne(by: "white")
         #expect(version.id == 18)
         #expect(version.name == "white")
         #expect(version.versionGroup.name == "black-white")
     }
 
-    @Test func testSelectSunByName() async throws {
+    @Test func selectSunByName() async throws {
         let version = try await Version.selectOne(by: "sun")
         #expect(version.id == 27)
         #expect(version.name == "sun")
         #expect(version.versionGroup.name == "sun-moon")
     }
 
-    @Test func testSelectScarletName() async throws {
+    @Test func selectScarletName() async throws {
         let version = try await Version.selectOne(by: "scarlet")
         #expect(version.id == 40)
         #expect(version.name == "scarlet")
@@ -148,7 +148,7 @@ struct VersionTest {
 
     // MARK: - Random
 
-    @Test func testOptionalOnRandomVersion() async throws {
+    @Test func optionalOnRandomVersion() async throws {
         let randomID = Int.random(in: 1 ... 43)
         PokeLogger.info("Select Version ID: \(randomID)")
         _ = try await Version.selectOne(by: randomID)
@@ -156,7 +156,7 @@ struct VersionTest {
 
     // MARK: - Error
 
-    @Test func testSelectInexistingVersion() async throws {
+    @Test func selectInexistingVersion() async throws {
         await #expect(throws: PokeAPIServiceError.notFound, performing: {
             try await Version.selectOne(by: "unknown")
         })
